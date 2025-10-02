@@ -6,3 +6,4 @@ hist(data, breaks = 30, col = "skyblue", border = "black",
     main = "Histogram of Fake Data",
     xlab = "Value",
     ylab = "Frequency")
+
