@@ -1,0 +1,817 @@
+---
+title: "Healthy Minds Study:<br>Examining Student Mental Health"
+subtitle: "Spring 2025"
+author: "Vinnie Wu"
+date: today
+---
+
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+htmltools::tagList(plotly::plotlyOutput("dummy"))
+source("../template/fullerton.R")
+```
+
+::: {style="text-align:center;"}
+<img src="../figure/Library.jpg" style="width:80%; height:auto;"/>
+:::
+
+
+# About the Survey {#about}
+
+In spring 2025, Fullerton College (FC) participated in the [Healthy Minds Study](https://healthymindsnetwork.org/hms/), a nation-wide survey across post-secondary institutions in the United States (four-year colleges and universities, as well as community colleges and technical schools), to investigate the prevalence of mental health outcomes, knowledge and attitudes about mental health, and mental health service utilization.
+
+The online survey was administered to all currently enrolled FC students. Overall, 906 FC students completed the survey with a response rate of about 5%, which is typical of campuswide surveys.
+
+## Mental Health Outcomes
+
+This report focuses on five key mental health outcomes among Fullerton College students: depression, anxiety, eating disorders, self-injury, and suicidal ideation. Additionally, it examines the prevalence of students experiencing any of those five mental health conditions. These outcomes were measured using validated screening tools commonly used in mental health research.
+
+**Depression** was measured using the [Patient Health Questionnaire-9 (PHQ-9)](https://www.apa.org/depression-guideline/patient-health-questionnaire.pdf), with a score of 10 or higher (out of 27) indicating *moderate to severe depression*. The survey asks about depression symptoms experienced in the past two weeks, including little interest or pleasure in doing things, feeling down or hopeless, trouble sleeping, and feeling tired or having little energy.
+
+**Anxiety** was measured using the [Generalized Anxiety Disorder-7 (GAD-7)](https://www.apaservices.org/practice/reimbursement/health-registry/anxiety-disorder-response.pdf), with a score of 10 or higher (out of 21) indicating *moderate to severe anxiety*. The survey asks about anxiety symptoms experienced in the past two weeks, including feelings of nervousness, inability to stop worrying, restlessness, and irritability.
+
+**Eating disorders** were assessed using the [SCOFF questionnaire](https://ceed.org.au/wp-content/uploads/2024/05/SCOFF.pdf), with a score of 2 or higher (out of 5) indicating a *likely eating disorder*. Examples of eating disorder symptoms include making oneself sick because of feeling uncomfortably full, worrying about losing control over how much one eats, and feeling fat when others say one is too thin.
+
+**Self-injury** was assessed by asking students to identify *different ways they may have hurt themselves on purpose, without intending to kill themselves* in the past year. This includes cutting, burning, punching, scratching, pulling hair, biting, interfering with wound healing, and other methods.
+
+**Suicidal ideation** was assessed by asking students if they had seriously thought about attempting suicide in the past year.
+
+## Limitations and Considerations
+
+As with any voluntary survey, the findings in this report should be interpreted with care. While the sample is generally representative of the Fullerton College student body, participation was self-selected, and certain groups may be underrepresented. 
+
+In addition, the analyses presented are descriptive and correlational, so they do not establish causal relationships.
+
+**Together, these results provide valuable insights into student experiences, but they are best understood as indicators of broader patterns rather than exact population estimates or evidence of causation.**
+
+
+# Mental Health Overview {#overview}
+
+## Primary Mental Health Outcomes
+
+Overall, mental health concerns are highly prevalent among surveyed students. **Nearly three-quarters (72%) reported experiencing at least one mental health condition, and 50% reported experiencing at least two mental health conditions.** Among specific conditions, depression was the most commonly reported (46%), followed by anxiety (39%) and eating disorders (37%). More severe indicators were reported by smaller, but still substantial, proportions of students, with 26% reporting self-injury and 15% reporting suicidal ideation.
+
+Collectively, these findings indicate a broad mental health burden within the student population.
+
+::: {#fig-overall .quarto-figure style="width:90%"}
+
+<div class="figure-cap">
+  **@fig-overall:** Primary Mental Health Outcomes, Spring 2025
+</div>
+
+```{r fig.height=3, fig.width=6, echo=FALSE}
+
+################## Overall Comparison ##################
+################## Outcome Mapping ##################
+outcome_map <- c(
+  dep_any_pct     = "Depression",
+  anx_any_pct     = "Anxiety",
+  ed_any_sde_pct  = "Eating Disorder",
+  sib_any_pct     = "Self-Injury",
+  sui_idea_pct   = "Suicidal Ideation",
+  anymhprob_pct   = "Any Mental Health Condition"
+)
+
+################## Select Overall Data ##################
+overall <- summary_wide %>%
+  filter(Predictor == "Overall", year == "2025") %>%
+  mutate(Source = "FC 2025")
+
+################## Reshape to Long Format ##################
+overall_long <- overall %>%
+  select(Source, all_of(names(outcome_map)), ends_with("_n_1"), ends_with("_total")) %>%
+  pivot_longer(
+    cols = names(outcome_map),
+    names_to = "OutcomeVar",
+    values_to = "pct"
+  ) %>%
+  mutate(
+    Outcome = recode(OutcomeVar, !!!outcome_map),
+    n_1_col   = str_replace(OutcomeVar, "_pct$", "_n_1"),
+    total_col = str_replace(OutcomeVar, "_pct$", "_total")
+  ) %>%
+  rowwise() %>%
+  mutate(
+    n_1   = cur_data()[[n_1_col]],
+    total = cur_data()[[total_col]]
+  ) %>%
+  mutate(
+    bar_color = ifelse(
+      Outcome == "Any Mental Health Condition",
+      "#375E9E",   # lighter FC Sky Blue
+      "#0F406B"    # FC Blue for all others
+    )) %>%
+  ungroup()
+
+################## Build Hover Text ##################
+overall_long <- overall_long %>%
+  mutate(
+    hovertext = paste0(
+      "<b><span style='color:#FFD600;'>", Outcome, "</span></b><br>",
+      "Percent: ", pct, "%<br>",
+      "Count: ", n_1, " of ", total, " respondents"
+      #"n = ", n_1, "<br>",
+      #"Total N = ", total
+    )
+  )
+
+################## Plot (Vertical Bars, FC 2025 Only) ##################
+bar_color <- "#0F406B"   # FC Blue
+
+################## Order Outcomes by Prevalence ##################
+outcome_order <- overall_long %>%
+  arrange(desc(pct)) %>%
+  pull(Outcome)
+
+overall_long <- overall_long %>%
+  mutate(Outcome = factor(Outcome, levels = outcome_order))
+
+
+################## Plot (Vertical Bars, Ordered, FC Blue) ##################
+p <- plot_ly(
+  data = overall_long,
+  x = ~Outcome,
+  y = ~pct,
+  type = "bar",
+  marker = list(color = overall_long$bar_color),   # <---- USE CUSTOM COLORS HERE
+  text = ~paste0(pct, "%"),
+  textposition = "outside",
+  hovertext = ~hovertext,
+  hoverinfo = "text"
+) %>%
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list(
+      title = "% of Students",
+      range = c(0, max(overall_long$pct, na.rm = TRUE) * 1.15)
+    ),
+    barmode = "group",
+    showlegend = FALSE
+  ) %>%
+  fc_plotly_theme() %>%
+  config(responsive = TRUE)
+
+
+p
+
+
+```
+
+:::
+
+## [**Additional Student Health Outcomes**](https://fc-oie.github.io/docs/HealthyMinds/2025/addloutcomes.html)
+
+Additional student health outcomes were examined, including:
+
+- Alcohol use
+- Nicotine use
+- Drug use, and
+- Experiences of interpersonal violence. 
+
+These outcomes were not disaggregated by demographics.
+
+[Read the full report on additional student health outcomes!](https://fc-oie.github.io/docs/HealthyMinds/2025/addloutcomes.html){.link-box target="_blank"}
+
+
+# [Demographic Differences](https://fc-oie.github.io/docs/HealthyMinds/2025/demographics.html) {#demographics}
+
+## About
+
+In this section, the extent to which Fullerton College students experience mental health issues is disaggregated, suggesting that the magnitude of inequities varies across groups. 
+
+Demographic groups include:
+
+- Race/ethnicity
+- Gender
+- Sexual orientation
+- Age group
+- Disability status
+- Financial status (based on Pell Grant), and
+- College generational status.
+
+## Summary of Results
+
+Across all demographic dimensions examined, mental health challenges are widespread among Fullerton College students, with several groups experiencing disproportionately higher prevalence across multiple outcomes.
+
+- **Race/Ethnicity:** Mental health outcomes vary substantially, with **Southeast Asian** and **Black/African American** students consistently reporting elevated prevalence across multiple indicators. **Pacific Islander/Native Hawaiian** and **American Indian/Alaska Native** students show particularly high levels for specific conditions (e.g., eating disorders and self-injury).
+- **Gender:** The largest disparities are observed by gender identity, with **transgender** and **non-binary/genderqueer** students experiencing markedly higher prevalence across nearly all mental health outcomes. **Female** students show elevated eating disorder–related symptoms, while **male** students generally report lower prevalence across indicators.
+- **Sexual Orientation:** Mental health challenges are substantially more prevalent among **LGBTQIA2S+** students, especially those identifying as **pansexual, queer, bisexual, or questioning/unsure**, compared to **non-LGBTQIA2S+** students. Disparities are particularly pronounced for depression, anxiety, self-injury, and suicidal ideation.
+- **Age Group:** Mental health burden is highest among **students under age 30**, particularly those ages **20–29**, with prevalence declining steadily with age. Older students, especially those **50 and older**, report substantially lower levels across nearly all outcomes.
+- **Disability Status:** A clear gradient exists, with students with **registered disabilities** reporting the highest prevalence, followed by those with **unregistered disabilities**, and the lowest rates among students with **no disability**. Elevated rates among unregistered students suggest unmet or emerging support needs rather than absence of need.
+- **Financial Status (Pell Grant):** Differences by Pell Grant status are modest but meaningful. **Pell Grant recipients** report slightly higher overall prevalence of any mental health condition and notably higher eating disorder–related symptoms, suggesting intersections between financial vulnerability and certain mental health challenges.
+- **College Generational Status:** Overall prevalence is similar between **first-generation** and **continuing-generation** students; however, **continuing-generation** students report higher anxiety, self-injury, and suicidal ideation, whereas **first-generation** students report higher eating disorder–related symptoms.
+
+Taken together, these findings indicate that **mental health needs are pervasive across the student population but are not evenly distributed**, emphasizing the importance of **equity-informed, culturally responsive, and identity-affirming approaches** to mental health outreach, prevention, and support.
+
+
+[Read the full report on disaggregated demographics](https://fc-oie.github.io/docs/HealthyMinds/2025/demographics.html){.link-box target="_blank"}
+
+# Linking Academic Performance to Mental Health {#grades}
+
+As with [**basic needs insecurity**](https://fc-oie.github.io/docs/RealCollegeCA/2025/report.html), **students who reported lower academic grades were more likely to also report experiencing more mental health issues**. This suggests that mental health challenges may be linked to lower academic performance. This emphasizes the importance of addressing student mental health to promote student success.
+
+::: {#fig-grades .quarto-figure style=width:"90%"}
+
+<div class="figure-cap">
+  **@fig-grades:** Rates of Mental Health Condition by Self-Reported Grades
+</div>
+
+```{r fig.height=4, fig.width=6}
+
+# --- FC color palette (ordered)
+fc_colors <- c(
+  "A"  = "#0F406B",  # Blue
+  "B"  = "#375E9E",  # Sky
+  "C"  = "#5DCCD4",  # Creek
+  "D" = "#FFD600",  # Yellow
+  "F"  = "#E6605B"   # Rustic
+)
+
+# --- Outcome mapping
+outcome_map <- c(
+  dep_any_pct    = "Depression ",
+  anx_any_pct = "Anxiety",
+  ed_any_sde_pct = "Eating Disorder",
+  sib_any_pct = "Self-Injury",
+  sui_idea_pct = "Suicidal Ideation",
+  anymhprob_pct = "Any Mental Health Condition"
+)
+
+
+# --- Prepare data
+grades_df <- summary_wide %>%
+  filter(str_starts(Predictor, "gr_")) %>%
+  mutate(
+    Grade  = str_remove(Predictor, "gr_")
+  )
+
+# --- Long version
+grades_long <- grades_df %>%
+  select(Grade, all_of(names(outcome_map)), ends_with("_n_1"), ends_with("_total")) %>%
+  pivot_longer(
+    cols = names(outcome_map),
+    names_to = "OutcomeVar",
+    values_to = "pct"
+  ) %>%
+  mutate(
+    Outcome = recode(OutcomeVar, !!!outcome_map),
+    n_1_col   = str_replace(OutcomeVar, "_pct$", "_n_1"),
+    total_col = str_replace(OutcomeVar, "_pct$", "_total")
+  ) %>%
+  rowwise() %>%
+  mutate(
+    n_1   = cur_data()[[n_1_col]],
+    total = cur_data()[[total_col]]
+  ) %>%
+  ungroup()
+
+
+outcome_order <- grades_long %>%
+  group_by(Outcome) %>%
+  summarise(overall_pct = mean(pct, na.rm = TRUE)) %>%
+  arrange(desc(overall_pct)) %>%
+  pull(Outcome)
+
+# Force "Any Mental Health Condition" to the front, if present
+if ("Any Mental Health Condition" %in% outcome_order) {
+  outcome_order <- c(
+    "Any Mental Health Condition",
+    outcome_order[outcome_order != "Any Mental Health Condition"]
+  )
+}
+
+# --- BUILD HOVER TEXT (NO COMPARISONS)
+grades_long <- grades_long %>%
+  mutate(
+    hovertext = paste0(
+      "<b><span style='color:#FFD600;'>Grade: ", Grade, "</span></b><br>",
+      "<b>", Outcome, "</b><br>",
+      "Percent: ", pct, "%<br>",
+      "Count: ", n_1, " of ", total, " respondents"
+      #"n = ", n_1, "<br>",
+      #"Total N = ", total
+    )
+  ) %>%
+  mutate(
+    Outcome = factor(Outcome, levels = outcome_order)
+  )
+
+
+# --- PLOT (2025 ONLY, NO COMPARISONS)
+plot_ly(
+  data = grades_long,
+  x = ~Outcome,
+  y = ~pct,
+  color = ~Grade,
+  colors = fc_colors,
+  type = "bar",
+  text = ~paste0(pct, "%"),
+  textposition = "auto",
+  hovertext = ~hovertext,
+  hoverinfo = "text"
+) %>%
+  layout(
+    barmode = "group",
+    xaxis = list(title = ""),
+    yaxis = list(
+      title = "% of Students",
+      range = c(0, max(grades_long$pct, na.rm = TRUE) + 10)
+    ),
+    legend = list(
+      title = list(text = "Grades"),
+      orientation = "h",
+      x = 0.5, y = 1.10,
+      xanchor = "center", yanchor = "bottom"
+    )
+  ) %>%
+  fc_plotly_theme() %>%
+  config(responsive = TRUE)
+
+
+```
+
+:::
+
+
+# Linking Food and Housing Insecurity to Mental Health {#foodhousing}
+
+This survey asked about food and housing security, albeit differently from the [**#RealCollegeCA Survey**](https://fc-oie.github.io/docs/RealCollegeCA/2025/report.html). Thus, the percentages of students experiencing food and housing insecurity from this survey are not directly comparable to those from the #RealCollegeCA survey.
+
+**Food insecurity** was measured using one question asking students if in the past 12 months, they were sometimes or often worried whether their food would run out before they got money to buy more.
+
+**Housing insecurity** was measured using one question asking students if in the past 12 months, they were sometimes or often worried about having stable housing. Stable housing was defined as sleeping in vehicles, motels, campgrounds, homeless shelters, single-occupancy facilities, or couches in other people's homes because they had nowhere else to go.
+
+## Food Insecurity and Mental Health
+
+Mental health outcomes were markedly elevated among students experiencing food insecurity compared with those who were food secure. **Nearly eight in ten food-insecure students (79%) indicated experiencing at least one mental health condition, versus 68% among food-secure students.** Together, these results point to the substantial mental health burden associated with food insecurity in the student population.
+
+Each bar below is the percentage of students who experience that mental health condition, stratified by food security status.
+
+::: {#fig-food .quarto-figure}
+
+<div class="figure-cap">
+  **@fig-food:** Food Insecurity and Mental Health
+</div>
+
+```{r}
+colors2 <- c(
+  "Food Secure"   = "#0F406B",  # FC Blue
+  "Food Insecure" = "#FFD600"   # FC Yellow
+)
+
+
+# --- Outcome mapping
+outcome_map <- c(
+  dep_any_pct    = "Depression ",
+  anx_any_pct = "Anxiety",
+  ed_any_sde_pct = "Eating Disorder",
+  sib_any_pct = "Self-Injury",
+  sui_idea_pct = "Suicidal Ideation",
+  anymhprob_pct = "Any Mental Health Condition"
+)
+
+
+# --- Prepare data
+food_df <- summary_wide %>%
+  filter(Predictor %in% c("food_secure", "food_insecure")) %>%
+  mutate(
+    Food = recode(
+      Predictor,
+      "food_secure"   = "Food Secure",
+      "food_insecure" = "Food Insecure"
+    )
+  )
+
+# --- Long version
+food_long <- food_df %>%
+  select(Food, all_of(names(outcome_map)), ends_with("_n_1"), ends_with("_total")) %>%
+  pivot_longer(
+    cols = names(outcome_map),
+    names_to = "OutcomeVar",
+    values_to = "pct"
+  ) %>%
+  mutate(
+    Outcome = recode(OutcomeVar, !!!outcome_map),
+    n_1_col   = str_replace(OutcomeVar, "_pct$", "_n_1"),
+    total_col = str_replace(OutcomeVar, "_pct$", "_total")
+  ) %>%
+  rowwise() %>%
+  mutate(
+    n_1   = cur_data()[[n_1_col]],
+    total = cur_data()[[total_col]]
+  ) %>%
+  ungroup()
+
+
+
+outcome_order <- food_long %>%
+  group_by(Outcome) %>%
+  summarise(overall_pct = mean(pct, na.rm = TRUE)) %>%
+  arrange(desc(overall_pct)) %>%
+  pull(Outcome)
+
+# Force "Any Mental Health condition" to the front, if present
+if ("Any Mental Health Condition" %in% outcome_order) {
+  outcome_order <- c(
+    "Any Mental Health Condition",
+    outcome_order[outcome_order != "Any Mental Health Condition"]
+  )
+}
+
+# --- BUILD HOVER TEXT (NO COMPARISONS)
+food_long <- food_long %>%
+  mutate(
+    hovertext = paste0(
+      "<b><span style='color:#FFD600;'>Food Security Status: ", Food, "</span></b><br>",
+      "<b>", Outcome, "</b><br>",
+      "Percent: ", pct, "%<br>",
+      "Count: ", n_1, " of ", total, " respondents"
+      #"n = ", n_1, "<br>",
+      #"Total N = ", total
+    )
+  ) %>%
+  mutate(
+    Outcome = factor(Outcome, levels = outcome_order)
+  )
+
+
+# --- PLOT (2025 ONLY, NO COMPARISONS)
+plot_ly(
+  data = food_long,
+  x = ~Outcome,
+  y = ~pct,
+  color = ~Food,
+  colors = colors2,
+  type = "bar",
+  text = ~paste0(pct, "%"),
+  textposition = "outside",
+  textfont = list(color="#333333"),
+  hovertext = ~hovertext,
+  hoverinfo = "text"
+)  %>%
+  layout(
+    barmode = "group",
+    xaxis = list(title = ""),
+    yaxis = list(
+      title = "% of Students",
+      range = c(0, max(food_long$pct, na.rm = TRUE) + 12),
+      cliponaxis = FALSE
+    ),
+    legend = list(
+      title = list(text = "Food Security Status"),
+      orientation = "h",
+      x = 0.5, y = 1.10,
+      xanchor = "center", yanchor = "bottom"
+    )
+  ) %>%
+  fc_plotly_theme() %>%
+  config(responsive = TRUE)
+
+
+```
+:::
+
+
+## Housing Insecurity and Mental Health
+
+Across the mental health outcomes examined, students experiencing housing insecurity consistently showed greater prevalence of mental health concerns relative to their housing-secure peers. In particular, **more than four in five housing-insecure students (81%) reported at least one mental health condition, compared with 68% of students who were housing secure.** This pattern underscores the strong association between housing instability and adverse mental health outcomes among students.
+
+Each bar below is the percentage of students who experience that mental health condition, stratified by housing security status.
+
+::: {#fig-house .quarto-figure}
+
+<div class="figure-cap">
+  **@fig-house:** Housing Insecurity and Mental Health
+</div>
+
+```{r}
+colors2 <- c(
+  "Housing Secure"   = "#0F406B",  # FC Blue
+  "Housing Insecure" = "#FFD600"   # FC Yellow
+)
+outcome_map <- c(
+  dep_any_pct     = "Depression",
+  anx_any_pct     = "Anxiety",
+  ed_any_sde_pct  = "Eating Disorder",
+  sib_any_pct     = "Self-Injury",
+  sui_idea_pct    = "Suicidal Ideation",
+  anymhprob_pct   = "Any Mental Health Condition"
+)
+housing_df <- summary_wide %>%
+  filter(Predictor %in% c("housing_secure", "housing_insecure")) %>%
+  mutate(
+    Housing = recode(
+      Predictor,
+      "housing_secure"   = "Housing Secure",
+      "housing_insecure" = "Housing Insecure"
+    )
+  )
+
+housing_long <- housing_df %>%
+  select(Housing, all_of(names(outcome_map)), ends_with("_n_1"), ends_with("_total")) %>%
+  pivot_longer(
+    cols = names(outcome_map),
+    names_to = "OutcomeVar",
+    values_to = "pct"
+  ) %>%
+  mutate(
+    Outcome = recode(OutcomeVar, !!!outcome_map),
+    n_1_col   = str_replace(OutcomeVar, "_pct$", "_n_1"),
+    total_col = str_replace(OutcomeVar, "_pct$", "_total")
+  ) %>%
+  rowwise() %>%
+  mutate(
+    n_1   = cur_data()[[n_1_col]],
+    total = cur_data()[[total_col]]
+  ) %>%
+  ungroup()
+outcome_order <- housing_long %>%
+  group_by(Outcome) %>%
+  summarise(overall_pct = mean(pct, na.rm = TRUE)) %>%
+  arrange(desc(overall_pct)) %>%
+  pull(Outcome)
+
+if ("Any Mental Health Condition" %in% outcome_order) {
+  outcome_order <- c(
+    "Any Mental Health Condition",
+    outcome_order[outcome_order != "Any Mental Health Condition"]
+  )
+}
+
+housing_long <- housing_long %>%
+  mutate(Outcome = factor(Outcome, levels = outcome_order))
+housing_long <- housing_long %>%
+  mutate(
+    hovertext = paste0(
+      "<b><span style='color:#FFD600;'>Housing Security Status: ", Housing, "</span></b><br>",
+      "<b>", Outcome, "</b><br>",
+      "Percent: ", pct, "%<br>",
+      "Count: ", n_1, " of ", total, " respondents"
+    )
+  )
+plot_ly(
+  data = housing_long,
+  x = ~Outcome,
+  y = ~pct,
+  color = ~Housing,
+  colors = colors2,
+  type = "bar",
+  text = ~paste0(pct, "%"),
+  textposition = "outside",
+  textfont = list(color = "#333333"),
+  hovertext = ~hovertext,
+  hoverinfo = "text"
+) %>%
+  layout(
+    barmode = "group",
+    xaxis = list(title = ""),
+    yaxis = list(
+      title = "% of Students",
+      range = c(0, max(housing_long$pct, na.rm = TRUE) + 12),
+      cliponaxis = FALSE
+    ),
+    legend = list(
+      title = list(text = "Housing Security Status"),
+      orientation = "h",
+      x = 0.5, y = 1.10,
+      xanchor = "center", yanchor = "bottom"
+    )
+  ) %>%
+  fc_plotly_theme() %>%
+  config(responsive = TRUE)
+
+```
+:::
+
+
+# Supporting Mental Health at FC {#shs}
+
+::: {style="text-align:center;"}
+<img src="../figure/SSC.png" style="width:80%; height:auto;"/>
+:::
+
+## Student Health Services
+
+Student Health Services is a vital resource at Fullerton College, dedicated to supporting the mental and physical well-being of our students. Specifically, the survey asked about students' utilization of mental health services, using Student Health Services. A total of 29 survey respondents indicated having used these services in the past 12 months. Although this is a small sample size, the feedback provided offers valuable insights into students' experiences with these services.
+
+**Overall, students were very satisfied with the services provided by Student Health Services,** with high satisfaction rates across various aspects of the services, including location, respect and consideration for identities, quality of therapists/counselors, and respect for privacy concerns. However, **only about 70% of students reported being satisfied with the hours of operation and scheduling ability,** indicating room for improvement in these areas.
+
+::: {#fig-shs .quarto-figure}
+
+<div class="figure-cap">
+  **@fig-shs:** Satisfaction with Student Health Services (SHS)
+</div>
+
+```{r}
+dat_bin <- df %>%
+  mutate(across(
+    sat_hours_1:sat_race_1,
+    ~ case_when(
+      .x %in% 1:3 ~ 0,
+      .x %in% 4:6 ~ 1,
+      TRUE ~ NA_real_
+    ),
+    .names = "{.col}_bin"
+  ))
+
+sat_percent <- dat_bin %>%
+  summarise(across(
+    ends_with("_bin"),
+    ~ round(mean(.x, na.rm = TRUE) * 100, 1)
+  ))
+
+labels <- c(
+  "sat_hours_1_bin" = "Convenient hours",
+  "sat_loc_1_bin" = "Location",
+  "sat_qual_1_bin" = "Quality of therapists/counselors",
+  "sat_priv_1_bin" = "Respect for your privacy concerns",
+  "sat_sched_1_bin" = "Ability to schedule appointments without long delays",
+  "sat_race_1_bin" = "Respect and consideration for my identities"
+)
+
+sat_table <- sat_percent %>%
+  pivot_longer(
+    everything(),
+    names_to = "item",
+    values_to = "percent"
+  ) %>%
+  mutate(
+    item = str_replace(item, "_percent$", ""), # remove suffix
+    label = recode(item, !!!labels)
+  ) %>%
+  select(label, percent) %>%
+  arrange(desc(percent))
+
+
+ft_sat <- sat_table %>%
+  flextable() %>%
+  set_header_labels(
+    label = "Satisfaction with SHS",
+    percent = "Percent Satisfied"
+  ) %>%
+  colformat_num(j = "percent", digits = 1, suffix = "%") %>%
+  set_table_properties(layout = "autofit", align = "left") %>%  
+  autofit()
+
+ft_sat
+
+```
+:::
+
+## Students' Mental Health Person of Contact at FC
+
+The survey also inquired about students' primary person of contact for mental health support at FC. The results indicate that **although 47% of students would not talk to anyone on campus about their mental health issues, the remaining students (53%) would go to a professor, academic advisor, student services staff, or another FC employee.** This highlights the importance of faculty and staff being equipped to provide support and resources for students facing mental health challenges.
+
+::: {#fig-contact .quarto-figure style=width:"70%"}
+
+<div class="figure-cap">
+  **@fig-contact:** Students' Primary Person of Contact for Mental Health Support at FC
+</div>
+
+```{r}
+
+# table on who they'd talk to on campus
+
+vars <- c(
+  "talk2_1",
+  "talk2_2",
+  "talk2_3",
+  "talk2_5",
+  "talk2_6",
+  "talk2_8")
+
+vars_all <- c(
+  "talk2_1",
+  "talk2_2",
+  "talk2_3",
+  "talk2_4",
+  "talk2_5",
+  "talk2_6",
+  "talk2_7",
+  "talk2_8"
+)
+
+labels <- c(
+  talk2_1 = "Professor from one of my classes",
+  talk2_2 = "Academic advisor",
+  talk2_3 = "Another faculty member",
+  talk2_4 = "Teaching assistant",
+  talk2_5 = "Student services staff",
+  talk2_6 = "Administrator",
+  talk2_7 = "Other (please specify)",
+  talk2_8 = "No one"
+)
+
+total_n <- df %>%
+  filter(if_any(all_of(vars), ~ !is.na(.x))) %>%
+  nrow()
+
+talk2_table <- df %>%
+  summarise(across(
+    all_of(vars),
+    ~ sum(.x == 1, na.rm = TRUE),
+    .names = "{.col}_count"
+  )) %>%
+  pivot_longer(
+    everything(),
+    names_to = "item",
+    values_to = "count"
+  ) %>%
+  mutate(
+    pct = round((count / total_n) * 100, 1),
+    item_clean = str_remove(item, "_count$"),
+    label = recode(item_clean, !!!labels)
+  ) %>%
+  select(label, pct) %>%
+  arrange(desc(pct))
+
+ft_talk2 <- talk2_table %>%
+  flextable() %>%
+  set_header_labels(
+    label = "Person student would talk to",
+    pct = "Percent"
+  ) %>%
+  colformat_num(j = "pct", digits = 1, suffix="%") %>%
+  set_table_properties(layout = "autofit", align = "left")
+
+ft_talk2 <- flextable::autofit(ft_talk2)
+
+# plot
+
+################## Select Overall Data ##################
+################## Select Overall Data ##################
+talk2_summary <- df %>%
+  summarise(across(
+    all_of(vars),
+    ~ sum(.x == 1, na.rm = TRUE),
+    .names = "{.col}_count"
+  )) %>%
+  pivot_longer(
+    everything(),
+    names_to = "OutcomeVar",
+    values_to = "count"
+  ) %>%
+  mutate(
+    pct = round((count / total_n) * 100, 1),
+    OutcomeVar = str_remove(OutcomeVar, "_count$")
+  )
+
+################## Reshape to Long Format ##################
+talk2_long <- talk2_summary %>%
+  mutate(
+    Outcome = recode(OutcomeVar, !!!labels)
+  )
+
+################## Build Hover Text ##################
+talk2_long <- talk2_long %>%
+  mutate(
+    hovertext = paste0(
+      "<b><span style='color:#FFD600;'>", Outcome, "</span></b><br>",
+      "Percent: ", pct, "%<br>",
+      "Count: ", count, " of ", total_n, " respondents"
+    )
+  )
+
+################## Order Outcomes by Prevalence ##################
+talk2_order <- talk2_long %>%
+  arrange(desc(pct)) %>%
+  pull(Outcome)
+
+talk2_long <- talk2_long %>%
+  mutate(Outcome = factor(Outcome, levels = talk2_order))
+
+################## Plot (Vertical Bars, Ordered, FC Blue) ##################
+p <- plot_ly(
+  data = talk2_long,
+  x = ~Outcome,
+  y = ~pct,
+  type = "bar",
+  color = I("#0F406B"),   # FC Blue
+  text = ~paste0(pct, "%"),
+  textposition = "outside",
+  hovertext = ~hovertext,
+  hoverinfo = "text"
+) %>%
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list(
+      title = "% of Students",
+      range = c(0, max(talk2_long$pct, na.rm = TRUE) * 1.15)
+    ),
+    showlegend = FALSE
+  ) %>%
+  fc_plotly_theme() %>%
+  config(responsive = TRUE)
+
+p
+
+
+```
+:::
+
+
+## [Learn more about how FC supports mental health!](https://health.fullcoll.edu/psychological-services/){.link-box target="_blank"}
+

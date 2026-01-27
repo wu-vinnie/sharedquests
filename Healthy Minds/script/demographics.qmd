@@ -1,0 +1,1243 @@
+---
+title: "Healthy Minds Study:<br>Examining Student Mental Health"
+subtitle: "Spring 2025"
+author: "Vinnie Wu"
+date: today
+---
+
+
+<div id="top"></div>
+
+
+# Disaggregating by Demographics
+
+
+<div style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-bottom:1em;"></div>
+
+
+```{r setup, include=FALSE}
+
+source("../template/fullerton.R")
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+htmltools::tagList(plotly::plotlyOutput("dummy"))
+
+
+```
+
+
+This section uses results from the Healthy Minds Study to examine how Fullerton College students experience mental health conditions, with a focus on disparities based on demographics, including:
+
+- [Race and ethnicity](#race)
+- [Gender](#gender)
+- [Sexual orientation](#sexual-orientation)
+- [Age group](#age-group)
+- [Disability status](#disability)
+- [Financial status (based on Pell Grant)](#financial), and
+- [College generational status](#college-gen).
+
+## Summary
+
+Across all demographic dimensions examined, mental health challenges are widespread among Fullerton College students, with several groups experiencing disproportionately higher prevalence across multiple outcomes.
+
+- **Race/Ethnicity:** Mental health outcomes vary substantially, with **Southeast Asian** and **Black/African American** students consistently reporting elevated prevalence across multiple indicators. **Pacific Islander/Native Hawaiian** and **American Indian/Alaska Native** students show particularly high levels for specific conditions (e.g., eating disorders and self-injury).
+- **Gender:** The largest disparities are observed by gender identity, with **transgender** and **non-binary/genderqueer** students experiencing markedly higher prevalence across nearly all mental health outcomes. **Female** students show elevated eating disorder–related symptoms, while **male** students generally report lower prevalence across indicators.
+- **Sexual Orientation:** Mental health challenges are substantially more prevalent among **LGBTQIA2S+** students, especially those identifying as **pansexual, queer, bisexual, or questioning/unsure**, compared to **non-LGBTQIA2S+** students. Disparities are particularly pronounced for depression, anxiety, self-injury, and suicidal ideation.
+- **Age Group:** Mental health burden is highest among **students under age 30**, particularly those ages **20–29**, with prevalence declining steadily with age. Older students, especially those **50 and older**, report substantially lower levels across nearly all outcomes.
+- **Disability Status:** A clear gradient exists, with students with **registered disabilities** reporting the highest prevalence, followed by those with **unregistered disabilities**, and the lowest rates among students with **no disability**. Elevated rates among unregistered students suggest unmet or emerging support needs rather than absence of need.
+- **Financial Status (Pell Grant):** Differences by Pell Grant status are modest but meaningful. **Pell Grant recipients** report slightly higher overall prevalence of any mental health condition and notably higher eating disorder–related symptoms, suggesting intersections between financial vulnerability and certain mental health challenges.
+- **College Generational Status:** Overall prevalence is similar between **first-generation** and **continuing-generation** students; however, **continuing-generation** students report higher anxiety, self-injury, and suicidal ideation, whereas **first-generation** students report higher eating disorder–related symptoms.
+
+Taken together, these findings indicate that **mental health needs are pervasive across the student population but are not evenly distributed**, emphasizing the importance of **equity-informed, culturally responsive, and identity-affirming approaches** to mental health outreach, prevention, and support.
+
+## Race and Ethnicity {#race}
+
+### About the Students
+
+Race and ethnicity data were collected using checkboxes, allowing students to identify with multiple groups simultaneously rather than choosing a single category. As a result, percentages across groups can exceed 100%, and each race/ethnicity is analyzed independently.
+
+The respondents were generally representative of the student body, but white students were overrepresented by about 15 percentage points (survey: 31%, spring 2025: 16%).
+
+::: {#fig-race .quarto-figure}
+
+<div class="figure-cap">
+  **@fig-race:** Respondents by Race/Ethnicity
+</div>
+
+```{r}
+
+
+labels <- c(
+  race_his     = "Hispanic / Latine",
+  race_black        = "Black / African American",
+  race_ainaan  = "American Indian / Alaska Native",
+  asian_east       = "East Asian",
+  asian_south       = "South Asian",
+  asian_southeast      = "Southeast Asian",
+  asian_other       = "Other Asian",
+  asian_filipin = "Filipino",
+  race_mides         = "Middle Eastern / North African",
+  race_pi         = "Pacific Islander / Native Hawaiian",
+  race_white        = "White",
+  race_other        = "Other Race / Ethnicity"
+)
+
+real <- tibble(
+  Category = names(labels),
+  Actual_Percent = c(60.2, 6.1, 3.3, 8.0, 2.1, 9.0, 1.6, 1.7, 2.8, 1.2, 16.3, 2.3)
+)
+
+make_demographic_bar(df, names(labels), labels, real)
+
+```
+
+:::
+
+
+### Mental Health Conditions by Race/Ethnicity
+
+Mental health outcomes vary substantially across racial/ethnic groups when compared to the campuswide averages (**Any mental health condition: 72%; Depression: 46%; Anxiety: 39%; Eating disorders: 37%; Self-injury: 26%; Suicidal ideation: 15%**).
+
+- **Any mental health condition** is most prevalent among **Southeast Asian** (84%) and **Black/African American** (83%) students, followed by **South Asian** (80%), **Other Race/Ethnicity** (76%), and **East Asian** (75%) students—all exceeding the campuswide average.
+- **Depression** is highest among **Southeast Asian** students (63%), with elevated rates also observed among **Black/African American**, **Pacific Islander/Native Hawaiian**, **Filipino**, and **South Asian** students (approximately 55–56%), each well above the institutional rate of 46%. In contrast, **Middle Eastern/North African** students report substantially lower levels (29%).
+- **Anxiety** is most prevalent among **Black/African American**, **Filipino**, **American Indian/Alaska Native**, and **Pacific Islander/Native Hawaiian** students (around 50%), notably higher than the campuswide average of 39%, while **Middle Eastern/North African** students report the lowest prevalence (21%).
+- **Eating disorder–related symptoms** show the widest dispersion relative to the institutional average (37%), with especially high prevalence among **American Indian/Alaska Native** (50%) and **Pacific Islander/Native Hawaiian** (44%) students, and markedly lower prevalence among **South Asian** students (18%).
+- **Self-injury** exceeds the campuswide rate (26%) among **Southeast Asian** (41%) and **Pacific Islander/Native Hawaiian** (44%) students, while **Other Asian** and **White** students report comparatively lower levels (approximately 14–28%).
+- **Suicidal ideation** is highest among **Black/African American** (24%) and **Southeast Asian** (23%) students—both substantially above the institutional average of 15%—and lowest among **Middle Eastern/North African** students (6%).
+
+Overall, **Southeast Asian and Black/African American students consistently report elevated mental health challenges across multiple outcomes**, often exceeding campuswide averages by large margins. Additionally, **Pacific Islander/Native Hawaiian and American Indian/Alaska Native students emerge as groups with particularly high prevalence for specific conditions** (e.g., eating disorder–related symptoms and self-injury), highlighting the importance of targeted, culturally responsive mental health strategies rather than uniform approaches.
+
+
+::: {#fig-race2 .quarto-figure}
+
+<div class="figure-cap">
+  **@fig-race2:** Specific Mental Health Conditions by Race/Ethnicity
+</div>
+
+```{r fig.height = 7.5}
+make_demographic_dropdown_plot(label_map_race)
+```
+
+:::
+
+::: {#fig-race3 .quarto-figure}
+
+<div class="figure-cap">
+  **@fig-race3:** Overview of Mental Health Conditions by Race/Ethnicity
+</div>
+
+```{r fig.height = 4}
+
+make_heatmap_plotly(summary_wide, label_map = label_map_race)
+```
+
+:::
+
+
+
+## Gender {#gender}
+
+### About the Students
+
+Gender was collected using checkboxes, and students could select multiple gender identities. As a result, percentages across groups can exceed 100%.
+
+Overall, female students were over-represented in the survey by about 13 percentage points (survey: 62%, spring 2025: 49%), whereas male students were under-represented by about 9 percentage points (survey: 34%, spring 2025: 43%).
+
+::: {#fig-gender1 .quarto-figure}
+
+<div class="figure-cap">
+  **@fig-gender1:** Respondents by Gender
+</div>
+
+```{r}
+
+labels <- c(
+  "gender_nb" = "Non-binary / Genderqueer",
+  "gender_trans" = "Transgender",
+  "gender_male" = "Male",
+  "gender_female" = "Female"
+)
+
+real <- tibble(
+  Category = names(labels),
+  Actual_Percent = c(1.7, 1.6, 42.5, 49.4)
+)
+
+make_demographic_bar(df, names(labels), labels, real)
+
+```
+
+:::
+
+
+### Mental Health Conditions by Gender
+
+Mental health outcomes vary substantially across gender identities when compared to the campuswide averages, with particularly pronounced disparities between **cisgender** and **non-cisgender** students (**Any mental health condition: 72%; Depression: 46%; Anxiety: 39%; Eating disorders: 37%; Self-injury: 26%; Suicidal ideation: 15%**).
+
+- **Any mental health condition** is nearly universal among **non-binary/genderqueer** (97%) and **transgender** (90%) students, far exceeding rates among **female** (74%) and **male** (65%) students.
+- **Depression** is especially elevated among **transgender** students (79%) and **non-binary/genderqueer** students (64%), compared to **female** (48%) and **male** (39%) students.
+- **Anxiety** follows a similar pattern, affecting more than two-thirds of **non-binary/genderqueer** (69%) and three-quarters of **transgender** (76%) students, while rates are substantially lower among **female** (40%) and **male** (33%) students.
+- **Eating disorder–related symptoms** are most prevalent among **female** students (42%), exceeding rates among **non-binary/genderqueer** (31%), **transgender** (28%), and **male** (27%) students.
+- **Self-injury** is markedly higher among **transgender** (62%) and **non-binary/genderqueer** (58%) students, more than double the prevalence among **female** (27%) and **male** (20%) students.
+- **Suicidal ideation** is highest among **transgender** students (35%), followed by **non-binary/genderqueer** students (24%), compared to substantially lower rates among **male** (16%) and **female** (13%) students.
+
+Overall, **transgender and non-binary/genderqueer students experience consistently and substantially higher mental health challenges across nearly all outcomes**, particularly for depression, anxiety, self-injury, and suicidal ideation. These disparities underscore the need for gender-affirming, trauma-informed, and identity-specific mental health supports, alongside broader campuswide prevention and care strategies. However, eating disorders were particularly prominent for female students.
+
+
+::: {#fig-gender2 .quarto-figure}
+
+<div class="figure-cap">
+  **@fig-gender2:** Specific Mental Health Conditions by Gender
+</div>
+
+```{r fig.height = 4}
+make_demographic_dropdown_plot(label_map_gender)
+```
+
+:::
+
+::: {#fig-gender3 .quarto-figure}
+
+<div class="figure-cap">
+  **@fig-gender3:** Overview of Mental Health Conditions by Gender
+</div>
+
+```{r fig.height = 4}
+
+make_heatmap_plotly(summary_wide, label_map = label_map_gender)
+```
+
+:::
+
+
+
+## Sexual Orientation {#sexual-orientation}
+
+### About the Students
+
+Sexual orientation was collected using checkboxes, and students could select multiple sexual orientations. As a result, percentages across groups can exceed 100%.
+
+In the figure below, an "LGBTQIA2S+" category was created, which aggregates the responses of students who indicated being pansexual, queer, bisexual, questioning/unsure, asexual, lesbian, and/or gay. Students who selected more than one sexual orientation are unduplicated in this category.
+
+For spring 2025, 13% of students indicated that they identify as LGBTQIA2S+, compared with 26% of respondents in this survey. However, this difference shouhld not be interpreted as overrepresentation in the survey sample, since institutional data on sexual orientation is known to be underreprorted.
+
+::: {#fig-so1 .quarto-figure}
+
+<div class="figure-cap">
+  **@fig-so1:** Respondents by Sexual Orientation
+</div>
+
+```{r }
+
+
+make_demographic_bar_sexual <- function(
+  df,
+  vars,
+  labels,
+  actual_demo = NULL,
+  title = NULL,
+  main_color = "#0F406B",
+  highlight_color = "#375E9E"
+) {
+  library(dplyr)
+  library(tidyr)
+  library(plotly)
+
+  # Filter out rows with all NA across selected variables
+  df_filtered <- df %>%
+    filter(if_any(all_of(vars), ~ !is.na(.)))
+
+  total_valid <- nrow(df_filtered)
+
+  # Frequency and percentage table
+  demo_table <- df_filtered %>%
+    summarise(across(all_of(vars), ~ sum(. == 1, na.rm = TRUE))) %>%
+    pivot_longer(
+      cols = everything(),
+      names_to = "Category",
+      values_to = "Freq"
+    ) %>%
+    mutate(
+      Category = as.character(Category),
+      Percent  = round(100 * Freq / total_valid, 1),
+      Label    = labels[Category]
+    )
+
+  # Optional reference comparison
+  if (!is.null(actual_demo)) {
+    demo_table <- demo_table %>%
+      left_join(actual_demo, by = "Category") %>%
+      mutate(
+        Diff = Percent - Actual_Percent,
+        Diff_label = ifelse(
+          Diff > 0,
+          paste0("+", round(Diff, 1), " pts"),
+          paste0(round(Diff, 1), " pts")
+        )
+      )
+  }
+
+  # ----- ORDERING LOGIC -----
+  ordered_categories <- c(
+    "sexual_het",
+    "sexual_lgbt",
+    demo_table %>%
+      filter(!Category %in% c("sexual_het", "sexual_lgbt")) %>%
+      arrange(desc(Percent)) %>%
+      pull(Category)
+  )
+
+  demo_table <- demo_table %>%
+    mutate(
+      Category = factor(Category, levels = ordered_categories),
+      Label    = factor(Label, levels = labels[ordered_categories]),
+      BarColor = ifelse(
+        Category %in% c("sexual_het", "sexual_lgbt"),
+        highlight_color,
+        main_color
+      )
+    )
+
+  # ----- PLOT -----
+  p <- plot_ly(
+    data = demo_table,
+    x = ~Percent,
+    y = ~Label,
+    type = "bar",
+    orientation = "h",
+    text = ~paste0(Percent, "%"),
+    textposition = "outside",
+    hovertext = ~paste0(
+      "<b><span style='color:#FFD600;'>", Label, "</span></b><br>",
+      Freq, " of ", total_valid, " respondents",
+      if (!is.null(actual_demo)) {
+        paste0(
+          "<br>% Survey Respondents: ", Percent, "% (", Diff_label, ")",
+          "<br>% 2025 Spring Students: ", Actual_Percent, "%"
+        )
+      } else ""
+    ),
+    hoverinfo = "text",
+    marker = list(color = ~BarColor)
+  ) %>%
+    layout(
+      title = title,
+      xaxis = list(
+        title = "Percent of Respondents",
+        range = c(0, max(demo_table$Percent) * 1.15)
+      ),
+      yaxis = list(title = "")
+    )
+
+  fc_plotly_theme(p)
+}
+
+
+make_demographic_plot_sexual <- function(
+  summary_wide,
+  outcome,
+  label_map
+) {
+  library(dplyr)
+  library(plotly)
+  library(stringr)
+
+  # --------------------------------------------------
+  # Outcome handling
+  # --------------------------------------------------
+  pct_col   <- outcome
+  total_col <- gsub("_pct$", "_total", outcome)
+
+  outcome_label <- dplyr::case_when(
+    outcome == "dep_any_pct"     ~ "Depression",
+    outcome == "anx_any_pct"     ~ "Anxiety",
+    outcome == "ed_any_sde_pct"  ~ "Eating Disorder",
+    outcome == "sib_any_pct"     ~ "Self-Injury",
+    outcome == "sui_idea_pct"    ~ "Suicidal Ideation",
+    outcome == "anymhprob_pct"   ~ "Any Mental Health Condition",
+    TRUE ~ outcome
+  )
+
+  # --------------------------------------------------
+  # Filter + recode
+  # --------------------------------------------------
+  df <- summary_wide %>%
+    filter(Predictor %in% names(label_map)) %>%
+    mutate(
+      PredictorCode  = Predictor,
+      PredictorValue = recode(Predictor, !!!label_map),
+      pct   = as.numeric(.data[[pct_col]]),
+      total = as.numeric(.data[[total_col]]),
+      small_n = total < 25
+    )
+
+  # --------------------------------------------------
+  # Collapse to ONE row per predictor
+  # --------------------------------------------------
+  df_plot <- df %>%
+    group_by(PredictorCode, PredictorValue) %>%
+    summarise(
+      pct = mean(pct, na.rm = TRUE),
+      total = sum(total, na.rm = TRUE),
+      small_n = any(small_n),
+      .groups = "drop"
+    )
+
+  # --------------------------------------------------
+  # Axis labels (wrap + asterisk)
+  # --------------------------------------------------
+  df_plot <- df_plot %>%
+    mutate(
+      PredictorLabel = ifelse(
+        nchar(PredictorValue) > 18,
+        gsub(" / ", " /<br>", PredictorValue),
+        PredictorValue
+      ),
+      PredictorLabel = ifelse(
+        small_n,
+        paste0(PredictorLabel, "*"),
+        PredictorLabel
+      )
+    )
+
+  # --------------------------------------------------
+  # EXPLICIT ordering (Plotly-safe)
+  # --------------------------------------------------
+  ordered_levels <- c(
+    "Non-LGBTQIA2S+",
+    "LGBTQIA2S+",
+    df_plot %>%
+      filter(!PredictorValue %in% c("Non-LGBTQIA2S+", "LGBTQIA2S+")) %>%
+      arrange(desc(pct)) %>%
+      pull(PredictorValue)
+  )
+
+  df_plot <- df_plot %>%
+    mutate(
+      PredictorValue = factor(PredictorValue, levels = ordered_levels),
+      BarColor = ifelse(
+        PredictorCode %in% c("sexual_het", "sexual_lgbt"),
+        "#375E9E",
+        "#0F406B"
+      )
+    ) %>%
+    arrange(PredictorValue)
+
+  # --------------------------------------------------
+  # Hover text
+  # --------------------------------------------------
+  df_plot <- df_plot %>%
+    mutate(
+      hovertext = paste0(
+        "<b>", PredictorValue, "</b><br>",
+        outcome_label, ": ", round(pct, 1), "%<br>",
+        "Respondents: ", total,
+        ifelse(
+          small_n,
+          "<br><b><span style='color:#E64B35;'>⚠️ Small sample size (&lt;25)</span></b>",
+          ""
+        )
+      )
+    )
+
+  # --------------------------------------------------
+  # Plot
+  # --------------------------------------------------
+  plot_ly(
+    data = df_plot,
+    x = ~PredictorValue,
+    y = ~pct,
+    type = "bar",
+    marker = list(color = ~BarColor),
+    text = ~paste0(round(pct, 1), "%"),
+    textposition = "outside",
+    hovertext = ~hovertext,
+    hoverinfo = "text"
+  ) %>%
+    layout(
+      xaxis = list(
+        title = "",
+        tickangle = -45,
+        categoryorder = "array",
+        categoryarray = levels(df_plot$PredictorValue),
+        ticktext = df_plot$PredictorLabel
+      ),
+      yaxis = list(
+        title = paste0("% Experiencing ", outcome_label),
+        range = c(0, max(df_plot$pct, na.rm = TRUE) * 1.15)
+      ),
+      annotations = list(
+        list(
+          text = "* Fewer than 25 respondents",
+          xref = "paper",
+          yref = "paper",
+          x = 1,
+          y = 1.05,
+          showarrow = FALSE,
+          xanchor = "right"
+        )
+      )
+    ) %>%
+    fc_plotly_theme() %>%
+    config(responsive = TRUE)
+}
+
+labels <- c(
+ "sexual_bi" = "Bisexual",
+  "sexual_g" = "Gay",
+  "sexual_l" = "Lesbian",
+  "sexual_pan" = "Pansexual",
+  "sexual_queer" = "Queer",
+  "sexual_asexual" = "Asexual",
+  "sexual_quest" = "Questioning / Unsure",
+  "sexual_lgbt" = "LGBTQIA2S+",
+  "sexual_het" = "Non-LGBTQIA2S+"
+)
+
+make_demographic_bar_sexual(df, names(labels), labels)
+
+```
+
+:::
+
+
+### Mental Health Conditions by Sexual Orientation
+
+Mental health outcomes vary substantially across sexual orientations when compared to the campuswide averages, with consistently higher prevalence among LGBTQIA2S+ students (**Any mental health condition: 72%; Depression: 46%; Anxiety: 39%; Eating disorders: 37%; Self-injury: 26%; Suicidal ideation: 15%**).
+
+- **Any mental health condition** is most prevalent among **pansexual** (97%) and **queer** (94%) students, followed by **bisexual** (91%) and **questioning/unsure** (88%) students. All LGBTQIA+ groups report markedly higher rates than **non-LGBTQIA+** students (65%).
+- **Depression** is especially elevated among **pansexual** (79%), **queer** (74%), **questioning/unsure** (69%), and **bisexual** (65%) students, compared to 40% among non-LGBTQIA+ students.
+- **Anxiety** follows a similar pattern, affecting over 60% of **pansexual** and **queer** students and nearly 60% of **bisexual** and **questioning/unsure** students, versus 33% among non-LGBTQIA+ students.
+- **Eating disorder–related symptoms** show notable variation, with particularly high prevalence among **pansexual** students (63%) and elevated levels among **queer**, **bisexual**, and **gay** students (approximately 42–47%). Rates are lowest among **questioning/unsure** students (24%).
+- **Self-injury** is most prevalent among **queer** (59%) and **pansexual** (55%) students, substantially exceeding the rate among non-LGBTQIA+ students (18%).
+- **Suicidal ideation** is highest among **gay** (33%), **queer** (26%), and **bisexual** (21%) students, compared to 12% among non-LGBTQIA+ students.
+
+Overall, **pansexual, queer, bisexual, and questioning/unsure students consistently report the highest levels of mental health challenges across multiple outcomes**. In contrast, **non-LGBTQIA+ students report substantially lower prevalence across all indicators**, highlighting pronounced disparities by sexual orientation and the need for targeted, affirming mental health supports.
+
+
+::: {#fig-so2 .quarto-figure}
+
+<div class="figure-cap">
+  **@fig-so2:** Specific Mental Health Conditions by Sexual Orientation
+</div>
+
+```{r fig.height = 7}
+make_demographic_dropdown_plot(label_map_sexual2)
+```
+
+:::
+
+
+::: {#fig-so3 .quarto-figure}
+
+<div class="figure-cap">
+  **@fig-so3:** Overview of Mental Health Conditions by Sexual Orientation
+</div>
+
+```{r fig.height = 4}
+make_heatmap_sexual <- function(
+  summary_wide,
+  label_map,
+  year = "2025"
+) {
+  library(dplyr)
+  library(tidyr)
+  library(purrr)
+  library(plotly)
+  library(stringr)
+  library(forcats)
+
+  # ------------------------------------------------------------
+  # Label wrapper
+  # ------------------------------------------------------------
+  wrap_label <- function(label, width = 18) {
+    label <- as.character(label)
+
+    if (grepl("/", label, fixed = TRUE)) {
+      slash_pos <- gregexpr("/", label, fixed = TRUE)[[1]][1]
+      return(paste0(
+        substr(label, 1, slash_pos),
+        "<br>",
+        substr(label, slash_pos + 1, nchar(label))
+      ))
+    }
+
+    if (nchar(label) <= width) return(label)
+
+    spaces <- gregexpr(" ", label)[[1]]
+    if (spaces[1] == -1) return(label)
+
+    mid <- nchar(label) / 2
+    break_at <- spaces[which.min(abs(spaces - mid))]
+    paste0(
+      substr(label, 1, break_at - 1),
+      "<br>",
+      substr(label, break_at + 1, nchar(label))
+    )
+  }
+
+  wrap_labels <- function(x) vapply(x, wrap_label, FUN.VALUE = character(1))
+
+  # ------------------------------------------------------------
+  # Outcome map + ordering
+  # ------------------------------------------------------------
+  outcome_map <- c(
+    dep_any_pct     = "Depression",
+    anx_any_pct     = "Anxiety",
+    ed_any_sde_pct  = "Eating Disorder",
+    sib_any_pct     = "Self-Injury",
+    sui_idea_pct    = "Suicidal Ideation",
+    anymhprob_pct   = "Any Mental Health Condition"
+  )
+
+  outcome_order <- c(
+    "Any Mental Health Condition",
+    "Depression",
+    "Anxiety",
+    "Eating Disorder",
+    "Self-Injury",
+    "Suicidal Ideation"
+  )
+
+  midpoints <- c(
+    Depression = 46,
+    Anxiety = 39,
+    `Eating Disorder` = 37,
+    `Self-Injury` = 26,
+    `Suicidal Ideation` = 15,
+    `Any Mental Health Condition` = 72
+  )
+
+  # ------------------------------------------------------------
+  # Filter predictors
+  # ------------------------------------------------------------
+  df <- summary_wide %>%
+    mutate(Predictor = as.character(Predictor)) %>%
+    filter(Predictor %in% names(label_map)) %>%
+    group_by(Predictor) %>%
+    arrange(desc(anymhprob_total)) %>%
+    slice(1) %>%
+    ungroup()
+
+  if (nrow(df) == 0) stop("No rows available after filtering.")
+
+  # ------------------------------------------------------------
+  # Clean labels + numeric coercion
+  # ------------------------------------------------------------
+  df <- df %>%
+    mutate(
+      GroupCode = Predictor,
+      Group = recode(Predictor, !!!label_map)
+    ) %>%
+    mutate(across(all_of(names(outcome_map)), as.numeric))
+
+  # ------------------------------------------------------------
+  # Long format
+  # ------------------------------------------------------------
+  df_long <- df %>%
+    pivot_longer(
+      cols = all_of(names(outcome_map)),
+      names_to = "OutcomeCode",
+      values_to = "Percent"
+    ) %>%
+    mutate(
+      Outcome = outcome_map[OutcomeCode],
+      Outcome_chr = as.character(Outcome)
+    ) %>%
+    filter(!is.na(Percent))
+
+  # ------------------------------------------------------------
+  # Extract n
+  # ------------------------------------------------------------
+  df_long <- df_long %>%
+    mutate(
+      n_cases = case_when(
+        OutcomeCode == "dep_any_pct"    ~ dep_any_n_1,
+        OutcomeCode == "anx_any_pct"    ~ anx_any_n_1,
+        OutcomeCode == "ed_any_sde_pct" ~ ed_any_sde_n_1,
+        OutcomeCode == "sib_any_pct"    ~ sib_any_n_1,
+        OutcomeCode == "sui_idea_pct"   ~ sui_idea_n_1,
+        OutcomeCode == "anymhprob_pct"  ~ anymhprob_n_1
+      ),
+      n_total = case_when(
+        OutcomeCode == "dep_any_pct"    ~ dep_any_total,
+        OutcomeCode == "anx_any_pct"    ~ anx_any_total,
+        OutcomeCode == "ed_any_sde_pct" ~ ed_any_sde_total,
+        OutcomeCode == "sib_any_pct"    ~ sib_any_total,
+        OutcomeCode == "sui_idea_pct"   ~ sui_idea_total,
+        OutcomeCode == "anymhprob_pct"  ~ anymhprob_total
+      )
+    )
+
+  # ------------------------------------------------------------
+  # ✅ GROUP ORDERING (FIXED)
+  # ------------------------------------------------------------
+  ordered_groups <- c(
+    "Non-LGBTQIA2S+",
+    "LGBTQIA2S+",
+    df_long %>%
+      filter(
+        Outcome == "Any Mental Health Condition",
+        !Group %in% c("Non-LGBTQIA2S+", "LGBTQIA2S+")
+      ) %>%
+      arrange(desc(Percent)) %>%
+      pull(Group)
+  )
+
+  df_long <- df_long %>%
+    mutate(
+      Group = factor(Group, levels = ordered_groups),
+      Outcome = factor(Outcome, levels = outcome_order)
+    ) %>%
+    arrange(Group, Outcome)
+
+  # ------------------------------------------------------------
+  # Per-outcome binning (unchanged)
+  # ------------------------------------------------------------
+  clamp <- function(x, low, high) pmax(pmin(x, high), low)
+
+  bins_info <- df_long %>%
+    group_by(Outcome_chr) %>%
+    summarise(
+      mid = midpoints[Outcome_chr][1],
+      subset_min = min(Percent, na.rm = TRUE),
+      subset_max = max(Percent, na.rm = TRUE),
+      range_max = max(subset_max - mid, mid - subset_min),
+      slice = range_max / 5,
+      .groups = "drop"
+    ) %>%
+    mutate(
+      bin_breaks = pmap(
+        list(mid, slice, subset_min, subset_max),
+        function(mid, slice, subset_min, subset_max) {
+          b <- clamp(
+            c(
+              subset_min,
+              mid - 3 * slice,
+              mid - slice,
+              mid + slice,
+              mid + 3 * slice,
+              subset_max
+            ),
+            subset_min,
+            subset_max
+          )
+          b <- cummax(b + c(0, rep(1e-6, length(b) - 1)))
+          b
+        }
+      )
+    )
+
+df_long <- df_long %>%
+  left_join(bins_info, by = "Outcome_chr") %>%
+  rowwise() %>%
+  mutate(
+    step_bin = {
+      b <- unique(bin_breaks)
+
+      # If breaks collapse too much, fall back to quantiles
+      if (length(b) < 6) {
+        b <- quantile(
+          df_long$Percent[df_long$Outcome_chr == Outcome_chr],
+          probs = seq(0, 1, length.out = 6),
+          na.rm = TRUE
+        )
+        b <- unique(as.numeric(b))
+      }
+
+      # Final safeguard
+      if (length(b) < 6) {
+        return(NA_character_)
+      }
+
+      cut(
+        Percent,
+        breaks = b,
+        include.lowest = TRUE,
+        labels = paste0("Step", 1:5)
+      )
+    },
+    text_color = ifelse(step_bin %in% c("Step4", "Step5"), "white", "#555555")
+  ) %>%
+  ungroup()
+
+
+  # ------------------------------------------------------------
+  # Hover text
+  # ------------------------------------------------------------
+  df_long <- df_long %>%
+    mutate(
+      hover_text = paste0(
+        "<b>", Group, "</b><br>",
+        Outcome, ": <b>", round(Percent, 1), "%</b><br>",
+        n_cases, " out of ", n_total, " students"
+      )
+    )
+
+  # ------------------------------------------------------------
+  # Wide matrices
+  # ------------------------------------------------------------
+  df_wide <- df_long %>%
+    select(Group, Outcome, Percent, step_bin, text_color, hover_text) %>%
+    group_by(Group, Outcome) %>%
+    slice(1) %>%
+    ungroup() %>%
+    pivot_wider(
+      names_from = Outcome,
+      values_from = c(Percent, step_bin, text_color, hover_text),
+      names_sep = "___"
+    )
+
+  group_names <- levels(df_long$Group)
+  outcome_names <- outcome_order[outcome_order %in% levels(df_long$Outcome)]
+
+  step_num <- sapply(
+    outcome_names,
+    \(o) as.numeric(factor(df_wide[[paste0("step_bin___", o)]], levels = paste0("Step", 1:5)))
+  )
+
+  text_matrix <- sapply(
+    outcome_names,
+    \(o) paste0(round(df_wide[[paste0("Percent___", o)]], 1), "%")
+  )
+
+  color_mat <- sapply(
+    outcome_names,
+    \(o) df_wide[[paste0("text_color___", o)]]
+  )
+
+  hover_mat <- sapply(
+    outcome_names,
+    \(o) df_wide[[paste0("hover_text___", o)]]
+  )
+
+  # ------------------------------------------------------------
+  # Plotly heatmap
+  # ------------------------------------------------------------
+  plot_ly(
+    x = wrap_labels(group_names),
+    y = wrap_labels(outcome_names),
+    z = t(step_num),
+    type = "heatmap",
+    colorscale = list(
+      list(0.00, "#FFD600"),
+      list(0.25, "#f5f3bf"),
+      list(0.50, "#B2C8E6"),
+      list(0.75, "#5A79A5"),
+      list(1.00, "#0F406B")
+    ),
+    zmin = 1,
+    zmax = 5,
+    showscale = FALSE,
+    text = t(text_matrix),
+    texttemplate = "%{text}",
+    textfont_color = t(color_mat),
+    hovertext = t(hover_mat),
+    hoverinfo = "text",
+    xgap = 3,
+    ygap = 3
+  ) %>%
+    layout(
+      xaxis = list(
+        title = "",
+        tickangle = -45,
+        categoryorder = "array",
+        categoryarray = wrap_labels(group_names)
+      ),
+      yaxis = list(
+        title = "",
+        autorange = "reversed"
+      )
+    ) %>%
+    fc_plotly_theme()
+}
+make_heatmap_sexual(summary_wide, label_map = label_map_sexual)
+
+```
+
+:::
+
+
+
+## Age Group {#age-group}
+
+### About the Students
+
+Students reported their age in the survey. All participants were required to be 18 years or older to complete the survey.
+
+::: {#fig-age1 .quarto-figure}
+
+<div class="figure-cap">
+  **@fig-age1:** Respondents by Age Group
+</div>
+
+```{r}
+
+labels <- c(
+  "age_under19" = "Under 19",
+  "age_20to24" = "20 to 24",
+  "age_25to29" = "25 to 29",
+  "age_30to34" = "30 to 34",
+  "age_35to39" = "35 to 39",
+  "age_40to49" = "40 to 49",
+  "age_over50" = "50 and older"
+)
+
+#### MUST EDIT##########
+real <- tibble(
+  Category = names(labels),
+  Actual_Percent = c(1.7, 1.6, 42.5, 49.4, NA, NA, NA)
+)
+
+make_demographic_bar_age <- function(
+  df,
+  vars,
+  labels,
+  actual_demo = NULL,
+  title = NULL,
+  color = "#0F406B"
+) {
+  library(dplyr)
+  library(tidyr)
+  library(plotly)
+
+  # Filter out rows with all NA across selected variables
+  df_filtered <- df %>%
+    filter(if_any(all_of(vars), ~ !is.na(.)))
+
+  total_valid <- nrow(df_filtered)
+
+  # Frequency and percentage table
+  demo_table <- df_filtered %>%
+    summarise(across(all_of(vars), ~ sum(. == 1, na.rm = TRUE))) %>%
+    pivot_longer(
+      cols = everything(),
+      names_to = "Category",
+      values_to = "Freq"
+    ) %>%
+    mutate(
+      Category = as.character(Category),
+      Label    = labels[Category],
+      Percent  = round(100 * Freq / total_valid, 1)
+    ) %>%
+    mutate(
+      Label = factor(Label, levels = labels)   # ← KEY FIX
+    )
+
+  # Merge with reference population data (optional)
+  if (!is.null(actual_demo)) {
+    demo_table <- demo_table %>%
+      left_join(actual_demo, by = "Category") %>%
+      mutate(
+        Diff = Percent - Actual_Percent,
+        Diff_label = ifelse(
+          Diff > 0,
+          paste0("+", round(Diff, 1), " pts"),
+          paste0(round(Diff, 1), " pts")
+        )
+      )
+  }
+
+  # Plotly horizontal bar chart
+  p <- plot_ly(
+    data = demo_table,
+    x = ~Percent,
+    y = ~Label,                     # ← NO reorder()
+    type = "bar",
+    orientation = "h",
+    text = ~paste0(Percent, "%"),
+    textposition = "outside",
+    hovertext = ~paste0(
+      "<b><span style='color:#FFD600;'>", Label, "</span></b><br>",
+      Freq, " of ", total_valid, " respondents",
+      if (!is.null(actual_demo)) {
+        paste0(
+          "<br>% Survey Respondents: ", Percent, "% (", Diff_label, ")",
+          "<br>% 2025 Spring Students: ", Actual_Percent, "%"
+        )
+      } else ""
+    ),
+    hoverinfo = "text",
+    marker = list(color = color)
+  ) %>%
+    layout(
+      title = title,
+      xaxis = list(
+        title = "Percent of Respondents",
+        range = c(0, max(demo_table$Percent) * 1.15)
+      ),
+      yaxis = list(title = "")
+    )
+
+  fc_plotly_theme(p)
+}
+
+make_demographic_bar_age(df, names(labels), labels)
+#make_demographic_bar(df, names(labels), labels, real)
+
+```
+
+:::
+
+
+### Mental Health Conditions by Age Group
+
+Mental health outcomes vary substantially across sexual orientations when compared to the campuswide averages, with younger students reporting substantially higher prevalence across most indicators compared to older students (**Any mental health condition: 72%; Depression: 46%; Anxiety: 39%; Eating disorders: 37%; Self-injury: 26%; Suicidal ideation: 15%**).
+
+- **Any mental health condition** is most prevalent among students ages **25–29** (79%) and **20–24** (78%), followed by those ages **35–39** (74%) and **30–34** (72%). Prevalence declines with age, reaching **38%** among students **50 and older**.
+- **Depression** is highest among students ages **25–29** (58%) and remains elevated among those ages **20–24**, **30–34**, and **35–39** (approximately 47–49%). Rates drop sharply among students **50 and older** (15%).
+- **Anxiety** is most prevalent among students ages **25–29** (45%), **20–24** (46%), and **30–34** (45%), with substantially lower levels among students ages **35–39** (28%) and **50 and older** (18%).
+- **Eating disorder–related symptoms** are relatively consistent across students under age 40 (approximately 39–42%), with lower prevalence among students ages **40–49** (26%) and **50 and older** (24%).
+- **Self-injury** is concentrated among younger students, particularly those ages **25–29** (32%) and **20–24** (32%), and declines markedly with age, reaching **3%** among students **50 and older**.
+- **Suicidal ideation** is highest among students ages **25–29** (24%) and **20–24** (17%), with substantially lower prevalence among students ages **35–39** (8%), **40–49** (8%), and **50 and older** (8%).
+
+Overall, **mental health challenges are most pronounced among students under age 30**, particularly for depression, anxiety, self-injury, and suicidal ideation. Prevalence declines steadily with age, indicating that **younger students bear a disproportionate mental health burden**, while older students report markedly lower levels across nearly all outcomes.
+
+
+::: {#fig-age2 .quarto-figure}
+
+<div class="figure-cap">
+  **@fig-age2:** Specific Mental Health Conditions by Age Group
+</div>
+
+```{r fig.height = 6}
+make_demographic_dropdown_plot(label_map_age)
+```
+
+:::
+
+::: {#fig-age3 .quarto-figure}
+
+<div class="figure-cap">
+  **@fig-age3:** Overview of Mental Health Conditions by Age Group
+</div>
+
+```{r fig.height = 4}
+
+make_heatmap_plotly(summary_wide, label_map = label_map_age)
+```
+
+:::
+
+
+## Disability Status {#disability}
+
+### About the Students
+
+Students indicated whether or not they have a disability. If they indicated having a disability, a follow-up question asked whether or not they were registered with a disability at Disability SUpport Services (DSS) at Fullerton College. Thus, students in the category "Any Disability" are the aggregate of students who have a registered or unregistered disability.
+
+::: {#fig-disab1 .quarto-figure}
+
+<div class="figure-cap">
+  **@fig-disab1:** Respondents by Disability Status
+</div>
+
+```{r fig.height = 4}
+
+labels <- c(
+  "any_disab" = "Any Disability",
+  "disab_reg" = "Registered Disability",
+  "disab_noreg" = "Unregistered Disability"
+)
+
+#### MUST EDIT##########
+real <- tibble(
+  Category = names(labels),
+  Actual_Percent = c(NA, NA, NA)
+)
+
+make_demographic_bar(df, names(labels), labels)
+#make_demographic_bar(df, names(labels), labels, real)
+
+```
+
+:::
+
+
+### Mental Health Conditions by Disability Status
+
+Mental health outcomes vary substantially by disability status, with a clear gradient observed across **registered disability**, **any disability**, **unregistered disability**, and **no disability** groups, especially when considering campuswide trends (**Any mental health condition: 72%; Depression: 46%; Anxiety: 39%; Eating disorders: 37%; Self-injury: 26%; Suicidal ideation: 15%**).
+
+- Students with a **registered disability** report the highest prevalence across all outcomes, including **any mental health condition** (82%), **depression** (67%), **anxiety** (53%), **self-injury** (38%), and **suicidal ideation** (25%).
+- Students reporting **any disability** but not necessarily registered show slightly lower—but still elevated—rates across outcomes, indicating substantial mental health burden even without formal accommodation status.
+- Students with an **unregistered disability** consistently fall between registered and no-disability groups, with rates notably higher than students with **no disability**, particularly for **depression** (55% vs. 36%) and **anxiety** (50% vs. 29%).
+- Students reporting **no disability** have substantially lower prevalence across all outcomes, though more than one-third still report **any mental health condition** (65%).
+
+However, it is likely that students with **registered disabilities** experience different levels of functional impact, compared to students with **unregistered disabilities**, which may increase engagement with formal support systems, such as DSS. Importantly, elevated rates among unregistered students may suggest unmet or unrecognized support rather than an absence of need.
+
+Overall, the differences suggest that **disability status is closely linked to mental health risk**, and that students with **unregistered disabilities represent a critical group for early identification, outreach, and preventative support**, not solely those formally registered with disability services.
+
+::: {#fig-disab2 .quarto-figure}
+
+<div class="figure-cap">
+  **@fig-disab2:** Specific Mental Health Conditions by Disability Status
+</div>
+
+```{r fig.height = 6}
+make_demographic_dropdown_plot(label_map_disab)
+```
+
+:::
+
+::: {#fig-disab3 .quarto-figure}
+
+<div class="figure-cap">
+  **@fig-disab3:** Overview of Mental Health Conditions by Disability Status
+</div>
+
+```{r fig.height = 4}
+
+make_heatmap_plotly(summary_wide, label_map = label_map_disab)
+```
+
+:::
+
+
+
+## Financial Status {#financial}
+
+### About the Students
+
+Financial status was collected using based on whether students were Pell Grant recipients.
+
+::: {#fig-fin1 .quarto-figure}
+
+<div class="figure-cap">
+  **@fig-fin1:** Respondents by Financial Status
+</div>
+
+```{r fig.height = 3}
+
+
+labels <- c(
+ "pell_yes" = "Pell Grant Recipient",
+  "pell_no" = "Non-Pell Grant Recipient"
+)
+
+#### MUST EDIT##########
+real <- tibble(
+  Category = names(labels),
+  Actual_Percent = c(NA, NA)
+)
+
+make_demographic_bar(df, names(labels), labels)
+
+```
+
+:::
+
+
+### Mental Health Conditions by Financial Status
+
+Mental health outcomes show modest but meaningful differences by Pell Grant status, with some indicators more elevated among Pell recipients and others slightly higher among non-Pell recipients.
+
+- **Any mental health condition** is reported more frequently among **Pell Grant recipients** (73%) than **non-Pell recipients** (70%), indicating a somewhat higher overall mental health burden among students with greater financial need.
+- **Depression** is slightly more prevalent among **non-Pell recipients** (46%) compared to **Pell recipients** (43%), though rates are similar across groups.
+- **Anxiety** rates are comparable between groups, with **Pell recipients** reporting marginally higher prevalence (38%) than **non-Pell recipients** (36%).
+- **Eating disorder–related symptoms** are notably higher among **Pell recipients** (40%) compared to **non-Pell recipients** (34%), representing one of the largest observed gaps by Pell status. This may be related to experiences of food insecurity.
+- **Self-injury** is slightly more prevalent among **non-Pell recipients** (26%) than **Pell recipients** (24%).
+- **Suicidal ideation** is reported at similar levels for both groups, with **Pell recipients** at 14% and **non-Pell recipients** at 13%.
+
+Overall, **students receiving Pell Grants report a slightly higher prevalence of experiencing any mental health condition and eating disorder–related symptoms**, while other outcomes show relatively small differences by Pell status. These patterns suggest that **financial vulnerability may intersect with certain mental health challenges**, even as mental health needs remain widespread across both Pell and non-Pell student populations.
+
+::: {#fig-fin2 .quarto-figure}
+
+<div class="figure-cap">
+  **@fig-fin2:** Specific Mental Health Conditions by Financial Status
+</div>
+
+```{r fig.height = 4}
+make_demographic_dropdown_plot(label_map_pell)
+```
+
+:::
+
+::: {#fig-fin3 .quarto-figure}
+
+<div class="figure-cap">
+  **@fig-fin3:** Overview of Mental Health Conditions by Financial Status
+</div>
+
+```{r fig.height = 4}
+
+make_heatmap_plotly(summary_wide, label_map = label_map_pell)
+```
+
+:::
+
+
+
+## College Generational Status {#college-gen}
+
+### About the Students
+
+College generational status (i.e., first-generation or continuing-generation) was collected using based on the highest level of education of parent(s) or guardian(s). Students were considering first-generation college students if neither parent or guardian had more than a high school degree.
+
+::: {#fig-col1 .quarto-figure}
+
+<div class="figure-cap">
+  **@fig-col1:** Respondents by College Generational Status
+</div>
+
+```{r fig.height = 3}
+
+
+labels <- c(
+  "firstgen" = "First-Gen",
+  "contgen" = "Continuing-Gen"
+)
+
+#### MUST EDIT##########
+real <- tibble(
+  Category = names(labels),
+  Actual_Percent = c(NA, NA)
+)
+
+make_demographic_bar(df, names(labels), labels)
+#make_demographic_bar(df, names(labels), labels, real)
+
+```
+
+:::
+
+
+### Mental Health Conditions by College Generational Status
+
+Mental health outcomes are largely similar between **first-generation** and **continuing-generation** students, though there are notable differences emerge for specific indicators.
+
+- **Any mental health condition** is reported at comparable levels by **first-generation** (73%) and **continuing-generation** (72%) students, indicating widespread mental health needs across both groups.
+- **Depression** is slightly more prevalent among **continuing-generation** students (47%) compared to **first-generation** students (45%).
+- **Anxiety** is also higher among **continuing-generation** students (40%) than **first-generation** students (37%).
+- **Eating disorder–related symptoms** are more prevalent among **first-generation** students (40%) compared to **continuing-generation** students (35%). This follows a similar pattern as students' financial status, where Pell Grant recipients demonstrated elevated eating disorder-related symptoms.
+- **Self-injury** shows a pronounced difference, with **continuing-generation** students reporting substantially higher prevalence (30%) than **first-generation** students (19%).
+- **Suicidal ideation** is likewise higher among **continuing-generation** students (17%) compared to **first-generation** students (11%).
+
+Overall, while overall mental health prevalence is similar by generational status, **continuing-generation students report higher levels of anxiety, self-injury, and suicidal ideation**, whereas **first-generation students report higher prevalence of eating disorder–related symptoms**. These differences suggest that **generational status may be associated with distinct mental health experiences**, underscoring the importance of tailoring outreach and supports to address different patterns of need across student groups.
+
+
+::: {#fig-col2 .quarto-figure}
+
+<div class="figure-cap">
+  **@fig-col2:** Specific Mental Health Conditions by College Generational Status
+</div>
+
+```{r fig.height = 4}
+make_demographic_dropdown_plot(label_map_gen)
+```
+
+:::
+
+::: {#fig-col3 .quarto-figure}
+
+<div class="figure-cap">
+  **@fig-col3:** Overview of Mental Health Conditions by College Generational Status
+</div>
+
+```{r fig.height = 4}
+
+make_heatmap_plotly(summary_wide, label_map = label_map_gen)
+```
+
+:::
+
+
+[Back to Main Page](https://fc-oie.github.io/docs/HealthyMinds/2025/report.html){.link-box2}

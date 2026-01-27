@@ -1,0 +1,473 @@
+---
+title: "Healthy Minds Study:<br>Examining Student Mental Health"
+subtitle: "Spring 2025"
+author: "Vinnie Wu"
+date: today
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+htmltools::tagList(plotly::plotlyOutput("dummy"))
+source("../template/fullerton.R")
+```
+
+# Additional Student Health Outcomes
+
+This section examines results on students' alcohol use, nicotine use, drug use, and experiences of interpersonal violence.
+
+
+## Alcohol Use {#alc}
+
+Alcohol use was assessed in the survey by asking students about their alcohol consumption in the past two weeks.
+
+**Any alcohol use** was defined as having at least one drink of alcohol in the past two weeks.
+
+**Binge drinking** was defined as consuming 4 or more (female), 5 or more (male), or 4 or 5 or more (non-binary) alcoholic drinks in a row, where one drink is a can of beer, a glass of wine, a wine cooler, a shot of liquor, or a mixed drink. This survey asked whether students had binge drank **1+ times** or **3+ times** in the past two weeks.
+
+
+::: {#fig-alc .quarto-figure style="width:45%"}
+
+<div class="figure-cap">
+  **@fig-alc:** Alcohol Use in FC Students
+</div>
+
+```{r fig.height=3, fig.width=6, echo=FALSE}
+
+################## Overall Comparison ##################
+################## Outcome Mapping ##################
+outcome_map <- c(
+   alc_any_pct     = "Any Alcohol Use",
+  binge1pl_pct   = "1+ Alcohol Binge",
+  binge3pl_pct   = "3+ Alcohol Binges"
+)
+
+################## Select Overall Data ##################
+overall <- summary_wide %>%
+  filter(Predictor == "Overall", year == "2025") %>%
+  mutate(Source = "FC 2025")
+
+################## Reshape to Long Format ##################
+overall_long <- overall %>%
+  select(Source, all_of(names(outcome_map)), ends_with("_n_1"), ends_with("_total")) %>%
+  pivot_longer(
+    cols = names(outcome_map),
+    names_to = "OutcomeVar",
+    values_to = "pct"
+  ) %>%
+  mutate(
+    Outcome = recode(OutcomeVar, !!!outcome_map),
+    n_1_col   = str_replace(OutcomeVar, "_pct$", "_n_1"),
+    total_col = str_replace(OutcomeVar, "_pct$", "_total")
+  ) %>%
+  rowwise() %>%
+  mutate(
+    n_1   = cur_data()[[n_1_col]],
+    total = cur_data()[[total_col]]
+  ) %>%
+  mutate(
+    bar_color =   "#0F406B"    # FC Blue for all others
+    ) %>%
+  ungroup()
+
+################## Build Hover Text ##################
+overall_long <- overall_long %>%
+  mutate(
+    hovertext = paste0(
+      "<b><span style='color:#FFD600;'>", Outcome, "</span></b><br>",
+      "Percent: ", pct, "%<br>",
+      "Count: ", n_1, " of ", total, " respondents"
+      #"n = ", n_1, "<br>",
+      #"Total N = ", total
+    )
+  )
+
+################## Plot (Vertical Bars, FC 2025 Only) ##################
+bar_color <- "#0F406B"   # FC Blue
+
+################## Order Outcomes by Prevalence ##################
+outcome_order <- overall_long %>%
+  arrange(desc(pct)) %>%
+  pull(Outcome)
+
+overall_long <- overall_long %>%
+  mutate(Outcome = factor(Outcome, levels = outcome_order))
+
+
+################## Plot (Vertical Bars, Ordered, FC Blue) ##################
+p <- plot_ly(
+  data = overall_long,
+  x = ~Outcome,
+  y = ~pct,
+  type = "bar",
+  marker = list(color = overall_long$bar_color),   # <---- USE CUSTOM COLORS HERE
+  text = ~paste0(pct, "%"),
+  textposition = "outside",
+  hovertext = ~hovertext,
+  hoverinfo = "text"
+) %>%
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list(
+      title = "% of Students",
+      range = c(0, max(overall_long$pct, na.rm = TRUE) * 1.15)
+    ),
+    barmode = "group",
+    showlegend = FALSE
+  ) %>%
+  fc_plotly_theme() %>%
+  config(responsive = TRUE)
+
+
+p
+
+
+```
+
+:::
+
+
+## Nicotine Use {#nicotine}
+
+Nicotine use was assessed in the survey by asking students about their use of various nicotine-containing products, including cigarettes, nicotine vapes, chewing tobacco, nicotine pouches (e.g., Zyn), and smoking cessation aids.
+
+::: {#fig-nicotine .quarto-figure style="width:90%"}
+
+<div class="figure-cap">
+  **@fig-nicotine:** Nicotine Use in FC Students
+</div>
+
+```{r fig.height=3, fig.width=6, echo=FALSE}
+
+################## Overall Comparison ##################
+################## Outcome Mapping ##################
+outcome_map <- c(
+  nicotine_type_cig_pct   = "Cigarettes",
+  nicotine_type_vape_pct   = "Nicotine vape",
+  nicotine_type_chew_pct   = "Chewing tobacco",
+  nicotine_type_zyn_pct    = "Nicotine pouches (e.g., Zyn)",
+  nicotine_type_cess_pct   = "Smoking cessation aids",
+  nico_any_pct             = "Any Nicotine Use"
+)
+
+################## Select Overall Data ##################
+overall <- summary_wide %>%
+  filter(Predictor == "Overall", year == "2025") %>%
+  mutate(Source = "FC 2025")
+
+################## Reshape to Long Format ##################
+overall_long <- overall %>%
+  select(Source, all_of(names(outcome_map)), ends_with("_n_1"), ends_with("_total")) %>%
+  pivot_longer(
+    cols = names(outcome_map),
+    names_to = "OutcomeVar",
+    values_to = "pct"
+  ) %>%
+  mutate(
+    Outcome = recode(OutcomeVar, !!!outcome_map),
+    n_1_col   = str_replace(OutcomeVar, "_pct$", "_n_1"),
+    total_col = str_replace(OutcomeVar, "_pct$", "_total")
+  ) %>%
+  rowwise() %>%
+  mutate(
+    n_1   = cur_data()[[n_1_col]],
+    total = cur_data()[[total_col]]
+  ) %>%
+  mutate(
+    bar_color = ifelse(
+      Outcome == "Any Nicotine Use",
+      "#375E9E",   # lighter FC Sky Blue
+      "#0F406B"    # FC Blue for all others
+    )) %>%
+  ungroup()
+
+################## Build Hover Text ##################
+overall_long <- overall_long %>%
+  mutate(
+    hovertext = paste0(
+      "<b><span style='color:#FFD600;'>", Outcome, "</span></b><br>",
+      "Percent: ", pct, "%<br>",
+      "Count: ", n_1, " of ", total, " respondents"
+      #"n = ", n_1, "<br>",
+      #"Total N = ", total
+    )
+  )
+
+################## Plot (Vertical Bars, FC 2025 Only) ##################
+bar_color <- "#0F406B"   # FC Blue
+
+################## Order Outcomes by Prevalence ##################
+outcome_order <- overall_long %>%
+  arrange(desc(pct)) %>%
+  pull(Outcome)
+
+overall_long <- overall_long %>%
+  mutate(Outcome = factor(Outcome, levels = outcome_order))
+
+
+################## Plot (Vertical Bars, Ordered, FC Blue) ##################
+p <- plot_ly(
+  data = overall_long,
+  x = ~Outcome,
+  y = ~pct,
+  type = "bar",
+  marker = list(color = overall_long$bar_color),   # <---- USE CUSTOM COLORS HERE
+  text = ~paste0(pct, "%"),
+  textposition = "outside",
+  hovertext = ~hovertext,
+  hoverinfo = "text"
+) %>%
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list(
+      title = "% of Students",
+      range = c(0, max(overall_long$pct, na.rm = TRUE) * 1.15)
+    ),
+    barmode = "group",
+    showlegend = FALSE
+  ) %>%
+  fc_plotly_theme() %>%
+  config(responsive = TRUE)
+
+
+p
+
+
+```
+
+:::
+
+
+## Drug Use {#druguse}
+
+Drug use was assessed in the survey by asking students about their use of various drugs recreationally in the past 30 days, including cannabis products, cocaine, heroin, opioids, benzodiazepines, methamphetamines, other stimulants, ecstasy/MDMA, ketamine, LSD, psilocybin, kratom, and other drugs.
+
+::: {#fig-drug .quarto-figure style="width:90%"}
+
+<div class="figure-cap">
+  **@fig-drug:** Drug Use in FC Students
+</div>
+
+```{r fig.height=3, fig.width=6, echo=FALSE}
+
+################## Overall Comparison ##################
+################## Outcome Mapping ##################
+outcome_map <- c(
+  drug_mar_pct     = "Cannabis products",
+  drug_coc_pct   = "Cocaine",
+  drug_her_pct = "Heroin",
+  drug_opi_pct    = "Opioids",
+  drug_benzo_pct  = "Benzodiazepines",
+  drug_met_pct = "Methamphetamines",
+  drug_stim_pct = "Other stimulants",
+  drug_ect_pct = "Ecstasy/MDMA",
+  drug_keta_pct = "Ketamine",
+  drug_lsd_pct = "LSD",
+  drug_psilo_pct = "Psilocybin",
+  drug_kratom_pct = "Kratom",
+  drug_other_pct = "Other drugs",
+  sub_any_pct     = "Any Substance Use"
+)
+
+################## Select Overall Data ##################
+overall <- summary_wide %>%
+  filter(Predictor == "Overall", year == "2025") %>%
+  mutate(Source = "FC 2025")
+
+################## Reshape to Long Format ##################
+overall_long <- overall %>%
+  select(Source, all_of(names(outcome_map)), ends_with("_n_1"), ends_with("_total")) %>%
+  pivot_longer(
+    cols = names(outcome_map),
+    names_to = "OutcomeVar",
+    values_to = "pct"
+  ) %>%
+  mutate(
+    Outcome = recode(OutcomeVar, !!!outcome_map),
+    n_1_col   = str_replace(OutcomeVar, "_pct$", "_n_1"),
+    total_col = str_replace(OutcomeVar, "_pct$", "_total")
+  ) %>%
+  rowwise() %>%
+  mutate(
+    n_1   = cur_data()[[n_1_col]],
+    total = cur_data()[[total_col]]
+  ) %>%
+  mutate(
+    bar_color = ifelse(
+      Outcome == "Any Mental Health Condition",
+      "#375E9E",   # lighter FC Sky Blue
+      "#0F406B"    # FC Blue for all others
+    )) %>%
+  ungroup()
+
+################## Build Hover Text ##################
+overall_long <- overall_long %>%
+  mutate(
+    hovertext = paste0(
+      "<b><span style='color:#FFD600;'>", Outcome, "</span></b><br>",
+      "Percent: ", pct, "%<br>",
+      "Count: ", n_1, " of ", total, " respondents"
+      #"n = ", n_1, "<br>",
+      #"Total N = ", total
+    )
+  )
+
+################## Plot (Vertical Bars, FC 2025 Only) ##################
+bar_color <- "#0F406B"   # FC Blue
+
+################## Order Outcomes by Prevalence ##################
+outcome_order <- overall_long %>%
+  arrange(desc(pct)) %>%
+  pull(Outcome)
+
+overall_long <- overall_long %>%
+  mutate(Outcome = factor(Outcome, levels = outcome_order))
+
+
+################## Plot (Vertical Bars, Ordered, FC Blue) ##################
+p <- plot_ly(
+  data = overall_long,
+  x = ~Outcome,
+  y = ~pct,
+  type = "bar",
+  marker = list(color = overall_long$bar_color),   # <---- USE CUSTOM COLORS HERE
+  text = ~paste0(pct, "%"),
+  textposition = "outside",
+  hovertext = ~hovertext,
+  hoverinfo = "text"
+) %>%
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list(
+      title = "% of Students",
+      range = c(0, max(overall_long$pct, na.rm = TRUE) * 1.15)
+    ),
+    barmode = "group",
+    showlegend = FALSE
+  ) %>%
+  fc_plotly_theme() %>%
+  config(responsive = TRUE)
+
+
+p
+
+
+```
+
+:::
+
+
+
+## Interpersonal Violence {#ipv}
+
+Interpersonal violence was assessed by asking students if they had experienced various forms of physical or emotional abuse since they began as a student at FC (adapted from [HITS scale](https://pubmed.ncbi.nlm.nih.gov/9669164/)), including being physically hurt, insulted or talked down on, threatened with harm, screamed or cursed at, or harassed.
+
+
+
+::: {#fig-ipv .quarto-figure style="width:90%"}
+
+
+<div class="figure-cap">
+  **@fig-ipv:** Experiences of Interpersonal Violence in FC Students
+</div>
+
+```{r fig.height=3, fig.width=6, echo=FALSE}
+
+################## Overall Comparison ##################
+################## Outcome Mapping ##################
+outcome_map <- c(
+  IPV_1_pct     = "Been physically hurt",
+  IPV_2_pct   = "Been insulted or talked down on",
+  IPV_3_pct = "Been threatened with harm",
+  IPV_4_pct    = "Been screamed or cursed at",
+  IPV_5_pct  = "Been harassed",
+  any_IPV_pct     = "Any Interpersonal Violence"
+)
+
+################## Select Overall Data ##################
+overall <- summary_wide %>%
+  filter(Predictor == "Overall", year == "2025") %>%
+  mutate(Source = "FC 2025")
+
+################## Reshape to Long Format ##################
+overall_long <- overall %>%
+  select(Source, all_of(names(outcome_map)), ends_with("_n_1"), ends_with("_total")) %>%
+  pivot_longer(
+    cols = names(outcome_map),
+    names_to = "OutcomeVar",
+    values_to = "pct"
+  ) %>%
+  mutate(
+    Outcome = recode(OutcomeVar, !!!outcome_map),
+    n_1_col   = str_replace(OutcomeVar, "_pct$", "_n_1"),
+    total_col = str_replace(OutcomeVar, "_pct$", "_total")
+  ) %>%
+  rowwise() %>%
+  mutate(
+    n_1   = cur_data()[[n_1_col]],
+    total = cur_data()[[total_col]]
+  ) %>%
+  mutate(
+    bar_color = ifelse(
+      Outcome == "Any Interpersonal Violence",
+      "#375E9E",   # lighter FC Sky Blue
+      "#0F406B"    # FC Blue for all others
+    )) %>%
+  ungroup()
+
+################## Build Hover Text ##################
+overall_long <- overall_long %>%
+  mutate(
+    hovertext = paste0(
+      "<b><span style='color:#FFD600;'>", Outcome, "</span></b><br>",
+      "Percent: ", pct, "%<br>",
+      "Count: ", n_1, " of ", total, " respondents"
+      #"n = ", n_1, "<br>",
+      #"Total N = ", total
+    )
+  )
+
+################## Plot (Vertical Bars, FC 2025 Only) ##################
+bar_color <- "#0F406B"   # FC Blue
+
+################## Order Outcomes by Prevalence ##################
+outcome_order <- overall_long %>%
+  arrange(desc(pct)) %>%
+  pull(Outcome)
+
+overall_long <- overall_long %>%
+  mutate(Outcome = factor(Outcome, levels = outcome_order))
+
+
+################## Plot (Vertical Bars, Ordered, FC Blue) ##################
+p <- plot_ly(
+  data = overall_long,
+  x = ~Outcome,
+  y = ~pct,
+  type = "bar",
+  marker = list(color = overall_long$bar_color),   # <---- USE CUSTOM COLORS HERE
+  text = ~paste0(pct, "%"),
+  textposition = "outside",
+  hovertext = ~hovertext,
+  hoverinfo = "text"
+) %>%
+  layout(
+    xaxis = list(title = ""),
+    yaxis = list(
+      title = "% of Students",
+      range = c(0, max(overall_long$pct, na.rm = TRUE) * 1.15)
+    ),
+    barmode = "group",
+    showlegend = FALSE
+  ) %>%
+  fc_plotly_theme() %>%
+  config(responsive = TRUE)
+
+
+p
+
+
+```
+
+:::

@@ -1,0 +1,557 @@
+/* ============================================================
+   Fullerton College (FC) Report Stylesheet — Clean Version
+   Author: Vinnie Wu
+   Purpose: Consistent visual identity for reports and dashboards
+   ============================================================ */
+
+/* ============================================================
+   Root variables
+   ============================================================ */
+
+:root {
+  --fc-blue:   #0F406B;
+  --fc-yellow: #FFD600;
+  --fc-sky:    #375E9E;
+  --fc-gray:   #333333;
+  --link-color: var(--fc-blue);
+}
+
+
+/* ============================================================
+   Typography & Body
+   ============================================================ */
+
+
+body {
+  font-family: "Century Gothic", "Helvetica", sans-serif;
+  font-size: 16px;
+  color: #000;
+  line-height: 1.6;
+  margin: 40px;
+  background-color: #fff;
+}
+
+
+/* Headings */
+h1, h2, h3, h4 {
+  font-family: "Century Gothic", "Helvetica", sans-serif;
+  color: var(--fc-blue);
+  font-weight: 700;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+h1 {
+  border-bottom: 2px solid var(--fc-blue);
+  padding-bottom: 4px;
+}
+
+#title-block h1 {
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+  margin-top: 1.5em;
+  margin-bottom: .3em;
+
+}
+
+#title-block h1,
+#report-title {
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+}
+
+
+h2, h3 {
+  border-left: 5px solid var(--fc-blue);
+  padding-left: 10px;
+}
+
+h3 {
+  font-style: italic;
+  font-weight: 600;
+}
+
+/* Subtitle */
+#subtitle {
+  font-family: "Century Gothic", sans-serif;
+  font-size: 2em;
+  color: var(--fc-gray);
+  margin: 10px 0 32px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border: none !important;
+}
+
+/* ============================================================
+   Report Title Block
+   ============================================================ */
+
+
+   
+#report-title {
+  color: var(--fc-blue);
+  font-family: "Century Gothic", "Helvetica", sans-serif;
+  font-size: 2.8em;
+  font-weight: 700;
+  margin-top: 1.2em;     /* space above the title */
+  margin-bottom: 0.3em;  /* space below the title */
+
+  text-align: center;
+}
+
+#fc-header-logo {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 900px;
+  width: 100%;
+}
+
+#title-block {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 900px;
+}
+
+
+
+/* ============================================================
+   Links & Navigation
+   ============================================================ */
+
+a, a:visited {
+  color: var(--fc-blue);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.section-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 1.2em 0;
+}
+
+/* Primary button-style links */
+.navbtn,
+.link-box {
+  background-color: var(--fc-blue);
+  color: white !important;
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+.navbtn:hover,
+.link-box:hover {
+  background-color: var(--fc-sky);
+}
+
+/* Outline button */
+.link-box2 {
+  background-color: transparent;
+  color: var(--fc-blue) !important;
+  border: 2px solid var(--fc-blue);
+  padding: 12px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  margin: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.link-box2:hover {
+  background-color: var(--fc-blue);
+  color: white !important;
+  box-shadow: 0 4px 10px rgba(15, 64, 107, 0.3);
+  transform: translateY(-2px);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ============================================================
+   Tables
+   ============================================================ */
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 1.5em;
+  font-family: "Century Gothic", sans-serif;
+}
+
+th {
+  background-color: var(--fc-blue);
+  color: #fff;
+  padding: 8px;
+  text-align: left;
+  font-weight: bold;
+}
+
+td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #f8f8f8;
+}
+
+/* ============================================================
+   Code Blocks
+   ============================================================ */
+
+code {
+  font-family: "Courier New", Consolas, monospace;
+  background-color: #f5f7fa;
+  color: var(--fc-blue);
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+pre {
+  background-color: #f5f7fa;
+  border-left: 4px solid var(--fc-blue);
+  padding: 10px;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 0.9em;
+  line-height: 1.4;
+  color: var(--fc-gray);
+}
+
+pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+/* ============================================================
+   Lists, Quotes, HR
+   ============================================================ */
+
+ul, ol {
+  margin-left: 30px;
+}
+
+blockquote {
+  border-left: 5px solid var(--fc-blue);
+  padding-left: 15px;
+  color: var(--fc-gray);
+  font-style: italic;
+  background-color: #f9f9f9;
+}
+
+hr {
+  border: none;
+  border-top: 2px solid var(--fc-blue);
+  margin: 2em 0;
+}
+
+
+/* ============================================================
+   Sidebar
+   ============================================================ */
+
+
+/* Sidebar column containing logo + TOC */
+#sidebar-column {
+  flex: 0 0 250px;     /* match TOC width */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centers the logo cleanly */
+  position: sticky;
+  top: 1rem;
+}
+
+
+.fc-sidebar-logo {
+  width: 100%;         /* match sidebar width */
+  text-align: center;
+  margin-bottom: 1rem; /* spacing above TOC */
+}
+
+.fc-sidebar-logo img {
+  width: 100%;          /* recommended visual width */
+  height: auto;
+}
+
+
+
+/* ============================================================
+   Table of Contents Sidebar
+   ============================================================ */
+
+   
+#layout-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+#toc {
+  top: 90px;
+  width: 250px;
+  flex-shrink: 0;
+  background-color: #f5f7fa;
+  border-left: 5px solid var(--fc-blue);
+  border-radius: 8px;
+  padding: 15px 18px;
+  font-family: "Century Gothic", sans-serif;
+  font-size: 15px;
+  color: var(--fc-blue);
+  max-height: none;
+  overflow-y: visible;
+}
+
+#main-body {
+  flex: 0 1 900px;
+  margin: 0 auto;
+  padding-bottom: 4rem;
+}
+
+#toc .toc-title,
+#toc h2 {
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 0 10px 0 !important;
+  font-size: 1.2em !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--fc-blue) !important;
+  background: none !important;
+  text-align: left !important;
+}
+
+#toc ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+#toc ul ul {
+  margin-left: 16px;
+  border-left: 2px solid #ddd;
+  padding-left: 10px;
+  display: none;
+}
+
+#toc a {
+  display: block;
+  color: var(--fc-blue);
+  padding: 3px 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  line-height: 1.4;
+  text-wrap: balance;
+}
+
+#toc a:hover {
+  background-color: rgba(15, 64, 107, 0.08);
+}
+
+#toc a.active {
+  background-color: #E8F0FA;
+  color: var(--fc-blue) !important;
+  font-weight: 700;
+}
+
+#toc li.active-parent > ul {
+  display: block;
+}
+
+
+/* Formats figure caption */
+.figure-cap {
+  color: #0F406B; 
+  font-family: "Century Gothic", "Helvetica", sans-serif;
+  font-weight: 700;
+  text-align: left;    
+  font-size: 1.05em;
+  margin-bottom: 0.1em; 
+}
+
+
+/* Hide Quarto auto-captions under figures */
+.quarto-float-caption,
+.quarto-float-caption-bottom,
+.quarto-float-caption.quarto-float-fig {
+  display: none !important;
+}
+
+
+
+/* ============================================================
+   Mobile Optimization Overrides
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+  /* Reduce global margins to avoid giant gutters */
+  body {
+    margin: 15px !important;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  /* Headings scale better on small screens */
+  h1 { font-size: 1.9em !important; }
+  h2 { font-size: 1.5em !important; }
+  h3 { font-size: 1.3em !important; }
+  h4 { font-size: 1.15em !important; }
+
+
+/* Hide sidebar, logo, and TOC on mobile */
+  #sidebar-column,
+  .fc-sidebar-logo,
+  #fc-header-logo,
+  #toc {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+
+  /* Title block and logo */
+  #title-block,
+  #fc-header-logo,
+  #report-title {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    text-align: center !important;
+  }
+
+  #report-title {
+    font-size: 2em !important;
+    margin-top: 0.8em;
+  }
+
+  /* Layout container collapses fully */
+  #layout-container {
+    flex-direction: column !important;
+    gap: 20px !important;
+    max-width: 100% !important;
+  }
+
+  /* TOC becomes full-width, no overflow */
+  #toc {
+    width: 100% !important;
+    margin: 0 0 20px 0 !important;
+    border-left: none !important;
+    border-bottom: 3px solid var(--fc-blue) !important;
+    padding: 12px !important;
+    font-size: 14px !important;
+  }
+
+  /* Expand nested TOC sections so users don’t have to tap tiny arrows */
+  #toc ul ul {
+    display: block !important;
+    border-left: 1px solid #ddd;
+    padding-left: 12px;
+  }
+
+  /* Main body becomes full width */
+  #main-body {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Link buttons scale down and reduce horizontal overflow */
+  .navbtn,
+  .link-box,
+  .link-box2 {
+    display: block !important;
+    width: 100% !important;
+    text-align: center;
+    padding: 10px 14px !important;
+    margin: 6px 0 !important;
+    font-size: 0.95em !important;
+  }
+
+  /* Tables scroll instead of bursting layout */
+  table {
+    display: table;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  /* Code blocks scroll horizontally */
+  pre {
+    white-space: pre-wrap;
+    overflow-x: auto !important;
+  }
+}
+
+
+/* Even smaller screens (portrait phones ≤480px) */
+@media (max-width: 480px) {
+
+  /* Ensure sidebar + logo stay hidden on very small screens */
+  #sidebar-column,
+  .fc-sidebar-logo,
+  #fc-header-logo,
+  #toc {
+    display: none !important;
+  }
+
+
+  body {
+    margin: 10px !important;
+    font-size: 14px !important;
+  }
+
+  #report-title {
+    font-size: 1.7em !important;
+  }
+
+  h1 { font-size: 1.6em !important; }
+  h2 { font-size: 1.3em !important; }
+  h3 { font-size: 1.15em !important; }
+
+  .navbtn,
+  .link-box,
+  .link-box2 {
+    font-size: 0.9em !important;
+    padding: 8px 12px !important;
+  }
+}
+
+/* ======================= */
+/* CUSTOM FIGURE  FIX */
+/* ======================= */
+
+/* ===== LOCK FIGURE WIDTH FOR PLOTLY ===== */
+
+.quarto-figure,
+.figure {
+  display: block;
+  width: 900px;          /* MATCH #main-body */
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-x: hidden;
+}
+
+.html-widget {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+
+
+
+/* End of Fullerton College Report Stylesheet */

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  $for(header-includes)$
+  $header-includes$
+  $endfor$
+
+  $if(highlighting-css)$
+    <style type="text/css">$highlighting-css$</style>
+  $endif$
+
+  $if(css)$
+    $for(css)$
+      <link rel="stylesheet" href="$css$" />
+    $endfor$
+  $endif$
+
+  <title>$if(title-prefix)$$title-prefix$ – $endif$$pagetitle$</title>
+</head>
+
+<body style="margin:0; padding:0; font-family:'Century Gothic',sans-serif; background-color:#ffffff;">
+
+<!-- =============================================== -->
+<!-- Layout Container (TOC + Main content) -->
+<!-- =============================================== -->
+<div id="layout-container">
+
+ <!-- Sidebar Logo -->
+  <div id="sidebar-column">
+    <div class="fc-sidebar-logo">
+      <img src="../template/fc-oie.png" alt="Fullerton College OIE Logo">
+    </div>
+
+  <!-- ===== Left Sidebar TOC ===== -->
+  $if(toc)$
+  <nav id="toc" aria-label=""Table of contents">
+    $if(toc-title)$<h2 class="toc-title">$toc-title$</h2>$endif$
+    $toc$
+  </nav>
+  $endif$
+  </div>
+
+  <!-- ===== Main Centered Column ===== -->
+  <main id="main-body" role="main">
+
+    <!-- --- Title block with logo above title --- -->
+    $if(title)$
+      <div id="title-block">
+      <h1 id="report-title">$title$</h1>
+      $if(subtitle)$<h2 id="subtitle">$subtitle$</h2>$endif$
+    </div>
+    $endif$
+
+<!-- --- Report Body --- -->
+<div id="report-body">
+
+
+<div style="
+  border-left: 6px solid #B00020;
+  background-color: #FFF6F6;
+  padding: 1.25rem 1.5rem;
+  margin: 2rem 0;
+  border-radius: 6px;
+  font-family: Century Gothic, Helvetica, sans-serif;
+">
+
+  <strong style="color:#8B0000; font-size:2rem;">
+    Content Notice
+  </strong>
+
+  <p style="margin:0.75rem 0; line-height:1.5; color:#2B2B2B;">
+    <b>This report contains mental health–related topics, including suicide-related topics</b>. Some readers may find this material sensitive or distressing. Readers are encourged to engage with this content at their own pace and to access support resources as needed.
+  </p>
+
+  <p style="margin:0.75rem 0 0.25rem 0; font-weight:600; color:#0F406B;">
+    24/7 Crisis Support
+  </p>
+  <ul style="margin:0 0 0 1.2rem; line-height:1.45; color:#2B2B2B;">
+    <li>Crisis Intervention Hotline (Didi Hirsch): (877) 727-4747</li>
+    <li>Suicide Hotline of Southern California: (714) 894-4242</li>
+    <li>Centralized Assessment Team (CAT): (866) 830-6011</li>
+    <li>Emergency services: 911</li>
+  </ul>
+</div>
+  $body$
+</div>
+
+
+<!-- Scroll-spy script (keep for TOC highlighting) -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const toc = document.querySelector("#toc");
+    if (!toc) return;
+    const links = Array.from(toc.querySelectorAll("a"));
+    const headings = links
+      .map(l => document.getElementById(decodeURIComponent(l.hash.slice(1))))
+      .filter(Boolean);
+
+    function updateTOC() {
+      let activeIndex = -1;
+      for (let i = 0; i < headings.length; i++) {
+        const rect = headings[i].getBoundingClientRect();
+        if (rect.top <= 140) activeIndex = i;
+        else break;
+      }
+
+      links.forEach(l => l.classList.remove("active"));
+      toc.querySelectorAll("li").forEach(li => li.classList.remove("active-parent"));
+      if (activeIndex >= 0) {
+        const activeLink = links[activeIndex];
+        activeLink.classList.add("active");
+        let li = activeLink.closest("li");
+        while (li && li.parentElement !== toc) {
+          li.classList.add("active-parent");
+          li = li.parentElement.closest("li");
+        }
+      }
+    }
+
+    document.addEventListener("scroll", updateTOC, { passive: true });
+    updateTOC();
+  });
+</script>
+
+<!-- =============================================== -->
+<!-- Footer: Last Updated -->
+<!-- =============================================== -->
+<footer style="text-align:center; margin-top:3em; font-style:italic; color:#555;">
+  Last updated on: $date$ by $author$
+</footer>
+
+
+
+</body>
+
+
+</html>
