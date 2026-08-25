@@ -1,0 +1,275 @@
+---
+title: "Course Success Report, 2025–2026"
+subtitle: "Faculty ID: `r params$faculty_id`"
+format:
+  pdf:
+    pdf-engine: xelatex
+    classoption:
+      - titlepage=false
+params:
+  faculty_id: null
+header-includes:
+  - \input{fullerton.tex}
+---
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+
+  # keep figures with code/output
+  fig.pos = "H",
+
+  # prevent floating to separate pages
+  out.extra = ""
+)
+
+
+source("script/2faculty_functions.R")
+
+# Generate plots once
+result <- plot_faculty_success_compare(df, faculty_id = params$faculty_id)
+n_plots <- result$n_plots
+
+
+
+# overall course success sentence for later
+overall_success_sentence <- summarize_overall_success(
+  df,
+  faculty_id_val = params$faculty_id
+)
+
+```
+
+
+## About
+
+As approved by [Faculty Senate](https://acrobat.adobe.com/id/urn:aaid:sc:VA6C2:711a168b-3b3f-47b5-8555-4f62101a92ea) in Spring 2026, this individualized report supports faculty self-reflection on course success outcomes and progress toward Fullerton College's Institutional Set Standards and Stretch Goals, established through the College's accreditation process [(2024-2025 Institutional Effectiveness Report, p. 13)](https://ie.fullcoll.edu/wp-content/uploads/sites/27/2026/07/2025-FC-Institutional-Effectiveness-Report-combined-cover.pdf).
+
+Across each graph, **the shaded light yellow area indicates course success rates that meet or exceed the College's Institutional Set Standard (ISS) of 62.1%.** The solid line represents the ISS, and the dashed line represents the Stretch Goal (80.0%).
+
+## Overall Course Success Rates
+
+As you review this section, here are some guiding questions to consider:
+
+- What patterns do you notice across your courses? How do your success rates compare with the overall rates for the same courses? How do your course success rates compare with the Institutional Set Standard of 62.1% and Stretch Goal of 80.0%?
+- What instructional practices (e.g., grading policies, assignment design, communication practices) may contribute to these outcomes?
+- What practices might you continue or change to support student success in future terms?
+
+**`r overall_success_sentence`**
+
+```{r}
+#| echo: false
+#| fig-cap: "Overall Course Success Rates"
+#| fig-pos: "H"
+#| fig-height: 2.5
+#| fig-width: 6.5
+
+print(result$plots[[1]])
+```
+
+```{r}
+#| echo: false
+#| fig-cap: "Overall Course Success Rates (continued)"
+#| fig-pos: "H"
+#| fig-height: 2.5
+#| fig-width: 6.5
+
+if (n_plots >= 2) {
+  print(result$plots[[2]])
+}
+```
+
+```{r}
+#| echo: false
+#| fig-cap: "Overall Course Success Rates (continued)"
+#| fig-pos: "H"
+#| fig-height: 2.5
+#| fig-width: 6.5
+
+if (n_plots >= 3) {
+  print(result$plots[[3]])
+}
+```
+
+
+## Disaggregated Course Success Rates
+
+In this section, course success rates are disaggregated by race/ethnicity, college generational status, and gender. As you review this section, here are some guiding questions to consider:
+
+- Which student groups are experiencing lower or higher success rates? If the sample size (*n*) is small, the rates may be more prone to fluctuation.
+- What instructional practices or structures (e.g., classroom climate, representation in materials, course expectations) may contribute to these differences?
+-	What practices or changes could better support groups of students experiencing lower success rates?
+
+```{r}
+
+result <- plot_faculty_success_by_ethnicity(df, faculty_id = params$faculty_id)
+summary_race_sentence <- summarize_ethnicity_gap(result)
+
+```
+
+### Race/Ethnicity
+
+Race/ethnicity was measured using an inclusive methodology in which students were included in all racial/ethnic groups with which they identified (e.g., a student identifying as Black/Asian will be included in both the "Black/African American" and "Asian" categories). This allows for a more representative understanding of student experiences. 
+
+**`r summary_race_sentence`**
+
+```{r}
+#| label: fig-ethnicity
+#| fig-height: 3
+#| fig-width: 6.5
+#| fig-cap: "Course Success Rates by Race/Ethnicity"
+#| fig-pos: "H"
+
+print(result$plot)
+```
+
+
+```{r}
+
+result <- plot_faculty_success_by_first_gen(df, faculty_id = params$faculty_id)
+summary_first_gen_sentence <- summarize_first_gen_gap(result)
+
+```
+
+### College Generational Status
+
+First-generation students were defined as students whose parents or guardians had never attended college. Continuing-generation students were defined as students with any college education, even if they did not receive a certificate/degree.
+
+**`r summary_first_gen_sentence`**
+
+
+```{r}
+#| label: fig-firstgen
+#| fig-height: 2.7
+#| fig-width: 4.5
+#| fig-cap: "Course Success Rates by College Generational Status"
+#| fig-pos: "H"
+
+#not using the DI graph
+print(result$plot)
+
+```
+
+
+```{r}
+
+result <- plot_faculty_success_by_gender(df, faculty_id = params$faculty_id)
+summary_gender_sentence <- summarize_gender_gap(result)
+
+```
+
+
+### Gender
+
+Students self-reported their gender identity. To ensure confidentiality, responses for non-binary (NB), transgender, and unknown genders were aggregated into a single group for analysis alongside female and male cohorts.
+
+**`r summary_gender_sentence`**
+
+
+```{r}
+#| label: fig-gender
+#| echo: false
+#| fig-height: 2.7
+#| fig-width: 4.5
+#| fig-cap: "Course Success Rates by Gender"
+#| fig-pos: "H"
+
+print(result$plot)
+```
+
+
+
+## Drop Reasons
+
+```{r drop-summary, include=FALSE}
+
+# Filter to faculty
+df_fac <- df_drop[df_drop$faculty_id == params$faculty_id, , drop = FALSE]
+
+# Total unique students who dropped
+total_dropped <- length(unique(df_fac$stud_pidm))
+
+# Total unique students who completed drop survey
+df_survey <- df_fac[
+  !is.na(df_fac$survey_date) &
+  df_fac$survey_date != "",
+  ,
+  drop = FALSE
+]
+
+total_survey <- length(unique(df_survey$stud_pidm))
+
+```
+
+When students drop a course, they are given the option to select reasons for dropping. A total of `r total_dropped` unique students dropped your course(s) on or after the course start date, and of those students, `r total_survey` responded to the drop reason survey.
+
+Students could select multiple reasons for dropping. The most common reasons selected by students who dropped your course(s) are shown in the graph below. Since students could select more than one reason, the categories are not mutually exclusive.
+
+As you review this section, here are some guiding questions to consider:
+
+-	What common themes appear in students’ reasons for dropping? 
+-	Which barriers appear academic versus outside the classroom?
+-	Which of these barriers, if any, might you be able to help address (e.g., through resource referrals, flexibility, communication practices, course policies)?
+
+
+```{r}
+#| fig-label: fig-drop-reasons
+#| fig-height: 5.5
+#| fig-width: 6.5
+#| fig-cap: "Drop Reasons for All Courses"
+#| fig-pos: "H"
+
+result <- plot_faculty_drops_by_reason(
+  df_drop   = df_drop,
+  faculty_id = params$faculty_id
+)
+
+# Check for message first
+if (!is.null(result$message)) {
+  print(result$message)
+} else {
+  # Display the plot
+  print(result$plot)
+}
+
+```
+
+
+### Open-Ended Drop Reasons
+
+Students were also asked to share why they dropped the course and what could have helped.
+
+
+```{r}
+#| label: tbl-drop
+#| tbl-cap: "Open-Ended Drop Reasons"
+#| tbl-pos: "H"
+
+result_open <- plot_faculty_drop_open_responses(
+  df_drop   = df_drop,
+  faculty_id = params$faculty_id
+)
+
+## Check for message first
+if (!is.null(result_open$message)) {
+  cat(result_open$message)
+} else {
+  library(kableExtra)
+  knitr::kable(
+    result_open$data,
+    format = "latex",
+    booktabs = TRUE,
+    align = c("c", "l", "l"),
+    col.names = c("#", "Why Did You Drop the Course?", "What Could Have Helped?")
+  ) |>
+    kable_styling(
+      latex_options = c("hold_position", "striped"),
+      font_size = 9
+    ) |>
+    column_spec(1, width = "0.4cm") |>
+    column_spec(2, width = "7cm", latex_valign = "p") |>
+    column_spec(3, width = "7cm", latex_valign = "p")
+}
+```

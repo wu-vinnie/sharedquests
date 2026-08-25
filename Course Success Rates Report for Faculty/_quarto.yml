@@ -1,0 +1,20 @@
+project:
+  type: default
+  output-dir: output
+
+execute:
+  echo: false
+  warning: false
+  message: false
+  freeze: false
+
+format:
+  pdf:
+    pdf-engine: xelatex
+    fig-cap-location: top
+    toc: false
+    number-sections: false
+    colorlinks: true
+    fig-format: png
+    dev: ragg_png
+    keep-tex: false

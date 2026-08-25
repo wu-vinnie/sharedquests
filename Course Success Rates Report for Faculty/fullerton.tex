@@ -1,0 +1,195 @@
+% ============================================================
+% Fullerton College (FC) PDF Preamble
+% Author: Vinnie Wu
+% Purpose: Consistent visual identity for reports
+% ============================================================
+
+\usepackage[margin=.8in]{geometry}
+\usepackage{fontspec}
+\setmainfont{Century Gothic}
+\usepackage{setspace}
+\setstretch{1.15}
+
+\usepackage{xcolor}
+\definecolor{FCBlue}{HTML}{0F406B}
+\definecolor{FCDarkGray}{HTML}{333333}
+
+\usepackage{graphicx}
+\usepackage{titling}
+\usepackage{titlesec}
+\usepackage{tikz}
+\usepackage{pdflscape}
+\usepackage{placeins}
+\usepackage{float}
+
+% ------------------------------------------------------------
+% Footer vertical position
+% ------------------------------------------------------------
+% Smaller footskip moves the footer up.
+\setlength{\footskip}{0.4in}
+
+
+
+% ------------------------------------------------------------
+% Adjust title block position
+% ------------------------------------------------------------
+\setlength{\droptitle}{-5em}
+
+
+% ------------------------------------------------------------
+% Title + Subtitle styling (KOMA-Script compatible)
+% ------------------------------------------------------------
+
+\makeatletter
+
+\pretitle{%
+  \begin{center}
+  \vspace*{-1.2em}
+  \includegraphics[height=0.6in]{template/fc.png}\\[0.4em]
+  \color{FCBlue}\bfseries\LARGE
+}
+
+\posttitle{%
+  \par
+  \vspace{0.1em}
+  {\Large\color{FCDarkGray}\normalfont\@subtitle\par}
+  \end{center}
+  \vspace{-3.5em} % <-- THIS LINE REMOVES THE GAP
+}
+
+
+\preauthor{\begin{center}\large\vspace{-2em}}  % <-- ADD THIS LINE
+\postauthor{\end{center}\vspace{-2em}}          % <-- ADD THIS LINE
+
+\predate{\begin{center}\normalsize\vspace{-1em}}  % <-- ADD THIS LINE
+\postdate{\end{center}\vspace{-2em}}              % <-- ADD THIS LINE
+
+
+\makeatother
+
+
+
+% ------------------------------------------------------------
+% Section Heading Styles
+% ------------------------------------------------------------
+
+% --- Vertical blue bar for H2/H3 (aligned with text height) ---
+\newcommand{\leftbar}{%
+  \tikz[baseline]{%
+    \node[inner sep=0pt, outer sep=0pt, anchor=base west, yshift=-0.25ex] (bar)
+      {\textcolor{FCBlue}{\rule{3pt}{1.25em}}};
+  }\hspace{0.6em}%
+}
+
+% --- H1 (Header 1): bold, large, left bar ---
+\titleformat{\section}[block]
+  {\color{FCBlue}\bfseries\LARGE}
+  {}{0pt}{\leftbar}
+
+
+
+% --- H2 (Header 2): bold, slightly smaller, left bar ---
+\titleformat{\subsection}[block]
+  {\color{FCBlue}\bfseries\Large}
+  {}{0pt}{\leftbar}
+
+% --- H3 (Header 3): bold italic, slightly smaller, left bar ---
+\titleformat{\subsubsection}[block]
+  {\color{FCBlue}\bfseries\itshape\large}
+  {}{0pt}{}
+
+% --- Optional H4–H6 ---
+\titleformat{\paragraph}
+  {\color{FCDarkGray}\bfseries\normalsize}
+  {}{0pt}{}
+\titleformat{\subparagraph}
+  {\color{FCDarkGray}\normalsize}
+  {}{0pt}{}
+
+% ------------------------------------------------------------
+% Section spacing (compact but consistent)
+% ------------------------------------------------------------
+\titlespacing*{\section}{0pt}{0.6em}{0.25em}
+\titlespacing*{\subsection}{0pt}{0.6em}{0.3em}
+\titlespacing*{\subsubsection}{0pt}{0.5em}{0.3em}
+
+% ============================================================
+% Footer: Fullerton College Faculty Senate
+% ============================================================
+
+\usepackage{fancyhdr}
+\fancyhf{} % clear all header/footer fields first
+
+% --- Footer appearance ---
+\newcommand{\FCfooterleft}{%
+  \textcolor{FCBlue}{\textbf{FULLERTON COLLEGE}}%
+  \textcolor{FCDarkGray}{\; Faculty Senate}%
+}
+\fancyfoot[L]{\small \FCfooterleft}
+\fancyfoot[R]{\small \textcolor{FCDarkGray}{\thepage}}
+
+% --- Horizontal rule above footer ---
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\footrule}{%
+  \hbox to\headwidth{%
+    \color{FCBlue}\leaders\hrule height \footrulewidth\hfill
+  }%
+}
+\renewcommand{\headrulewidth}{0pt}
+
+% --- Apply footer to all pages (including first) ---
+\pagestyle{fancy}
+\thispagestyle{fancy}
+
+
+% ============================================================
+% Fix plain (title) page footer alignment
+% ============================================================
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  % left text
+  \fancyfoot[L]{\small
+    \textcolor{FCBlue}{\textbf{FULLERTON COLLEGE}}%
+    \textcolor{FCDarkGray}{\; Faculty Senate}%
+  }%
+  % right page number
+  \fancyfoot[R]{\small \textcolor{FCDarkGray}{\thepage}}%
+  % blue horizontal rule
+  \renewcommand{\footrulewidth}{0.4pt}%
+  \renewcommand{\footrule}{%
+    \hbox to\headwidth{%
+      \color{FCBlue}\leaders\hrule height \footrulewidth\hfill
+    }%
+  }%
+  \renewcommand{\headrulewidth}{0pt}%
+}
+
+
+% ============================================================
+% Figures
+% ============================================================
+
+ % always have caption above the figure
+
+\usepackage{caption}
+
+\captionsetup{
+  justification=raggedright,
+  singlelinecheck=false
+}
+
+\captionsetup[figure]{
+  labelfont=bf
+}
+
+\captionsetup[table]{
+  labelfont=bf
+}
+
+% reducing float
+
+\makeatletter
+\def\fps@figure{H}
+\makeatother
+
