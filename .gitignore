@@ -1,0 +1,27 @@
+# ============================================================
+# Never commit raw data, R workspaces, or credentials.
+# Only rendered, aggregated outputs belong in this repo.
+# ============================================================
+
+# R session files (.RData can hold full data frames and saved credentials)
+.RData
+.Rhistory
+.Rproj.user/
+
+# Data folders: keep the folder itself via .gitkeep or a README .txt
+**/data/*
+!**/data/.gitkeep
+!**/data/*.txt
+
+# Data files anywhere
+*.xlsx
+*.xls
+*.csv
+*.sav
+*.dta
+*.sas7bdat
+*.rds
+
+# Credentials
+*.creds
+.Renviron

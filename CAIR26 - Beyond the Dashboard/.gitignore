@@ -1,2 +1,6 @@
 /.quarto/
 **/*.quarto_ipynb
+
+# Student-level data: never commit (keep the folder via .gitkeep)
+/data/*
+!/data/.gitkeep
