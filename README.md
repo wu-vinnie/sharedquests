@@ -17,7 +17,7 @@ Think of it as a **working map**, not a polished product:
 ## 🌐 Looking for rendered outputs?
 If you’re looking for **published HTML files or other viewable artifacts**, those live here instead:
 
-👉 https://github.com/fc-oie/docs/
+👉 [link redacted]
 
 That repository hosts the outputs.  
 This one hosts the *how*.
