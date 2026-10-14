@@ -1,0 +1,142 @@
+---
+title: "Beyond the Dashboard:"
+subtitle: "Automate Reporting, Elevate Storytelling"
+author:
+  - name: "Vinnie Wu, Ph.D."
+    affiliations:
+      - name: "Senior Research & Planning Analyst"
+      - name: "Fullerton College"
+  - name: "Joshua Rhee, Ph.D."
+    affiliations:
+      - name: "Research and Planning Analyst"
+      - name: "Irvine Valley College"
+
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+
+source("setup.R")
+
+```
+
+## Overview {.section-slide}
+
+<!--
+  Section divider slide. Apply the `.section-slide` class to the
+  slide's heading (as above) for any slide meant to introduce a new
+  part of the deck.
+-->
+
+## Sound familiar?
+
+Common challenges with data requests
+
+::::: {.tile-grid}
+::: {.tile .fragment}
+Audience
+:::
+::: {.tile .fragment}
+Type of Data
+:::
+::: {.tile .fragment}
+Primary Message
+:::
+::: {.tile .fragment}
+Tight Timelines
+:::
+::: {.tile .fragment}
+Redundancy
+:::
+:::::
+
+::: {.takeaway .fragment}
+Building and formatting eats **precious time**.\
+A reproducible, reusable template gives it back.
+:::
+
+::: {.notes}
+Engagement opener:
+
+1. Raise your hand if you've rebuilt the same report more than once.
+2. Keep your hand up if you spent so much time creating the report that you lost time to work on other things.
+
+Joshie
+:::
+
+
+## Agenda
+
+- First topic
+- Second topic
+
+::: {.notes}
+Open with the "sounds familiar?" question. Spend ~2 min here.
+Mention Joshua covers the IVC example.
+:::
+
+## A Heading Slide
+
+Body text goes here. `.reveal p` line-height and `.reveal strong`
+color are already styled — just write normally.
+
+**Key point** worth emphasizing appears in FC blue automatically.
+
+### A Sub-point
+
+Use `###` for a smaller, italicized sub-heading within a slide,
+styled in `--fc-sky`.
+
+## Callout Boxes
+
+::: {.blue-box}
+Use `.blue-box` for a primary emphasis callout — solid FC blue
+background, white text.
+:::
+
+::: {.yellow-box}
+Use `.yellow-box` for a highlight or warning-style callout.
+:::
+
+::: {.gray-box}
+Use `.gray-box` for a lower-emphasis supporting note — light
+background, blue left border.
+:::
+
+## A Table
+
+| Metric          | Fall 2025 | Fall 2026 |
+|------------------|-----------|-----------|
+| Enrollment       | 1,204     | 1,331     |
+| Retention Rate   | 78%       | 81%       |
+| Success Rate     | 71%       | 74%       |
+
+## A Plotly Chart
+
+```{r}
+#| label: fig-example
+#| echo: false
+
+plot_ly(
+  mpg,
+  x = ~displ,
+  y = ~hwy,
+  type = "scatter",
+  mode = "markers"
+) |>
+  fc_plotly_theme()
+```
+
+## A Quote
+
+> Use blockquotes for pulled quotes, testimonials, or emphasis text
+> that should stand apart from the body copy.
+
+## Wrap-up {.section-slide}
+
+## Questions?
+
+Contact: Vinnie Wu at [vwu@fullcoll.edu](mailto:vwu@fullcoll.edu)

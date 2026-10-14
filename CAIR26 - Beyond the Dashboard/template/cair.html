@@ -1,0 +1,16 @@
+<!-- Gives every `.section-slide` a full-screen Stinger Blue background,
+     so the class alone is enough in index.qmd. Styling lives in cair.css. -->
+<script>
+  (function () {
+    function paintSectionSlides() {
+      document.querySelectorAll(".reveal .slides section.section-slide").forEach(function (s) {
+        if (!s.hasAttribute("data-background-color")) {
+          s.setAttribute("data-background-color", "#0F406B");
+        }
+      });
+      Reveal.sync();
+    }
+    if (Reveal.isReady()) paintSectionSlides();
+    else Reveal.on("ready", paintSectionSlides);
+  })();
+</script>

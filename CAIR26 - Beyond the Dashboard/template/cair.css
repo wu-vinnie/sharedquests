@@ -1,0 +1,859 @@
+/* ============================================================
+   Fullerton College (FC) Presentation Stylesheet (reveal.js)
+   Package:      fcbrand
+   Template:     presentation
+   Author:       Vinnie Wu
+   Version:      1.0.0
+   Last updated: 2026-07-09
+
+   This stylesheet is intended ONLY for the Presentation template.
+   Do not reuse for reports or dashboards — each template owns its
+   own fullerton.css.
+
+   Structure:
+     1. Variables
+     2. Reset / Base
+     3. Slide Layout
+     4. Title Slide
+     4b. Logo
+     5. Headings
+     6. Text & Lists
+     7. Links
+     8. Tables
+     9. Code
+     10. Images & Figures (incl. Plotly)
+     11. Blockquotes
+     12. Section Divider Slides
+     13. Callout Boxes
+     14. Footer, Progress, Slide Number
+     15. Utilities & Quarto Overrides
+
+   Note: no Responsive section — reveal.js handles slide scaling
+   internally via its own scale engine, unlike the report template.
+   ============================================================ */
+
+
+/* ============================================================
+   1. Variables
+   ============================================================ */
+
+:root {
+
+  /* --- Joint FC + IVC palette ---
+     Only official colors from the two brand guides (IVC Blue is
+     replaced by Stinger Blue). Balanced 6 FC / 6 IVC.
+     Not used: IVC Blue, FC Creek, FC Breeze. */
+
+  /* Primary (core three) */
+  --fc-blue:    #0F406B;   /* FC Stinger Blue: titles, headings, dominant */
+  --fc-yellow:  #FFD600;   /* FC Hornet Yellow: accent fills only (1.4:1 on white) */
+  --ivc-silver: #C7CACE;   /* IVC Silver: borders, rules, neutral fills */
+
+  /* Accents: charts and highlights (graphics, not body text) */
+  --ivc-bright-blue: #0092D1;
+  --fc-rust:         #E6605B;   /* FC Rustic */
+  --ivc-green:       #9DC136;
+  --ivc-magenta:     #C13A84;
+
+  /* Text */
+  --fc-purple:   #1B0D42;   /* FC Elderberry: deep accent */
+  --fc-sky:      #375E9E;   /* FC Sky: h3, hover, meta (6.5:1) */
+  --ivc-dust:    #7C98B3;   /* IVC Blue Dust: footer / large muted only (3.0:1) */
+
+  /* Light tints */
+  --ivc-light-blue: #C0D9E8;
+  --fc-lemon:       #F5F3BF;   /* FC Lemon Zest */
+
+  --fc-gray: #222222;   /* body text: near-black, outside the brand palette */
+
+  --link-color: var(--fc-blue);
+
+  /* Chart series order: alternates schools, max hue separation */
+  --chart-1: var(--fc-blue);
+  --chart-2: var(--fc-yellow);
+  --chart-3: var(--ivc-bright-blue);
+  --chart-4: var(--fc-rust);
+  --chart-5: var(--ivc-green);
+  --chart-6: var(--ivc-magenta);
+
+  /* --- Backgrounds (tints of palette colors) --- */
+  --bg-light:   color-mix(in srgb, var(--ivc-light-blue) 40%, white);  /* gray callout box */
+  --bg-stripe:  color-mix(in srgb, var(--ivc-silver) 25%, white);      /* table stripes */
+  --bg-quote:   color-mix(in srgb, var(--fc-lemon) 60%, white);        /* blockquote */
+
+  /* --- Text (secondary) --- */
+  --text-secondary: var(--fc-sky);    /* author / date */
+  --text-muted:     var(--ivc-dust);  /* footer */
+
+  /* --- Borders --- */
+  --border-light: var(--ivc-silver);
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* --- Typography --- */
+  --font-body: Arial, sans-serif;
+
+  --body-size: 32px;   /* ~4.4% of a 720px-tall slide: readable when projected */
+
+  --title-size:    2.4em;
+  --subtitle-size: 1.15em;
+  --meta-size:     0.8em;
+
+  --h1-size: 1.5em;
+  --h2-size: 1.3em;
+  --h3-size: 1.15em;
+
+  --table-size: 0.75em;
+  --code-size:  0.65em;
+
+  /* --- Spacing --- */
+  --space-xs: 0.25rem;   /* 4px */
+  --space-sm: 0.5rem;    /*  8px */
+  --space-md: 1rem;      /* 16px */
+  --space-lg: 1.25rem;   /* 20px */
+  --space-xl: 2.5rem;    /* 40px */
+
+  /* --- Shadows (reserved for future components) --- */
+  --shadow-sm: 0 2px 4px rgba(15, 64, 107, 0.15);
+  --shadow-md: 0 4px 10px rgba(15, 64, 107, 0.3);
+
+  /* --- Motion --- */
+  --transition-fast: 0.2s ease;
+}
+
+
+/* ============================================================
+   2. Reset / Base
+   ============================================================ */
+
+.reveal {
+  font-family: var(--font-body);
+  font-size: var(--body-size);
+  color: var(--fc-gray);
+}
+
+
+/* ============================================================
+   3. Slide Layout
+   ============================================================ */
+
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal .slides section {
+  width: 95%;
+  margin-inline: auto;
+  padding: var(--space-xl) var(--space-lg) var(--space-lg) var(--space-lg);
+}
+
+
+/* ============================================================
+   4. Title Slide
+   ============================================================ */
+
+.reveal .quarto-title-block {
+  text-align: center;
+}
+
+.reveal .title {
+  font-family: var(--font-body) !important;
+  font-size: var(--title-size) !important;
+  font-weight: 700 !important;
+  line-height: 1.1 !important;
+  color: var(--fc-blue) !important;
+  margin: 0 0 var(--space-xs) !important;
+  text-shadow: none !important;
+}
+
+.reveal .subtitle {
+  font-family: var(--font-body) !important;
+  font-size: 2.0em !important;     /* just under --title-size (2.4em) */
+  font-weight: 400 !important;
+  line-height: 1.2 !important;
+  color: var(--fc-blue) !important;
+  margin: 0 !important;   /* sits tight under the title */
+}
+
+.reveal .author,
+.reveal .date {
+  font-family: var(--font-body) !important;
+  font-size: var(--meta-size) !important;
+  color: var(--text-secondary) !important;
+}
+
+/* Multi-author block: side-by-side columns, name over role/college */
+.reveal .quarto-title-authors {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-xl) 4em;
+  flex-wrap: wrap;
+  margin-block: 1.75em 0;   /* clear break between titles and names */
+}
+
+.reveal .quarto-title-author {
+  text-align: center;
+}
+
+.reveal .quarto-title-author-name {
+  font-family: var(--font-body) !important;
+  font-size: 1em !important;
+  font-weight: 700 !important;
+  color: var(--fc-blue) !important;
+  margin-bottom: var(--space-xs);
+}
+
+.reveal .quarto-title-affiliation {
+  font-family: var(--font-body) !important;
+  font-size: 0.8em !important;
+  line-height: 1.35 !important;
+  color: var(--fc-gray) !important;
+  margin: 0 !important;
+}
+
+.reveal .quarto-title-block .date {
+  font-size: 0.6em !important;
+  color: var(--text-muted) !important;
+}
+
+
+/* ============================================================
+   4b. Logo
+   ============================================================ */
+
+/* Both college logos sit above the title on the title slide only:
+   FC on the left, IVC on the right. Drawn as backgrounds so no extra
+   markup is needed; URLs are relative to this stylesheet and
+   embed-resources inlines them. Source sizes: fc.png 1668 x 418,
+   ivc-logo.png 745 x 226. */
+.reveal #title-slide::before {
+  content: "";
+  display: block;
+  width: 860px;
+  height: 96px;
+  margin: 0 auto 1.5em;
+  background:
+    url("fc.png")       left  center / auto 100% no-repeat,
+    url("ivc-logo.png") right center / auto 100% no-repeat;
+}
+
+
+/* ============================================================
+   5. Headings
+   ============================================================ */
+
+.reveal h1 {
+  font-family: var(--font-body);
+  font-size: var(--h1-size);
+  font-weight: 700;
+  color: var(--fc-blue);
+  margin-bottom: 0.45em;
+  padding-bottom: 0.18em;
+}
+
+.reveal h2 {
+  font-family: var(--font-body);
+  font-size: var(--h2-size);
+  font-weight: 700;
+  color: var(--fc-blue);
+  border-inline-start: 8px solid var(--fc-blue);
+  padding-inline-start: 0.35em;
+  margin-bottom: 0.45em;
+}
+
+.reveal h3 {
+  font-family: var(--font-body);
+  font-size: var(--h3-size);
+  font-style: italic;
+  font-weight: 600;
+  color: var(--fc-sky);
+}
+
+
+/* ============================================================
+   6. Text & Lists
+   ============================================================ */
+
+.reveal p {
+  line-height: 1.4;
+}
+
+.reveal strong {
+  color: var(--fc-blue);
+}
+
+.reveal ul,
+.reveal ol {
+  margin-block: var(--space-sm);
+  line-height: 1.3;
+}
+
+.reveal li {
+  margin-bottom: 0.15em;   /* tight, Google Slides-like bullet rhythm */
+}
+
+.reveal li > p {
+  margin-block: 0;
+}
+
+
+/* ============================================================
+   7. Links
+   ============================================================ */
+
+.reveal a {
+  color: var(--link-color);
+  transition: color var(--transition-fast);
+}
+
+.reveal a:hover {
+  color: var(--fc-sky);
+}
+
+
+/* ============================================================
+   8. Tables
+   ============================================================ */
+
+.reveal table {
+  font-size: var(--table-size);
+  border-collapse: collapse;
+  margin-inline: auto;
+}
+
+.reveal table th {
+  background: var(--fc-blue);
+  color: white;
+  font-weight: bold;
+  padding: var(--space-sm);
+}
+
+.reveal table td {
+  padding: var(--space-sm);
+  border: 1px solid var(--border-light);
+}
+
+.reveal table tr:nth-child(even) {
+  background: var(--bg-stripe);
+}
+
+
+/* ============================================================
+   9. Code
+   ============================================================ */
+
+.reveal pre {
+  width: 100%;
+  font-size: var(--code-size);
+  border-inline-start: 6px solid var(--fc-blue);
+  border-radius: var(--radius-md);
+}
+
+.reveal code {
+  color: var(--fc-blue);
+}
+
+
+/* ============================================================
+   10. Images & Figures
+   ============================================================ */
+
+.reveal img {
+  border: none;
+  box-shadow: none;
+  max-height: 70vh;
+}
+
+/* Plotly widgets */
+.reveal .html-widget {
+  width: 100% !important;
+  margin-inline: auto;
+}
+
+/* Quarto figure wrapper */
+.reveal .quarto-figure {
+  text-align: center;
+}
+
+
+/* ============================================================
+   11. Blockquotes
+   ============================================================ */
+
+.reveal blockquote {
+  border-inline-start: 6px solid var(--fc-blue);
+  background: var(--bg-quote);
+  color: var(--fc-gray);
+  padding: var(--space-lg);
+  box-shadow: none;
+}
+
+
+/* ============================================================
+   12. Section Divider Slides
+   ============================================================ */
+
+/* Usage: `## Part 1: The Problem {.section-slide}`
+   Quarto puts the class on the <section>, not the heading. The
+   full-screen Stinger Blue background is set by template/cair.html,
+   which adds data-background-color to every .section-slide. */
+.reveal .slides section.section-slide {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.reveal section.section-slide h1,
+.reveal section.section-slide h2 {
+  font-size: var(--title-size);
+  text-align: center;
+  color: white;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Short Hornet Yellow accent bar under the heading */
+.reveal section.section-slide h1::after,
+.reveal section.section-slide h2::after {
+  content: "";
+  display: block;
+  width: 3em;
+  height: 0.12em;
+  margin: 0.35em auto 0;
+  background: var(--fc-yellow);
+}
+
+/* Optional line of text under the heading */
+.reveal section.section-slide p {
+  color: var(--ivc-light-blue);
+  text-align: center;
+  margin-top: var(--space-lg);
+}
+
+
+/* ============================================================
+   13. Callout Boxes
+   ============================================================ */
+
+.blue-box {
+  background: var(--fc-blue);
+  color: white;
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+}
+
+.blue-box code {
+  color: var(--fc-yellow);   /* default code color is blue: invisible here */
+}
+
+.blue-box,
+.yellow-box,
+.gray-box {
+  margin-block: var(--space-md);
+}
+
+.yellow-box {
+  background: var(--fc-yellow);
+  color: var(--fc-blue);   /* 7.6:1 */
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+}
+
+.gray-box {
+  background: var(--bg-light);
+  border-inline-start: 6px solid var(--fc-blue);
+  padding: var(--space-lg);
+  border-radius: var(--radius-md);
+}
+
+
+/* ============================================================
+   14. Footer, Progress, Slide Number
+   ============================================================ */
+
+.reveal .footer {
+  position: absolute;
+  bottom: var(--space-lg);
+  left: var(--space-xl);
+  color: var(--text-muted);
+  font-size: 0.45em;
+}
+
+.reveal .progress {
+  color: var(--fc-blue);
+}
+
+.reveal .slide-number {
+  color: var(--fc-blue);
+  font-size: 0.5em;
+}
+
+/* Prev/next arrows (`controls: true`) and the slide-menu button */
+.reveal .controls,
+.slide-menu-button a,
+.slide-menu-button i {
+  color: var(--fc-blue) !important;
+}
+
+
+/* ============================================================
+   15. Utilities & Quarto Overrides
+   ============================================================ */
+
+/* Fix unnecessary code scrollbars */
+.reveal div.sourceCode {
+  overflow: visible !important;
+  max-width: 100%;
+}
+
+.reveal pre.sourceCode {
+  overflow-x: visible !important;
+}
+
+.reveal pre.sourceCode code {
+  white-space: pre-wrap !important;
+  word-break: break-word;
+}
+
+/* Hide auto-generated figure captions — presentations don't use them */
+.reveal .quarto-figure + p.caption,
+.reveal img + p.caption {
+  display: none !important;
+}
+
+/* End of Fullerton College Presentation Stylesheet */
+/* Arrows, slide number and progress bar stay visible on dark
+   backgrounds (e.g. section divider slides). Reveal adds this class. */
+.reveal.has-dark-background .controls,
+.reveal.has-dark-background .slide-number,
+.reveal.has-dark-background .slide-number a {
+  color: white !important;
+}
+
+/* Tiles: a centered, wrapping row of short labels.
+     ::::: {.tile-grid}
+     ::: {.tile}  (add .fragment to reveal one at a time)
+   3 per row; a 4th/5th tile wraps and centers below. */
+.tile-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-block: var(--space-lg);
+}
+
+.tile-grid .tile {
+  flex: 0 1 30%;
+  box-sizing: border-box;   /* padding inside the 30%, so 3 fit per row */
+  background: var(--bg-light);   /* fill only: no accent line, so the
+                                    heading and takeaway bars stand out */
+  border-radius: var(--radius-md);
+  padding: var(--space-xl) var(--space-lg);   /* roomy, so tiles read as blocks */
+  text-align: center;
+  font-weight: 700;
+  color: var(--fc-blue);
+}
+
+.tile-grid .tile p {
+  margin: 0;
+}
+
+/* Takeaway: the one line the audience should remember. No fill
+   (avoids projector glare); a Hornet Yellow rule carries the accent. */
+.takeaway {
+  border-inline-start: 8px solid var(--fc-yellow);
+  padding: var(--space-xs) 0 var(--space-xs) var(--space-lg);
+  margin-block: var(--space-xl) var(--space-lg);
+  font-size: 1.1em;
+  color: var(--fc-blue);
+}
+
+.takeaway p {
+  margin: 0;
+}
+
+/* Tile width modifiers: {.tile-grid .cols-2} or {.tile-grid .cols-4} */
+.tile-grid.cols-2 .tile { flex-basis: 45%; }
+.tile-grid.cols-4 .tile { flex-basis: 22%; }
+
+/* Second line in a tile: a short description in regular weight */
+.tile-grid .tile p + p {
+  margin-top: var(--space-sm);
+  font-size: 0.85em;   /* readable when projected */
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--fc-gray);
+}
+
+/* Flow: left-to-right process steps with arrows between them.
+     ::::: {.flow}
+     ::: {.step}          automated step (light blue fill)
+     ::: {.step .manual}  human step (Lemon Zest fill)
+   The second line of a step is its label (e.g. "Automated"); the text
+   carries the meaning, the fill color only reinforces it. */
+.flow {
+  display: flex;
+  align-items: stretch;
+  gap: 2em;   /* room for the arrow between steps */
+  margin-block: var(--space-xl) var(--space-lg);
+}
+
+.flow .step {
+  position: relative;
+  flex: 1 1 0;
+  box-sizing: border-box;
+  background: var(--bg-light);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-sm);
+  text-align: center;
+  font-size: 0.75em;
+  font-weight: 700;
+  color: var(--fc-blue);
+}
+
+.flow .step.manual {
+  background: var(--fc-lemon);   /* human step: warm fill, no line */
+}
+
+.flow .step p {
+  margin: 0;
+}
+
+.flow .step p + p {
+  margin-top: var(--space-xs);
+  font-size: 0.8em;
+  font-weight: 400;
+  color: var(--fc-gray);
+}
+
+.flow .step + .step::before {
+  content: "\2192";   /* right arrow */
+  position: absolute;
+  left: -1.35em;   /* centered in the 2em gap */
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.6em;   /* big enough to read as a connector */
+  font-weight: 700;
+  line-height: 1;
+  color: var(--fc-blue);
+}
+
+/* Version card: the audience / purpose / product / format summary */
+.version-card {
+  background: var(--bg-light);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  font-size: 0.8em;
+  line-height: 1.5;
+}
+
+.version-card p:first-child {
+  margin-top: 0;
+  font-size: 1.1em;
+}
+
+/* Compare cards: "before" (neutral) vs. "after" (brand) side by side */
+.compare-card {
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.compare-card p:first-child {
+  margin-top: 0;
+}
+
+.compare-card.before {
+  background: color-mix(in srgb, var(--ivc-silver) 35%, white);
+}
+
+.compare-card.after {
+  background: var(--bg-light);
+}
+
+/* Placeholder: marks where a screenshot or chart still needs to go */
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 8em;
+  padding: var(--space-lg);
+  border: 3px dashed var(--ivc-silver);
+  border-radius: var(--radius-md);
+  text-align: center;
+  font-size: 0.7em;
+  color: var(--text-secondary);
+}
+
+.placeholder.tall {
+  min-height: 12em;
+}
+
+/* Cards: a row of tall, left-aligned boxes with a heading and bullets.
+   Use instead of tiles when each item needs supporting detail.
+     ::::: {.card-grid}
+     ::: {.card}
+     ### Heading
+     - point
+   Text stays near body size so it reads from the back of the room. */
+.card-grid {
+  display: flex;
+  gap: var(--space-lg);
+  align-items: stretch;
+  margin-top: var(--space-lg);
+}
+
+.card-grid .card {
+  flex: 1 1 0;
+  box-sizing: border-box;
+  background: var(--bg-light);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg) var(--space-lg) var(--space-md);
+  font-size: 1em;   /* full body size: readable when projected */
+}
+
+.reveal .card-grid .card h3 {
+  margin: 0 0 var(--space-sm);
+  font-size: 1.1em;
+  font-style: normal;
+  font-weight: 700;
+  color: var(--fc-blue);
+}
+
+.reveal .card-grid .card ul {
+  margin: 0;
+  padding-inline-start: 1em;
+}
+
+.reveal .card-grid .card li {
+  margin-bottom: var(--space-sm);
+}
+
+/* Agenda: one full-width row per segment, time on the left.
+     ::: {.agenda}
+     - [0–5 min]{.time} Segment name [Interactive]{.badge}
+   Rows with a badge get the warm fill; the badge text carries the
+   meaning, the fill only reinforces it. */
+.reveal .agenda ul {
+  display: block;   /* reveal shrinks lists to content; rows span the slide */
+  width: 100%;
+  list-style: none;
+  margin: var(--space-lg) 0 0;
+  padding: 0;
+}
+
+.reveal .agenda li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  margin: 0 0 var(--space-sm);
+  padding: var(--space-sm) var(--space-lg);
+  background: var(--bg-light);
+  border-radius: var(--radius-md);
+}
+
+.reveal .agenda li:has(.badge) {
+  background: var(--fc-lemon);
+}
+
+.reveal .agenda .time {
+  flex: 0 0 5.5em;
+  font-weight: 700;
+  color: var(--fc-blue);
+}
+
+.reveal .agenda .badge {
+  margin-left: auto;
+  font-size: 0.7em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--fc-blue);
+}
+
+/* Big idea: one central phrase, centered and large.
+     ::: {.big-idea}
+     Reduce cognitive load
+   The yellow bar echoes the section divider slides. */
+.reveal .big-idea {
+  margin-top: 1.75em;
+  text-align: center;
+}
+
+.reveal .big-idea p {
+  margin: 0;
+  font-size: 2.3em;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--fc-blue);
+}
+
+.reveal .big-idea p::after {
+  content: "";
+  display: block;
+  width: 3em;
+  height: 0.12em;
+  margin: 0.3em auto 0;
+  background: var(--fc-yellow);
+}
+
+
+/* Takeaway variant for crowded slides: less space above */
+.takeaway.tight {
+  margin-top: var(--space-md);
+}
+
+/* Quote cards: {.card-grid .quotes} for a question heading over a quoted line */
+.reveal .card-grid.quotes .card p {
+  margin: 0;
+  font-style: italic;
+  line-height: 1.35;
+}
+
+/* Source caption under a figure or card row: [text]{.source} */
+.reveal .source {
+  display: block;
+  margin-top: var(--space-sm);
+  text-align: right;
+  font-size: 0.6em;
+  color: var(--fc-gray);
+}
+
+/* Compact tiles: {.tile-grid .compact} for grids sharing a slide */
+.tile-grid.compact {
+  gap: var(--space-sm);
+  margin-block: var(--space-sm);
+}
+
+.tile-grid.compact .tile {
+  flex-basis: 48%;
+  padding: var(--space-md);
+  font-size: 0.85em;
+}
+
+/* Steps panel: instructions that stay on screen during an activity */
+.reveal .steps-panel {
+  margin-top: var(--space-sm);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--fc-lemon);
+  border-radius: var(--radius-md);
+  font-size: 0.8em;
+}
+
+.reveal .steps-panel p:first-child {
+  margin-top: 0;
+  color: var(--fc-blue);
+}
+
+.reveal .steps-panel ol {
+  margin: 0;
+  padding-inline-start: 1.2em;
+}
+
+.reveal .steps-panel li {
+  margin-bottom: var(--space-sm);
+}

@@ -1,0 +1,22 @@
+project:
+  type: default
+  output-dir: output
+
+execute:
+  echo: false
+  warning: false
+  message: false
+
+format:
+  revealjs:
+    css: template/cair.css
+    include-after-body: template/cair.html
+    width: 1280    # 16:9, fills a projector
+    height: 720
+    slide-number: true
+    controls: true
+    chalkboard: false
+    theme: simple
+    embed-resources: true
+    toc: false
+    

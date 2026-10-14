@@ -1,0 +1,632 @@
+---
+title: "Beyond the Dashboard:"
+subtitle: "Automate Reporting, Elevate Storytelling"
+author:
+  - name: "Vinnie Wu, Ph.D."
+    affiliations:
+      - name: "Senior Research & Planning Analyst"
+      - name: "Fullerton College"
+  - name: "Joshua Rhee, Ph.D."
+    affiliations:
+      - name: "Research and Planning Analyst"
+      - name: "Irvine Valley College"
+
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+
+source("setup.R")
+
+```
+
+<!--
+  Layout pieces used in this deck (styles in template/cair.css):
+    {.section-slide}            full-screen blue divider slide
+    {.tile-grid} + {.tile}      row of labels; add .cols-2 / .cols-4
+    {.flow} + {.step}           left-to-right process; .manual for human steps
+    {.takeaway}                 the one line to remember
+    {.placeholder}              stand-in for a screenshot or chart
+    {.fragment}                 reveal one click at a time
+  Demo slides from the original template are in template/examples.qmd.
+-->
+
+## Sound familiar?
+
+Common challenges with data requests
+
+::::: {.tile-grid}
+::: {.tile .fragment}
+Audience
+:::
+::: {.tile .fragment}
+Type of Data
+:::
+::: {.tile .fragment}
+Primary Message
+:::
+::: {.tile .fragment}
+Tight Timelines
+:::
+::: {.tile .fragment}
+Redundancy
+:::
+:::::
+
+::: {.takeaway .fragment}
+Building and formatting eats **precious time**.\
+A reproducible, reusable template gives it back.
+:::
+
+::: {.notes}
+Joshie
+
+Engagement opener:
+
+1. Raise your hand if you've rebuilt the same report more than once.
+2. Keep your hand up if you spent so much time creating the report that you lost time to work on other things.
+
+:::
+
+
+## Why go beyond the dashboard?
+
+Dashboards expanded access to data, but access isn't understanding.
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.compare-card .before .fragment}
+**Dashboards**
+
+- Show the numbers
+- Built for anyone to explore
+- Leave interpretation to the viewer
+:::
+:::
+
+::: {.column width="50%"}
+::: {.compare-card .after .fragment}
+**Reports that tell the story**
+
+- Add context and meaning
+- Built for one audience and decision
+- Point to a takeaway and next step
+:::
+:::
+::::
+
+::: {.takeaway .fragment}
+Dashboards automate the numbers.\
+We **automate the reporting**, so we can **elevate the storytelling**.
+:::
+
+::: {.notes}
+We know there's automation in dashboards (data visualization, filtering, drilldown), but people usually think of reports as more manual labor in its creation. We want to show that reports can be automated too, so analysts can focus on the interpretation and storytelling.
+:::
+
+
+## Today's session
+
+::: {.agenda}
+- [0–5 min]{.time} Why it matters
+- [5–20 min]{.time} Best practices & workflow
+- [20–30 min]{.time} Your turn [Interactive]{.badge}
+- [30–40 min]{.time} Behind the scenes
+- [40–45 min]{.time} Q&A & reflection [Interactive]{.badge}
+:::
+
+::: {.takeaway}
+Demos use **R**, but the principles apply on any reporting platform (e.g., Python, Word/PowerPoint).
+:::
+
+::: {.notes}
+Rows marked Interactive are where the audience participates.
+:::
+
+
+# Same Data,<br>Different End Product {.section-slide}
+
+The #RealCollegeCA Survey: Basic Needs in the CCCs
+
+::: {.notes}
+⏱ ~5:00. Target: finish this section by ~13:00, leaving ~7 min for Build It Once.
+:::
+
+## Same data, different end product
+
+:::: {.columns}
+::: {.column width="38%"}
+::: {.version-card}
+**#RealCollegeCA · Version 1**
+
+**Audience:** President's Office\
+**Purpose:** Various uses (President's welcome talk, Board updates)\
+**Product:** Electronic / physical report\
+**Format:** PDF
+:::
+:::
+
+::: {.column width="62%"}
+::: {.placeholder}
+Screenshot: IVC food insecurity page, disaggregated by gender (bullets, key takeaway, IVC vs. statewide chart)
+:::
+:::
+::::
+
+::: {.notes}
+Joshie
+:::
+
+## Same data, different end product
+
+:::: {.columns}
+::: {.column width="38%"}
+::: {.version-card}
+**#RealCollegeCA · Version 2**
+
+**Audience:** Campuswide\
+**Purpose:** Overview + drilldown for specific programs\
+**Product:** Interactive report\
+**Format:** HTML
+:::
+
+::: {.takeaway .fragment}
+Food insecurity is most elevated among **transgender and non-binary students**.
+:::
+:::
+
+::: {.column width="62%"}
+**Food Insecurity by Gender**
+
+```{r}
+#| label: food-insecurity-gender
+#| fig-height: 4.2
+#| fig-alt: "Interactive grouped bar chart of food insecurity by gender at Fullerton College in 2023 and 2025 compared with the 2025 statewide rate. In 2025, transgender students report 48%, non-binary 42%, female 41%, and male 39%, against a campuswide average of 40%."
+# Fixed size in slide pixels: reveal.js scales the slide, so plotly must not
+# resize itself to the screen or it overflows on large displays
+make_demographic_plot(summary_wide, outcome = "Food_Insecurity", predictor_prefix = "Gender_") |>
+  plotly::layout(autosize = FALSE, width = 680, height = 400) |>
+  plotly::config(responsive = FALSE)
+```
+:::
+::::
+
+::: {.notes}
+Vinnie: same survey, different audience and decision, so a different product. This chart is live: hover for comparisons, click a group to zoom.
+:::
+
+## Different end product, same rules
+
+Our two reports looked different, but underneath we followed the same rules and process.
+
+**What makes a data story work, no matter who it's for?**
+
+::: {.big-idea .fragment}
+Reduce cognitive load
+:::
+
+::: {.notes}
+Joshie
+:::
+
+## Reducing cognitive load
+
+::::: {.card-grid}
+::: {.card .fragment}
+### Consistency
+
+- Same branding
+- Same chart types for similar data
+- Same phrasing of interpretations
+:::
+::: {.card .fragment}
+### Inclusivity
+
+- Easy to read
+- Alt text
+- Sufficient color contrast
+- Works at any data-literacy level
+:::
+::: {.card .fragment}
+### Sense-Making
+
+- Interpret the data for the reader
+- Same message for everyone
+:::
+:::::
+
+
+::: {.notes}
+Joshie
+:::
+
+## From data to decisions
+
+Every report should help answer:
+
+::::: {.card-grid .quotes}
+::: {.card .fragment}
+### What's the key takeaway?
+
+"Basic needs insecurities affect the majority of Fullerton College students."
+
+"…the magnitude of inequities varies across groups."
+:::
+::: {.card .fragment}
+### Why does it matter?
+
+"Basic needs challenges may be linked to lower academic performance."
+:::
+::: {.card .fragment}
+### What could someone do next?
+
+"…opportunities to continue strengthening outreach and communication."
+:::
+:::::
+
+[Quotes from FC's 2025 #RealCollegeCA report]{.source}
+
+::: {.takeaway .tight .fragment}
+Clear charts help people **see**. Clear stories help them **decide**.
+:::
+
+::: {.notes}
+Vinnie: 
+The third question is the hardest. Our report points toward action, but it stays general, and that's normal for IR. Analysts frame the options; leadership decides.
+The real "next steps" happened when we shared the data, which is the next slide.
+"Be the catalyst." — Loris
+:::
+
+## So what? Turning data into advocacy
+
+:::: {.columns}
+::: {.column width="58%"}
+**Campuswide**
+
+- Continued Healthy Hornet Meals for students
+- Convocation presentation on basic needs
+
+:::: {.fragment}
+**With students**
+
+- Ambassadors promoted basic needs resources
+- Journalism class wrote a student article
+
+::: {.takeaway .tight}
+We shared the data with students, and they became **advocates**.
+:::
+::::
+:::
+
+::: {.column width="42%"}
+![](../figures/apida.png){fig-align="center" fig-alt="Victoria Kim and Nancy Phan, Fullerton College students named AANHPI Student Ambassador Program Fellows by the Foundation for California Community Colleges, smiling beside a cardboard cutout wearing an APIDA sash."}
+:::
+::::
+
+::: {.notes}
+The data didn't stop at leadership: sharing it with students turned them into advocates for their peers.
+:::
+
+
+# Build It Once, Use It Everywhere {.section-slide}
+
+::: {.notes}
+⏱ ~13:00. Target: start Your Turn by 20:00.
+:::
+
+## Reusable templates
+
+Consistency, accessibility, and sense-making, built in once
+
+::::: {.tile-grid .cols-4}
+::: {.tile .fragment}
+Branding
+:::
+::: {.tile .fragment}
+Accessible Palette
+:::
+::: {.tile .fragment}
+Accessible Text
+:::
+::: {.tile .fragment}
+Takeaways
+:::
+:::::
+
+::: {.notes}
+Once we know what it should look like, template it: reports in R, Word, PowerPoint, etc.
+Same headers, navigation, chart types (e.g., ggplot2 themes), margins, fonts, gridlines, brand colors.
+Explain why each matters.
+:::
+
+## A reproducible workflow
+
+::::: {.flow}
+::: {.step .fragment}
+Raw data
+:::
+::: {.step .manual .fragment}
+Cleaning
+
+Manual + automated
+:::
+::: {.step .fragment}
+Visualization
+
+Automated
+:::
+::: {.step .manual .fragment}
+Narrative & accessibility
+
+Manual
+:::
+::: {.step .fragment}
+Output
+
+PDF · HTML · image
+:::
+:::::
+
+::: {.takeaway .fragment}
+Cleaning puts data in the right "format" so everything after it can be automated.
+:::
+
+::: {.notes}
+Output is automated with the template: .qmd + .css + .html.
+:::
+
+## The toolkit
+
+::::: {.card-grid}
+::: {.card .fragment}
+### R
+
+- Data prep: tidyverse
+- Charts: ggplot2, plotly
+- Reusable chart functions
+:::
+::: {.card .fragment}
+### Quarto
+
+- Reports & slides from one file
+- HTML, PDF, Word
+- Parameterized reports
+:::
+::: {.card .fragment}
+### Templates
+
+- CSS for branding & layout
+- ggplot2 themes
+- Shared color palette
+:::
+:::::
+
+::: {.takeaway .fragment}
+**New to R?** Start by templating one recurring chart.
+:::
+
+::: {.notes}
+All free and open source. R is the reporting infrastructure: data prep, visualization, narrative, accessibility, and automation in one repeatable workflow.
+:::
+
+## What to automate, and what not to
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.compare-card .after}
+**Automate**
+
+Repeatable visualizations\
+Formatting
+:::
+:::
+
+::: {.column width="50%"}
+::: {.compare-card .before}
+**Don't automate**
+
+Sense-making: interpretation, recommendations, conclusions
+:::
+:::
+::::
+
+::: {.takeaway .fragment}
+Automation should eliminate repetitive work, not analytical thinking.
+:::
+
+::: {.notes}
+...which is why we're research analysts.
+:::
+
+
+## Where AI fits
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.compare-card .before .fragment}
+**AI can help us**
+
+- Draft and debug code
+- Build reusable chart functions
+- Suggest chart types and alt text
+  (e.g., accessibility considerations)
+:::
+:::
+
+::: {.column width="50%"}
+::: {.compare-card .after .fragment}
+**We still need to**
+
+- Verify every line of code
+- Protect student data privacy
+- Interpret findings in campus context
+- Own the conclusions
+:::
+:::
+::::
+
+::: {.takeaway .tight .fragment}
+AI can speed up the build. The **thinking** and the **accountability** stay with us.
+:::
+
+::: {.notes}
+Same principle as the last slide: automate repetitive work, not analytical thinking. AI is another automation tool.
+Privacy: never paste identifiable student data into public AI tools; use approved, campus-licensed tools.
+Share a real example of how you've used AI in your workflow (e.g., drafting a ggplot2 function, writing a first pass of alt text).
+:::
+
+
+# Your Turn {.section-slide}
+
+::: {.notes}
+⏱ 20:00. 10 minutes total: ~1 min setup, ~6 min in groups, ~3 min share-out.
+:::
+
+## Same data, different stories
+
+Campus Climate Survey: one dataset, four audiences
+
+:::: {.columns}
+::: {.column width="58%"}
+::::: {.tile-grid .cols-2 .compact}
+::: {.tile}
+President's Office
+
+"What do I need to know?"
+:::
+::: {.tile}
+Faculty & staff
+
+Campuswide email report
+:::
+::: {.tile}
+Student Equity Committee
+
+"I want to know about our X students."
+:::
+::: {.tile}
+Board of Trustees
+
+"Tell me about the campus climate."
+:::
+:::::
+:::
+
+::: {.column width="42%"}
+::: {.steps-panel}
+**In your group**
+
+1. **Identify** the key message, context, and implied action.
+2. **Choose** a visualization/tool and framing for your audience.
+3. **Share** in one minute: how did your audience change your choices?
+:::
+:::
+::::
+
+::: {.notes}
+Breakout activity. Present the list of variables. Assign one audience per group.
+Board meetings are public, so the Board presentation doubles as the public audience.
+~6 min in groups, then ~3 min share-out (about 45 seconds per group).
+Reflection prompt to close the share-out: how do storytelling choices shape understanding, decisions, and action?
+:::
+
+
+# Behind the Scenes {.section-slide}
+
+::: {.notes}
+⏱ 30:00. Josh (~5 min): consistent visualizations. Vinnie (~5 min): parameterized reporting.
+:::
+
+## Consistent visualizations: design the data first
+
+:::: {.columns}
+::: {.column width="45%"}
+- Define the variables needed (e.g., year, groupings)
+- Define predictor vs. outcome variables
+- Choose the data structure (wide vs. long)
+- Clean the data
+:::
+
+::: {.column width="55%"}
+::: {.placeholder}
+Screenshot: cleaned survey data (College, year, gender, sexual orientation, race indicator columns)
+:::
+:::
+::::
+
+::: {.notes}
+Josh: create a table of disaggregations and outcomes before writing any chart code.
+:::
+
+## Consistent visualizations: one function, every chart
+
+:::: {.columns}
+::: {.column width="40%"}
+- Branding, colors, fonts
+- Clean layout (gridlines, values)
+- Legend
+- Readable labels
+- Warnings (n < 20)
+- Export sizes
+:::
+
+::: {.column width="60%"}
+::: {.placeholder}
+CODEEEEE for consistent styles
+:::
+:::
+::::
+
+## The result
+
+::: {.placeholder .tall}
+Chart: IVC vs. statewide outcome percentages (overall, then by race/ethnicity)
+:::
+
+::: {.notes}
+Point out the red labels for n < 20: the warning is built into the function, so it's never forgotten.
+:::
+
+## Scaling reports: parameterized reporting
+
+::: {.placeholder .tall}
+Faculty course success report: one template, a report per faculty member
+:::
+
+::: {.notes}
+Vinnie: present the faculty course success data scenario.
+How it was automated, what it produced, how much manual labor it saved.
+:::
+
+
+# Wrap-up {.section-slide}
+
+::: {.notes}
+⏱ 40:00. Keep the conclusion to ~1 min to leave room for Q&A and the reflection.
+:::
+
+## Conclusion
+
+A reproducible, reusable template saves time on building and formatting reports, so we can spend more time interpreting.
+
+::: {.takeaway .fragment}
+Analysts should spend their time interpreting, not formatting.
+:::
+
+## Sample code
+
+- **Vinnie's code:** _link TBD_
+- **Josh's code:** _link TBD_
+
+## Questions?
+
+::: {.takeaway}
+**Before you go:** think of one recurring report you build.
+What's one improvement from today you could try on it?
+:::
+
+Vinnie Wu · [vwu@fullcoll.edu](mailto:vwu@fullcoll.edu)\
+Joshua Rhee · [jrhee@ivc.edu](mailto:jrhee@ivc.edu)
