@@ -584,6 +584,7 @@ Talk about an example?
 
 :::: {.columns}
 ::: {.column width="45%"}
+
 - Define the variables needed (e.g., year, groupings)
 - Define predictor vs. outcome variables
 - Choose the data structure (wide vs. long)
@@ -602,30 +603,10 @@ Screenshot: cleaned survey data (College, year, gender, sexual orientation, race
 Joshie
 :::
 
-## Consistent visualizations: build the template
-
-<!-- EXAMPLE NEEDED: screenshot of the actual template pieces: the palette with hex codes and contrast ratios, the ggplot theme, and the report header/logo. -->
-
-:::: {.columns}
-::: {.column width="40%"}
-- Brand palette, tested for contrast
-- Chart theme (ggplot2)
-- Report header, logo, fonts (CSS)
-:::
-
-::: {.column width="60%"}
-::: {.placeholder}
-Screenshot: palette with hex codes + ggplot2 theme + branded report header
-:::
-:::
-::::
-
-::: {.notes}
-Once we know what it should look like, template it: same headers, navigation, chart types, margins, fonts, gridlines, brand colors.
-This works in the tools you already use, e.g., Word or PowerPoint templates, Excel chart templates, Tableau workbooks.
-:::
 
 ## Consistent visualizations: one function, every chart
+
+Create a function to make the same style figures for all predictors to outcomes.
 
 :::: {.columns}
 ::: {.column width="40%"}
@@ -633,7 +614,7 @@ This works in the tools you already use, e.g., Word or PowerPoint templates, Exc
 - Clean layout (gridlines, values)
 - Legend
 - Readable labels
-- Warnings (n < 20)
+- Warnings
 - Export sizes
 :::
 
