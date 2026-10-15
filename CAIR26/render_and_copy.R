@@ -2,9 +2,9 @@
 # render_and_copy.R
 # Package:  fctools
 #
-# Renders every .qmd/.Rmd in scripts/. Quarto's own `output-dir`
-# setting (in _quarto.yml) places the rendered file in this
-# project's local output/ folder automatically — this script does
+# Renders every .qmd/.Rmd in the project root. Quarto writes each
+# rendered file next to its .qmd (no output-dir is set in
+# _quarto.yml) — this script does
 # NOT duplicate that step.
 #
 # This script's only job is optional: if `publish_dir` is set
@@ -12,8 +12,8 @@
 # asset folder) to an external location, e.g. a public docs repo.
 # Leave `publish_dir` as NULL to skip external publishing.
 #
-# Run this from the template root (the folder containing scripts/,
-# data/, figures/, output/, template/) — not from inside scripts/.
+# Run this from the template root (the folder containing the .qmd,
+# data/, figures/, template/).
 # ============================================================
 
 library(quarto)
@@ -23,8 +23,9 @@ library(fs)
 # User configuration — edit per project
 # ---------------------------------------------------------------
 
-# Must match `project.output-dir` in this project's _quarto.yml.
-local_output_dir <- "output"
+# Where Quarto writes the rendered file: "." (next to the .qmd) when
+# _quarto.yml sets no `project.output-dir`; otherwise must match it.
+local_output_dir <- "."
 
 # External publish folder. Set to NULL (default) to skip.
 #
@@ -37,18 +38,18 @@ publish_dir <- NULL
 # ---------------------------------------------------------------
 
 cat(
-  "\n🔧 Rendering all Quarto (.qmd) and R Markdown (.Rmd) files in scripts/ ...\n"
+  "\n🔧 Rendering all Quarto (.qmd) and R Markdown (.Rmd) files in the project root ...\n"
 )
 
 qmd_files <- dir_ls(
-  "scripts",
+  ".",
   regexp = "\\.(qmd|Rmd)$",
   recurse = FALSE,
   type = "file"
 )
 
 if (length(qmd_files) == 0) {
-  cat("⚠️  No .qmd or .Rmd files found in scripts/. Nothing to render.\n")
+  cat("⚠️  No .qmd or .Rmd files found in the project root. Nothing to render.\n")
 }
 
 if (!is.null(publish_dir)) {
@@ -128,4 +129,4 @@ for (qmd in qmd_files) {
   }
 }
 
-cat("\n🏁 All .qmd and .Rmd files in scripts/ processed.\n")
+cat("\n🏁 All .qmd and .Rmd files in the project root processed.\n")

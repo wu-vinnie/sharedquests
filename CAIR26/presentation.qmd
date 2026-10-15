@@ -21,18 +21,18 @@ knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 
 source("setup.R")
 
-```
+# Layout pieces used in this deck (styles in template/cair.css):
+#   {.section-slide}            full-screen blue divider slide
+#   {.tile-grid} + {.tile}      row of labels; add .cols-2 / .cols-4
+#   {.flow} + {.step}           left-to-right process; .manual for human steps
+#   {.takeaway}                 the one line to remember
+#   {.placeholder}              stand-in for a screenshot or chart
+#   {.fragment}                 reveal one click at a time
 
-<!--
-  Layout pieces used in this deck (styles in template/cair.css):
-    {.section-slide}            full-screen blue divider slide
-    {.tile-grid} + {.tile}      row of labels; add .cols-2 / .cols-4
-    {.flow} + {.step}           left-to-right process; .manual for human steps
-    {.takeaway}                 the one line to remember
-    {.placeholder}              stand-in for a screenshot or chart
-    {.fragment}                 reveal one click at a time
-  Demo slides from the original template are in template/examples.qmd.
--->
+# Keep this note inside the chunk: an HTML comment before the first ##
+# heading renders as an empty slide.
+
+```
 
 ## Sound familiar?
 
@@ -319,7 +319,7 @@ We shared the data with students, and they became **advocates**.
 
 ::: {.column width="42%"}
 ::: {.fragment fragment-index=1}
-![](../figures/apida.png){fig-align="center" fig-alt="Victoria Kim and Nancy Phan, Fullerton College students named AANHPI Student Ambassador Program Fellows by the Foundation for California Community Colleges, smiling beside a cardboard cutout wearing an APIDA sash."}
+![](figures/apida.png){fig-align="center" fig-alt="Victoria Kim and Nancy Phan, Fullerton College students named AANHPI Student Ambassador Program Fellows by the Foundation for California Community Colleges, smiling beside a cardboard cutout wearing an APIDA sash."}
 :::
 :::
 ::::
@@ -451,7 +451,7 @@ Vinnie
 ## A reproducible workflow (between reports)
 
 ::: {.video-center}
-<video src="../figures/r_report_template.mp4" controls preload="auto" height="560"></video>
+<video src="figures/r_report_template.mp4" controls preload="auto" height="560"></video>
 :::
 
 ::: {.notes}

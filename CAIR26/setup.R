@@ -54,7 +54,7 @@ cair_text <- "#222222"  # matches body text in cair.css
 library(readxl)
 
 # Quarto renders from scripts/, so the data folder is one level up
-df <- read_xlsx(file.path("..", "data", "RealCollegeCA_clean_23+25_v2.xlsx"))
+df <- read_xlsx(file.path("data", "RealCollegeCA_clean_23+25_v2.xlsx"))
 
 # adding lgbtqia2s+ (Any_LGBT / Non_LGBT are predictors in label_map)
 lgbt_vars <- grep("^LGBT_", names(df), value = TRUE)
