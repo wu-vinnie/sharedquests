@@ -253,10 +253,10 @@ Joshie
 :::::
 
 ::::: {.bracket-row}
-::: {.bracket .span-2}
+::: {.bracket .span-2 .fragment}
 Automated with templates
 :::
-::: {.bracket .manual}
+::: {.bracket .manual .fragment}
 Where our time goes
 :::
 :::::
@@ -328,7 +328,7 @@ We shared the data with students, and they became **advocates**.
 Sharing data with students turned them into advocates.
 :::
 
-## How would YOU tell the story?
+## ACTIVITY: How would YOU tell the story?
 
 Campus Climate Survey: one dataset, four audiences
 
@@ -425,7 +425,7 @@ Output is automated with the template: .qmd + .css + .html.
 ## A reproducible workflow (between reports)
 
 ::::: {.flow .detail}
-::: {.step .manual .fragment}
+::: {.step .manual}
 Where I started: copy `setup.R`
 
 Paste it into each new report, then manually delete/add what's relevant.
@@ -557,8 +557,8 @@ Example: ethnicity pulls as XYYNNYNNY --> individ columns
 ::::
 
 ::: {.takeaway .tight .fragment}
-AI can eliminate repetitive work.<br>
-However, the **thinking** and the **accountability** stay with us.
+AI can help automate the automation.<br>
+However, we still need to own the interpretation and conclusions.
 :::
 
 ::: {.notes}
