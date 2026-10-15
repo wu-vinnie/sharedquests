@@ -353,6 +353,20 @@
   color: var(--fc-blue);
 }
 
+/* Long code on a slide: fixed-height box the presenter scrolls through.
+   Usage: wrap a code block in ::: {.code-scroll} */
+.reveal .code-scroll div.sourceCode {
+  max-height: 500px;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;   /* code wraps, so no sideways scroll */
+}
+
+.reveal .code-scroll pre,
+.reveal .code-scroll pre code {
+  max-height: none;
+  overflow: visible;
+}
+
 
 /* ============================================================
    10. Images & Figures
@@ -503,6 +517,17 @@
    15. Utilities & Quarto Overrides
    ============================================================ */
 
+/* Center a video horizontally: wrap the shortcode in ::: {.video-center} */
+.video-center {
+  display: flex;
+  justify-content: center;
+}
+
+.video-center .video-js,
+.video-center video {
+  margin-inline: auto;
+}
+
 /* Fix unnecessary code scrollbars */
 .reveal div.sourceCode {
   overflow: visible !important;
@@ -629,6 +654,24 @@
   color: var(--fc-gray);
 }
 
+/* Detail flow: fewer steps with sentences in them, e.g. {.flow .detail}.
+   Larger, left-aligned text with space between lines. */
+.flow.detail .step {
+  font-size: 0.9em;
+  text-align: left;
+  padding: var(--space-lg);
+}
+
+.flow.detail .step p + p {
+  margin-top: var(--space-md);
+  font-size: 0.85em;
+  line-height: 1.4;
+}
+
+.flow.detail .step p strong {
+  color: var(--fc-blue);
+}
+
 .flow .step + .step::before {
   content: "\2192";   /* right arrow */
   position: absolute;
@@ -731,6 +774,61 @@
 
 .reveal .card-grid .card li {
   margin-bottom: var(--space-sm);
+}
+
+/* Human-work card: same Lemon Zest fill as {.step .manual} in a flow */
+.card-grid .card.manual {
+  background: var(--fc-lemon);
+}
+
+/* Brackets under a 3-card grid that group the cards above them.
+     ::::: {.bracket-row}
+     ::: {.bracket .span-2}   spans the first two cards
+     ::: {.bracket .manual}   human work (Lemon Zest label)
+   The grid matches .card-grid's columns and gap so brackets line up. */
+.bracket-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+  margin-top: var(--space-sm);
+}
+
+.bracket-row .bracket {
+  position: relative;
+  padding-top: 26px;   /* room for the bracket line */
+  text-align: center;
+  font-size: 0.8em;
+  font-weight: 700;
+  color: var(--fc-blue);
+}
+
+.bracket-row .bracket.span-2 {
+  grid-column: span 2;
+}
+
+/* The bracket: open-topped line hanging under the cards */
+.bracket-row .bracket::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 14px;
+  border: 3px solid var(--fc-blue);
+  border-top: none;
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
+
+.bracket-row .bracket p {
+  display: inline-block;
+  margin: 0;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-md);
+  background: var(--bg-light);
+}
+
+.bracket-row .bracket.manual p {
+  background: var(--fc-lemon);
 }
 
 /* Agenda: one full-width row per segment, time on the left.
