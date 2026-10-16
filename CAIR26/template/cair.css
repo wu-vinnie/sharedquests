@@ -354,17 +354,54 @@
 }
 
 /* Long code on a slide: fixed-height box the presenter scrolls through.
-   Usage: wrap a code block in ::: {.code-scroll} */
-.reveal .code-scroll div.sourceCode {
+     ::::: {.code-scroll}
+     ::: {.code-label}   **1. Step:** what it does [(lines 1–9)]{.lines}
+     ```r ... ```        one code block per labeled step
+   Each label sticks to the top of the box while its code scrolls past.
+   Keep code lines under ~60 characters so nothing wraps. */
+.reveal .code-scroll {
   max-height: 500px;
-  overflow-y: auto !important;
-  overflow-x: hidden !important;   /* code wraps, so no sideways scroll */
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: var(--space-sm);   /* keep code clear of the scrollbar */
+  scroll-behavior: smooth;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.reveal .code-scroll div.sourceCode {
+  margin: 0 0 var(--space-lg);
 }
 
 .reveal .code-scroll pre,
 .reveal .code-scroll pre code {
   max-height: none;
   overflow: visible;
+}
+
+.reveal .code-scroll pre.sourceCode code {
+  white-space: pre !important;   /* lines are pre-broken: no mid-argument wraps */
+  line-height: 1.45;
+}
+
+.code-scroll .code-label {
+  position: sticky;
+  top: -1px;   /* no gap above the pinned label */
+  z-index: 1;
+  padding: var(--space-xs) 0 var(--space-sm);
+  background: white;
+  box-shadow: 0 6px 6px -6px rgb(0 0 0 / 0.25);   /* separates label from code scrolling under it */
+  font-size: 0.7em;
+  color: var(--fc-blue);
+}
+
+.code-scroll .code-label p {
+  margin: 0;
+}
+
+.code-scroll .code-label .lines {
+  color: var(--text-secondary);
+  font-size: 0.9em;
 }
 
 
@@ -447,6 +484,62 @@
   margin-top: var(--space-lg);
 }
 
+
+/* Closing slide: white panel on the blue section slide with a QR code
+   and links.  # Thank you! {.section-slide}
+                 ::: {.thanks-panel}  > {.qr-placeholder} + {.thanks-info} */
+.thanks-panel {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+  margin-top: var(--space-lg);
+  padding: var(--space-lg) var(--space-xl);
+  background: white;
+  border-radius: var(--radius-lg);
+  font-size: 1.05em;   /* links and emails must read from the back of the room */
+}
+
+.reveal section.section-slide .thanks-panel p {
+  color: var(--fc-gray);
+  text-align: left;
+  margin: 0 0 var(--space-md);
+}
+
+.reveal section.section-slide .thanks-panel a {
+  color: var(--fc-blue);   /* default link blue is too light on white */
+  text-decoration: underline;
+}
+
+/* Prompt line above the panel: white so it reads on Stinger Blue */
+.reveal section.section-slide p strong {
+  color: white;
+}
+
+.reveal section.section-slide .thanks-panel p strong {
+  color: var(--fc-blue);
+}
+
+.reveal section.section-slide .thanks-panel p:last-child {
+  margin-bottom: 0;
+}
+
+.reveal section.section-slide .thanks-panel img {
+  margin: 0;
+}
+
+/* Stand-in until the real QR image is added */
+.qr-placeholder {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  border: 3px dashed var(--ivc-silver);
+  border-radius: var(--radius-md);
+  font-size: 0.8em;
+  color: var(--text-secondary);
+}
 
 /* ============================================================
    13. Callout Boxes
@@ -954,4 +1047,38 @@
 
 .reveal .steps-panel li {
   margin-bottom: var(--space-sm);
+}
+
+/* AI note: a small white call-out at the bottom of a compare card,
+   revealed after the card's bullets.  ::: {.ai-note .fragment} */
+.compare-card .ai-note {
+  margin-top: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: white;
+  border-radius: var(--radius-md);
+  font-size: 0.75em;
+  line-height: 1.35;
+}
+
+.compare-card .ai-note p {
+  margin: 0;
+}
+
+.compare-card .ai-note strong {
+  color: var(--fc-blue);
+}
+
+/* Wide figure: a full-width image under the slide text, e.g. a data
+   table screenshot.  ![](figures/x.png){.wide-figure} */
+.reveal img.wide-figure {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;   /* border stays inside the content width */
+  max-height: 340px;
+  object-fit: contain;
+  object-position: left top;
+  margin: var(--space-xl) 0 0;
+  border: 1px solid var(--ivc-silver);
+  border-radius: var(--radius-md);
 }

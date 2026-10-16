@@ -111,8 +111,9 @@ This is esp important in the age of AI, where numbers can be spat out quickly, b
 
 ::: {.agenda}
 - [0–5 min]{.time} Why it matters
-- [5–20 min]{.time} Best practices & workflow
-- [20–30 min]{.time} Your turn [Interactive]{.badge}
+- [5–13 min]{.time} Same data, different end product
+- [13–23 min]{.time} Your turn [Interactive]{.badge}
+- [23–30 min]{.time} Build it once: workflow & tools
 - [30–40 min]{.time} Behind the scenes
 - [40–45 min]{.time} Q&A & reflection [Interactive]{.badge}
 :::
@@ -136,7 +137,7 @@ Administered 2023 · 2025 · next in 2027 (?)
 ::: {.notes}
 State that the survey is recurring, and the 2025 report was rebuilt from scratch. The 2027 report will be built from the same template, with new data dropped in.
 
-⏱ ~5:00. Target: finish this section by ~13:00, leaving ~7 min for Build It Once.
+⏱ ~5:00. Target: start Your Turn by 13:00.
 :::
 
 ## Same data, same design, different end product
@@ -328,11 +329,17 @@ We shared the data with students, and they became **advocates**.
 Sharing data with students turned them into advocates.
 :::
 
+# Your Turn {.section-slide}
+
+::: {.notes}
+⏱ 13:00. 10 minutes total: ~1 min setup, ~6 min in groups, ~3 min share-out. Target: start Build It Once by 23:00.
+:::
+
 ## ACTIVITY: How would YOU tell the story?
 
 Campus Climate Survey: one dataset, four audiences
 
-Assume you have the variables you need. How would you tell the story for each audience?
+Assume you have the variables and/or results you need. How would you tell the story for each audience?
 
 <!-- EXAMPLE NEEDED: give groups a real artifact (a printed handout or QR code with 1–2 charts or a small table of results). Without one, discussion stays abstract. -->
 
@@ -383,7 +390,7 @@ Reflection prompt to close the share-out: how do storytelling choices shape unde
 build the report once, then drop in new data each cycle
 
 ::: {.notes}
-⏱ ~13:00. Target: start Your Turn by 20:00.
+⏱ ~23:00. ~7 min for this section. Target: start Behind the Scenes by 30:00.
 :::
 
 ## A reproducible workflow (within the report)
@@ -495,8 +502,6 @@ Vinnie
 
 ## What to automate, and what not to
 
-<!-- EXAMPLE NEEDED: one real judgment call automation couldn't make (e.g., a small group where the % looked alarming but n was 12, or a result that needed campus context to interpret). -->
-
 :::: {.columns}
 ::: {.column width="50%"}
 ::: {.compare-card .after}
@@ -506,6 +511,10 @@ Vinnie
 - Charts for every group
 - Branding and formatting
 - One report per program
+
+::: {.ai-note .fragment fragment-index=1}
+**AI can help:** debugging code, alt text, contrast checks
+:::
 :::
 :::
 
@@ -513,65 +522,22 @@ Vinnie
 ::: {.compare-card .before}
 **Don't automate**
 
-- What the numbers mean
+- What the results mean
 - Campus context and history
 - Small-sample judgment calls
 - Recommendations and conclusions
+
+::: {.ai-note .fragment fragment-index=1}
+**AI isn't perfect:** verifying code, checking alt text
 :::
-:::
-::::
-
-::: {.takeaway .fragment}
-Automation should eliminate repetitive work, not analytical thinking.
-:::
-
-::: {.notes}
-Example: ethnicity pulls as XYYNNYNNY --> individ columns
-...which is why we're research analysts. job security 'mirite?
-:::
-
-
-## AI is another automation tool
-
-:::: {.columns}
-::: {.column width="50%"}
-::: {.compare-card .before .fragment}
-**AI can help us**
-
-- Draft and debug code
-- Build reusable chart functions
-- Suggest and check accessibility (e.g., alt text, color contrast)
-:::
-:::
-
-::: {.column width="50%"}
-::: {.compare-card .after .fragment}
-**We still need to**
-
-- Verify every line of code
-- Protect student data privacy
-- Interpret findings in campus context
-- Own the conclusions
 :::
 :::
 ::::
 
-::: {.takeaway .tight .fragment}
-AI can help automate the automation.<br>
-However, we still need to own the interpretation and conclusions.
-:::
 
 ::: {.notes}
-Talk about an example?
+Even if AI can help with repetitive tasks, 1) it isn't always correct and 2) it can't provide context or the framing you need for your specific audience.
 :::
-
-
-# Your Turn {.section-slide}
-
-::: {.notes}
-⏱ 20:00. 10 minutes total: ~1 min setup, ~6 min in groups, ~3 min share-out.
-:::
-
 
 
 # Behind the Scenes {.section-slide}
@@ -583,21 +549,19 @@ Talk about an example?
 ## Consistent visualizations: design the data first
 
 :::: {.columns}
-::: {.column width="45%"}
-
+::: {.column width="50%"}
 - Define the variables needed (e.g., year, groupings)
 - Define predictor vs. outcome variables
 - Choose the data structure (wide vs. long)
+:::
+
+::: {.column width="50%"}
 - Clean the data
 - Stack survey years (2023 + 2025), so 2027 just gets appended
 :::
-
-::: {.column width="55%"}
-::: {.placeholder}
-Screenshot: cleaned survey data (College, year, gender, sexual orientation, race indicator columns)
-:::
-:::
 ::::
+
+![](figures/raw_dataframe_crop.png){.wide-figure fig-alt="Screenshot of the cleaned survey data in wide format: one row per student, with College and year columns followed by 0/1 indicator columns for gender, sexual orientation, and race/ethnicity."}
 
 ::: {.notes}
 Joshie
@@ -609,7 +573,7 @@ Joshie
 Create a function to make the same style figures for all predictors to outcomes.
 
 :::: {.columns}
-::: {.column width="40%"}
+::: {.column width="30%"}
 - Branding, colors, fonts
 - Clean layout (gridlines, values)
 - Legend
@@ -618,55 +582,94 @@ Create a function to make the same style figures for all predictors to outcomes.
 - Export sizes
 :::
 
-::: {.column width="60%"}
-::: {.code-scroll}
+::: {.column width="70%"}
+::::: {.code-scroll}
+::: {.code-label}
+**1. Wide → long → summarize:** works for any number of groups [(lines 132–150)]{.lines}
+:::
+
 ```{.r code-line-numbers="false"}
-# 1. Wide → long → summarize: works for any number of groups (lines 132–150)
 summarise_outcomes <- function(data, student_groups, outcomes,
-                               by = c("College", "year"), digits = 0) {
+                               by = c("College", "year"),
+                               digits = 0) {
   data %>%
-    pivot_longer(all_of(student_groups), names_to = "Student_Group", values_to = "in_group") %>%
+    pivot_longer(all_of(student_groups),
+                 names_to = "Student_Group",
+                 values_to = "in_group") %>%
     filter(in_group == 1) %>%
-    pivot_longer(all_of(outcomes), names_to = "Outcome", values_to = "has_outcome") %>%
+    pivot_longer(all_of(outcomes),
+                 names_to = "Outcome",
+                 values_to = "has_outcome") %>%
     group_by(across(all_of(by)), Student_Group, Outcome) %>%
     summarise(total = sum(!is.na(has_outcome)),
               n = sum(has_outcome == 1, na.rm = TRUE),
               pct = round(100 * n / total, digits),
               .groups = "drop")
 }
+```
 
-# 2. IVC + State in one table (lines 237–239)
-summary_long <- summarise_outcomes(ivc, student_groups, outcomes) %>%
+::: {.code-label}
+**2. IVC + State in one table** [(lines 237–239)]{.lines}
+:::
+
+```{.r code-line-numbers="false"}
+summary_long <-
+  summarise_outcomes(ivc, student_groups, outcomes) %>%
   bind_rows(statewide) %>%
   mutate(Source = paste(College, year))
+```
 
-# 3. The plot core: one bar per source, one panel per outcome (inside make_comparison_plot)
-ggplot(plot_data, aes(x = Group_Label, y = pct, fill = Source)) +
-  geom_col(position = position_dodge(width = 0.72), width = 0.64) +
-  geom_text(aes(label = bar_label, color = low_n, group = Source),
-            position = position_dodge(width = 0.72), vjust = -0.25) +
+::: {.code-label}
+**3. The plot core:** one bar per source, one panel per outcome [(inside make_comparison_plot)]{.lines}
+:::
+
+```{.r code-line-numbers="false"}
+ggplot(plot_data,
+       aes(x = Group_Label, y = pct, fill = Source)) +
+  geom_col(position = position_dodge(width = 0.72),
+           width = 0.64) +
+  geom_text(aes(label = bar_label, color = low_n,
+                group = Source),
+            position = position_dodge(width = 0.72),
+            vjust = -0.25) +
   facet_wrap(~ Outcome, nrow = 1) +
   scale_fill_manual(values = fill_colors)
 # ... theme settings
+```
 
-# 4. 12 plots from a grid instead of 12 copy-pasted calls (lines 270–277)
-plot_grid <- expand_grid(group_set = names(group_sets), outcome = outcomes)
+::: {.code-label}
+**4. Every group x outcome combination in one loop** instead of 12 copy-pasted calls [(lines 270–277)]{.lines}
+:::
+
+```{.r code-line-numbers="false"}
+plot_grid <- expand_grid(group_set = names(group_sets),
+                         outcome = outcomes)
+
 group_plots <- pmap(plot_grid, function(group_set, outcome) {
   build_plot(group_sets[[group_set]], outcome,
-             size = plot_sizes[[group_set]] %||% plot_sizes$default)
+             size = plot_sizes[[group_set]] %||%
+               plot_sizes$default)
 })
 ```
-:::
+:::::
 :::
 ::::
 
-## The result
 
-::: {.placeholder .tall}
-Chart: IVC vs. statewide outcome percentages (overall, then by race/ethnicity)
-:::
+## The result: IVC vs. statewide
+
+![](figures/overall_insecurity.png){width="100%" fig-alt="Grouped bar chart of IVC vs. statewide outcome percentages for three outcomes."}
 
 ::: {.notes}
+One function call per outcome: same colors, same layout, same labels.
+:::
+
+## Same function, disaggregated
+
+![](figures/food_ethnicity.png){width="100%" fig-alt="Grouped bar chart of food insecurity by race/ethnicity, IVC 2023 and 2025 vs. statewide 2025. Groups with fewer than 20 respondents are labeled in red."}
+
+::: {.notes}
+Same function, now by race/ethnicity: only the grouping changed.
 Point out the red labels for n < 20: the warning is built into the function, so it's never forgotten.
 :::
 
@@ -690,27 +693,57 @@ How it was automated, what it produced, how much manual labor it saved.
 ⏱ 40:00. Keep the conclusion to ~1 min to leave room for Q&A and the reflection.
 :::
 
-## Conclusion
+## What changes in 2027
 
-<!-- EXAMPLE NEEDED: close on one number (e.g., "the 2025 report took X hours; 2027 should take Y"). -->
+<!-- EXAMPLE NEEDED: add real hours to the first two steps (e.g., "2025: ~X hours by hand", "2027: ~Y minutes"). One number makes this land. -->
 
-A reproducible, reusable template saves time on building and formatting reports, so we can spend more time interpreting.
+::::: {.flow .detail}
+::: {.step .manual .fragment}
+2025: rebuild
+
+Cleaned, charted, and formatted the #RealCollegeCA report
+:::
+::: {.step .fragment}
+2027: re-render
+
+New data in, same template, same functions, report out
+:::
+::: {.step .manual .fragment}
+The time we get back
+
+Sense-making, and getting the data to people who act on it (like our student advocates)
+:::
+:::::
 
 ::: {.takeaway .fragment}
-Analysts should spend their time interpreting, not formatting.
+**Automate** the reporting, so we can **elevate** the storytelling.
 :::
 
-## Sample code
+::: {.notes}
+Bring it back to the case study: the 2027 report is a re-render, not a rebuild. The time saved goes to the parts that can't be automated: interpreting, and sharing the data so it turns into action, like the students who became advocates.
+:::
 
-- **Vinnie's code:** _link TBD_
-- **Josh's code:** _link TBD_
+# Thank you! Questions? {.section-slide}
 
-## Questions?
-
-::: {.takeaway}
-**Before you go:** think of one recurring report you build.
+**Before you go:** think of one recurring report you build.<br>
 What's one improvement from today you could try on it?
+
+::: {.thanks-panel}
+<!-- QR CODE: replace the placeholder div below with
+     ![](figures/qr.png){width="200" fig-alt="QR code linking to the GitHub repository"} -->
+::: {.qr-placeholder}
+QR code
 :::
+
+::: {.thanks-info}
+**Sample code & slides**\
+[github.com/somethingsomething](https://github.com/wu-vinnie/sharedquests/tree/main/CAIR26)
 
 Vinnie Wu · [vwu@fullcoll.edu](mailto:vwu@fullcoll.edu)\
 Joshua Rhee · [jrhee@ivc.edu](mailto:jrhee@ivc.edu)
+:::
+:::
+
+::: {.notes}
+Leave this slide up during Q&A so people can scan the QR code.
+:::
