@@ -1077,8 +1077,8 @@
   box-sizing: border-box;   /* border stays inside the content width */
   max-height: 340px;
   object-fit: contain;
-  object-position: left top;
-  margin: var(--space-xl) 0 0;
+  object-position: center top;
+  margin: var(--space-xl) auto 0;   /* centered when height-limited */
   border: 1px solid var(--ivc-silver);
   border-radius: var(--radius-md);
 }
