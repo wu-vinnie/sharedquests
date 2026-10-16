@@ -1367,6 +1367,51 @@ padding: var(--space-md) var(--space-lg) var(--space-sm);
 .reveal .card-grid.compact .card li {
 margin-bottom: var(--space-xs);
 }
+
+.card-grid.toolkit {
+display: grid;
+grid-template-columns: repeat(3, minmax(0, 1fr));
+grid-template-rows: auto auto;
+column-gap: var(--space-lg);
+row-gap: var(--space-sm);
+}
+.toolkit .toolkit-col {
+display: grid;
+grid-row: span 2;
+grid-template-rows: subgrid;
+min-width: 0;
+}
+
+.reveal .card .card-title {
+display: block;
+margin: 0 0 var(--space-sm);
+font-size: 1.1em;
+font-weight: 700;
+color: var(--fc-blue);
+}
+.reveal .toolkit .code-scroll {
+max-height: 210px;
+}
+.card-grid.toolkit .card {
+font-size: 0.7em;
+}
+.reveal .toolkit pre {
+font-size: 0.5em; 
+}
+.toolkit .code-scroll .code-label {
+font-size: 0.55em;
+}
+
+.reveal .code-scroll.wrap pre.sourceCode code {
+white-space: normal !important; 
+}
+.reveal .code-scroll.wrap pre.sourceCode code > span {
+display: block;
+white-space: pre-wrap; 
+min-height: 1.45em; 
+padding-left: 2em;
+text-indent: -2em;
+}
 </style>
   <style type="text/css">.reveal
 div.sourceCode
@@ -3971,8 +4016,8 @@ display:block!important;
 <p>Overall, food insecurity is most elevated among transgender and non-binary students.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="plotly html-widget html-fill-item" id="htmlwidget-4a7d6e0691bacffd0172" style="width:960px;height:403.2px;"></div>
-<script type="application/json" data-for="htmlwidget-4a7d6e0691bacffd0172">{"x":{"visdat":{"66c0723f5aac":["function () ","plotlyVisDat"]},"cur_data":"66c0723f5aac","attrs":{"66c0723f5aac":{"x":{},"y":{},"text":{},"textfont":{"color":"#333333"},"textposition":"outside","hovertext":{},"hoverinfo":"text","color":{},"colors":["#375E9E","#0F406B","#FFD600"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"width":680,"height":400,"margin":{"b":60,"l":90,"t":60,"r":40},"xaxis":{"domain":[0,1],"automargin":true,"title":"","tickangle":-45,"tickmode":"array","tickvals":["Transgender","Non-Binary","Female","Male"],"ticktext":["Transgender*","Non-Binary*","Female","Male"],"categoryorder":"array","categoryarray":["Transgender","Non-Binary","Female","Male"],"titlefont":{"family":"Century Gothic","size":14,"color":"#0F406B"},"tickfont":{"family":"Century Gothic","size":12,"color":"#333333"},"showgrid":false,"zeroline":false,"showline":false},"yaxis":{"domain":[0,1],"automargin":true,"title":"% of Students Experiencing Food Insecurity","range":[0,60.949999999999996],"titlefont":{"family":"Century Gothic","size":14,"color":"#0F406B"},"tickfont":{"family":"Century Gothic","size":12,"color":"#333333"},"showgrid":false,"zeroline":false,"showline":false},"barmode":"group","legend":{"orientation":"h","x":0.5,"y":1.1000000000000001,"xanchor":"center","yanchor":"bottom"},"annotations":[{"text":"* Fewer than 25 respondents","xref":"paper","yref":"paper","x":1,"y":1.03,"showarrow":false,"font":{"size":12,"color":"#555555"},"xanchor":"right","yanchor":"top"},{"text":"Tip: Click on the legend or demographic to filter. Click again to return.","xref":"paper","yref":"paper","x":1,"y":0.97999999999999998,"showarrow":false,"font":{"size":12,"color":"#555555"},"xanchor":"right","yanchor":"top"}],"font":{"family":"Century Gothic","color":"#333333"},"plot_bgcolor":"white","paper_bgcolor":"white","hoverlabel":{"font":{"family":"Century Gothic","size":12,"color":"white"},"bgcolor":"#0F406B","bordercolor":"#333333"},"autosize":false,"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"responsive":false},"data":[{"x":["Transgender","Non-Binary","Female","Male"],"y":[52,39,35,34],"text":["52%","39%","35%","34%"],"textfont":{"color":"#333333"},"textposition":["outside","outside","outside","outside"],"hovertext":["<b><span style='color:#FFD600;'>Transgender (FC 2023)<\/span><\/b><br>Food Insecurity: 52%<br>vs. FC 2025: -4 pts<br>vs. State 2025: -1 pts<br><b><span style='color:#E64B35;'>⚠️ Small sample size (&lt;25 respondents)<\/span><\/b>","<b><span style='color:#FFD600;'>Non-Binary (FC 2023)<\/span><\/b><br>Food Insecurity: 39%<br>vs. FC 2025: +3 pts<br>vs. State 2025: -13 pts<br><b><span style='color:#E64B35;'>⚠️ Small sample size (&lt;25 respondents)<\/span><\/b>","<b><span style='color:#FFD600;'>Female (FC 2023)<\/span><\/b><br>Food Insecurity: 35%<br>vs. FC 2025: +6 pts<br>vs. State 2025: -12 pts","<b><span style='color:#FFD600;'>Male (FC 2023)<\/span><\/b><br>Food Insecurity: 34%<br>vs. FC 2025: +5 pts<br>vs. State 2025: -11 pts"],"hoverinfo":["text","text","text","text"],"type":"bar","name":"FC 2023","marker":{"color":"rgba(55,94,158,1)","line":{"color":"rgba(55,94,158,1)"}},"error_y":{"color":"rgba(55,94,158,1)"},"error_x":{"color":"rgba(55,94,158,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Transgender","Non-Binary","Female","Male"],"y":[48,42,41,39],"text":["48%","42%","41%","39%"],"textfont":{"color":"#333333"},"textposition":["outside","outside","outside","outside"],"hovertext":["<b><span style='color:#FFD600;'>Transgender (FC 2025)<\/span><\/b><br>Food Insecurity: 48%<br>vs. FC 2023: +4 pts<br>vs. State 2025: -5 pts","<b><span style='color:#FFD600;'>Non-Binary (FC 2025)<\/span><\/b><br>Food Insecurity: 42%<br>vs. FC 2023: -3 pts<br>vs. State 2025: -10 pts","<b><span style='color:#FFD600;'>Female (FC 2025)<\/span><\/b><br>Food Insecurity: 41%<br>vs. FC 2023: -6 pts<br>vs. State 2025: -6 pts","<b><span style='color:#FFD600;'>Male (FC 2025)<\/span><\/b><br>Food Insecurity: 39%<br>vs. FC 2023: -5 pts<br>vs. State 2025: -6 pts"],"hoverinfo":["text","text","text","text"],"type":"bar","name":"FC 2025","marker":{"color":"rgba(15,64,107,1)","line":{"color":"rgba(15,64,107,1)"}},"error_y":{"color":"rgba(15,64,107,1)"},"error_x":{"color":"rgba(15,64,107,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Transgender","Non-Binary","Female","Male"],"y":[53,52,47,45],"text":["53%","52%","47%","45%"],"textfont":{"color":"#333333"},"textposition":["outside","outside","outside","outside"],"hovertext":["<b><span style='color:#FFD600;'>Transgender (State 2025)<\/span><\/b><br>Food Insecurity: 53%","<b><span style='color:#FFD600;'>Non-Binary (State 2025)<\/span><\/b><br>Food Insecurity: 52%","<b><span style='color:#FFD600;'>Female (State 2025)<\/span><\/b><br>Food Insecurity: 47%","<b><span style='color:#FFD600;'>Male (State 2025)<\/span><\/b><br>Food Insecurity: 45%"],"hoverinfo":["text","text","text","text"],"type":"bar","name":"State 2025","marker":{"color":"rgba(255,214,0,1)","line":{"color":"rgba(255,214,0,1)"}},"error_y":{"color":"rgba(255,214,0,1)"},"error_x":{"color":"rgba(255,214,0,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":{"render":[{"code":"\n      function(el, x) {\n        const gd = document.getElementById(el.id);\n        const allCats = [...new Set(x.data[0].x)];\n        let active = null;\n        gd.on('plotly_click', function(e) {\n          if (!e.points || e.points.length === 0) return;\n          const clickedCat = e.points[0].x;\n          const current = active;\n          if (current === clickedCat) {\n            Plotly.relayout(gd, {'xaxis.range': null, 'xaxis.autorange': true});\n            active = null;\n          } else {\n            const index = allCats.indexOf(clickedCat);\n            const pad = 0.5;\n            Plotly.relayout(gd, {'xaxis.range': [index - pad, index + pad]});\n            active = clickedCat;\n          }\n        });\n      }\n    ","data":null}]}}</script>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-c756d139a2a39456b164" style="width:960px;height:403.2px;"></div>
+<script type="application/json" data-for="htmlwidget-c756d139a2a39456b164">{"x":{"visdat":{"14e48c01bbf":["function () ","plotlyVisDat"]},"cur_data":"14e48c01bbf","attrs":{"14e48c01bbf":{"x":{},"y":{},"text":{},"textfont":{"color":"#333333"},"textposition":"outside","hovertext":{},"hoverinfo":"text","color":{},"colors":["#375E9E","#0F406B","#FFD600"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"width":680,"height":400,"margin":{"b":60,"l":90,"t":60,"r":40},"xaxis":{"domain":[0,1],"automargin":true,"title":"","tickangle":-45,"tickmode":"array","tickvals":["Transgender","Non-Binary","Female","Male"],"ticktext":["Transgender*","Non-Binary*","Female","Male"],"categoryorder":"array","categoryarray":["Transgender","Non-Binary","Female","Male"],"titlefont":{"family":"Century Gothic","size":14,"color":"#0F406B"},"tickfont":{"family":"Century Gothic","size":12,"color":"#333333"},"showgrid":false,"zeroline":false,"showline":false},"yaxis":{"domain":[0,1],"automargin":true,"title":"% of Students Experiencing Food Insecurity","range":[0,60.949999999999996],"titlefont":{"family":"Century Gothic","size":14,"color":"#0F406B"},"tickfont":{"family":"Century Gothic","size":12,"color":"#333333"},"showgrid":false,"zeroline":false,"showline":false},"barmode":"group","legend":{"orientation":"h","x":0.5,"y":1.1000000000000001,"xanchor":"center","yanchor":"bottom"},"annotations":[{"text":"* Fewer than 25 respondents","xref":"paper","yref":"paper","x":1,"y":1.03,"showarrow":false,"font":{"size":12,"color":"#555555"},"xanchor":"right","yanchor":"top"},{"text":"Tip: Click on the legend or demographic to filter. Click again to return.","xref":"paper","yref":"paper","x":1,"y":0.97999999999999998,"showarrow":false,"font":{"size":12,"color":"#555555"},"xanchor":"right","yanchor":"top"}],"font":{"family":"Century Gothic","color":"#333333"},"plot_bgcolor":"white","paper_bgcolor":"white","hoverlabel":{"font":{"family":"Century Gothic","size":12,"color":"white"},"bgcolor":"#0F406B","bordercolor":"#333333"},"autosize":false,"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"responsive":false},"data":[{"x":["Transgender","Non-Binary","Female","Male"],"y":[52,39,35,34],"text":["52%","39%","35%","34%"],"textfont":{"color":"#333333"},"textposition":["outside","outside","outside","outside"],"hovertext":["<b><span style='color:#FFD600;'>Transgender (FC 2023)<\/span><\/b><br>Food Insecurity: 52%<br>vs. FC 2025: -4 pts<br>vs. State 2025: -1 pts<br><b><span style='color:#E64B35;'>⚠️ Small sample size (&lt;25 respondents)<\/span><\/b>","<b><span style='color:#FFD600;'>Non-Binary (FC 2023)<\/span><\/b><br>Food Insecurity: 39%<br>vs. FC 2025: +3 pts<br>vs. State 2025: -13 pts<br><b><span style='color:#E64B35;'>⚠️ Small sample size (&lt;25 respondents)<\/span><\/b>","<b><span style='color:#FFD600;'>Female (FC 2023)<\/span><\/b><br>Food Insecurity: 35%<br>vs. FC 2025: +6 pts<br>vs. State 2025: -12 pts","<b><span style='color:#FFD600;'>Male (FC 2023)<\/span><\/b><br>Food Insecurity: 34%<br>vs. FC 2025: +5 pts<br>vs. State 2025: -11 pts"],"hoverinfo":["text","text","text","text"],"type":"bar","name":"FC 2023","marker":{"color":"rgba(55,94,158,1)","line":{"color":"rgba(55,94,158,1)"}},"error_y":{"color":"rgba(55,94,158,1)"},"error_x":{"color":"rgba(55,94,158,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Transgender","Non-Binary","Female","Male"],"y":[48,42,41,39],"text":["48%","42%","41%","39%"],"textfont":{"color":"#333333"},"textposition":["outside","outside","outside","outside"],"hovertext":["<b><span style='color:#FFD600;'>Transgender (FC 2025)<\/span><\/b><br>Food Insecurity: 48%<br>vs. FC 2023: +4 pts<br>vs. State 2025: -5 pts","<b><span style='color:#FFD600;'>Non-Binary (FC 2025)<\/span><\/b><br>Food Insecurity: 42%<br>vs. FC 2023: -3 pts<br>vs. State 2025: -10 pts","<b><span style='color:#FFD600;'>Female (FC 2025)<\/span><\/b><br>Food Insecurity: 41%<br>vs. FC 2023: -6 pts<br>vs. State 2025: -6 pts","<b><span style='color:#FFD600;'>Male (FC 2025)<\/span><\/b><br>Food Insecurity: 39%<br>vs. FC 2023: -5 pts<br>vs. State 2025: -6 pts"],"hoverinfo":["text","text","text","text"],"type":"bar","name":"FC 2025","marker":{"color":"rgba(15,64,107,1)","line":{"color":"rgba(15,64,107,1)"}},"error_y":{"color":"rgba(15,64,107,1)"},"error_x":{"color":"rgba(15,64,107,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Transgender","Non-Binary","Female","Male"],"y":[53,52,47,45],"text":["53%","52%","47%","45%"],"textfont":{"color":"#333333"},"textposition":["outside","outside","outside","outside"],"hovertext":["<b><span style='color:#FFD600;'>Transgender (State 2025)<\/span><\/b><br>Food Insecurity: 53%","<b><span style='color:#FFD600;'>Non-Binary (State 2025)<\/span><\/b><br>Food Insecurity: 52%","<b><span style='color:#FFD600;'>Female (State 2025)<\/span><\/b><br>Food Insecurity: 47%","<b><span style='color:#FFD600;'>Male (State 2025)<\/span><\/b><br>Food Insecurity: 45%"],"hoverinfo":["text","text","text","text"],"type":"bar","name":"State 2025","marker":{"color":"rgba(255,214,0,1)","line":{"color":"rgba(255,214,0,1)"}},"error_y":{"color":"rgba(255,214,0,1)"},"error_x":{"color":"rgba(255,214,0,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":{"render":[{"code":"\n      function(el, x) {\n        const gd = document.getElementById(el.id);\n        const allCats = [...new Set(x.data[0].x)];\n        let active = null;\n        gd.on('plotly_click', function(e) {\n          if (!e.points || e.points.length === 0) return;\n          const clickedCat = e.points[0].x;\n          const current = active;\n          if (current === clickedCat) {\n            Plotly.relayout(gd, {'xaxis.range': null, 'xaxis.autorange': true});\n            active = null;\n          } else {\n            const index = allCats.indexOf(clickedCat);\n            const pad = 0.5;\n            Plotly.relayout(gd, {'xaxis.range': [index - pad, index + pad]});\n            active = clickedCat;\n          }\n        });\n      }\n    ","data":null}]}}</script>
 </div>
 </div>
 </div></div>
@@ -4187,7 +4232,7 @@ display:block!important;
 <p><strong>In your group</strong></p>
 <ol type="1">
 <li><strong>Identify</strong> the key message, context, and implied action.</li>
-<li><strong>Choose</strong> a visualization/tool and framing for your audience.</li>
+<li><strong>Choose</strong> a visualization/tool, report format, and framing for your audience.</li>
 <li><strong>Share</strong> in one minute: how did your audience change your choices?</li>
 </ol>
 </div>
@@ -4444,7 +4489,7 @@ display:block!important;
 <p>Paste it into each new report, then manually delete/add what’s relevant.</p>
 <p><strong>Examples:</strong> libraries, functions, themes</p>
 </div>
-<div class="step fragment">
+<div class="step fragment" data-fragment-index="1">
 <p>Where I am now: an R package</p>
 <p>Package calls report templates, functions, and themes.</p>
 <p>One version, loaded everywhere with <code>library()</code>.</p>
@@ -4487,9 +4532,10 @@ display:block!important;
 </section>
 <section id="example-toolkit" class="slide level2">
 <h2>Example toolkit</h2>
-<div class="card-grid">
-<div class="card fragment">
-<h3 id="r">R</h3>
+<div class="card-grid compact toolkit">
+<div class="toolkit-col fragment">
+<div class="card">
+<p><span class="card-title">R</span></p>
 <ul>
 <li>Data prep: tidyverse</li>
 <li>Charts: ggplot2, plotly</li>
@@ -4497,21 +4543,185 @@ display:block!important;
 <li>Create a package or reusable file</li>
 </ul>
 </div>
-<div class="card fragment">
-<h3 id="quarto">Quarto</h3>
+<div class="code-scroll wrap">
+<div class="code-label">
+<p><strong>setup.R</strong></p>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Libraries ----</span></span>
+<span id="cb5-2"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># data wrangling/viz</span></span>
+<span id="cb5-3"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly) <span class="co"># cool charts</span></span>
+<span id="cb5-4"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here) <span class="co"># file paths</span></span>
+<span id="cb5-5"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl) <span class="co"># Excel import</span></span>
+<span id="cb5-6"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(writexl) <span class="co"># Excel export</span></span>
+<span id="cb5-7"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven) <span class="co"># SPSS/SAS/Stata import</span></span>
+<span id="cb5-8"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glue) <span class="co"># Flexible text interpolation</span></span>
+<span id="cb5-9"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(flextable) <span class="co"># pretty tables</span></span>
+<span id="cb5-10"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggtext) <span class="co"># rich text in ggplot (HTML/Markdown)</span></span>
+<span id="cb5-11"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ragg) <span class="co"># raster rendering for plots</span></span>
+<span id="cb5-12"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(extrafont) <span class="co"># font management</span></span>
+<span id="cb5-13"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(htmltools) <span class="co"># html in reports</span></span>
+<span id="cb5-14"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quarto) <span class="co">#render quarto from R</span></span>
+<span id="cb5-15"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">loadfonts</span>(<span class="at">device =</span> <span class="st">&quot;win&quot;</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-17"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href aria-hidden="true" tabindex="-1"></a><span class="co"># ---- Fullerton College Color Palette ----</span></span>
+<span id="cb5-19"><a href aria-hidden="true" tabindex="-1"></a>fc_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb5-20"><a href aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Blue&quot;</span> <span class="ot">=</span> <span class="st">&quot;#0F406B&quot;</span>,</span>
+<span id="cb5-21"><a href aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Yellow&quot;</span> <span class="ot">=</span> <span class="st">&quot;#FFD600&quot;</span>,</span>
+<span id="cb5-22"><a href aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Sky&quot;</span> <span class="ot">=</span> <span class="st">&quot;#375E9E&quot;</span>,</span>
+<span id="cb5-23"><a href aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Creek&quot;</span> <span class="ot">=</span> <span class="st">&quot;#5DCCD4&quot;</span>,</span>
+<span id="cb5-24"><a href aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Breeze&quot;</span> <span class="ot">=</span> <span class="st">&quot;#BAEEED&quot;</span>,</span>
+<span id="cb5-25"><a href aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;LemonZest&quot;</span> <span class="ot">=</span> <span class="st">&quot;#F5F3BF&quot;</span>,</span>
+<span id="cb5-26"><a href aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Rustic&quot;</span> <span class="ot">=</span> <span class="st">&quot;#E6605B&quot;</span>,</span>
+<span id="cb5-27"><a href aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Elderberry&quot;</span> <span class="ot">=</span> <span class="st">&quot;#1B0D42&quot;</span></span>
+<span id="cb5-28"><a href aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-29"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-30"><a href aria-hidden="true" tabindex="-1"></a><span class="co"># Neutral tone for text, lines, etc.</span></span>
+<span id="cb5-31"><a href aria-hidden="true" tabindex="-1"></a>fc_blue <span class="ot">&lt;-</span> <span class="st">&quot;#0F406B&quot;</span></span>
+<span id="cb5-32"><a href aria-hidden="true" tabindex="-1"></a>fc_gray <span class="ot">&lt;-</span> <span class="st">&quot;#333333&quot;</span></span>
+<span id="cb5-33"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-34"><a href aria-hidden="true" tabindex="-1"></a><span class="co"># ---- FC ggplot Theme ----</span></span>
+<span id="cb5-35"><a href aria-hidden="true" tabindex="-1"></a>theme_fc <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">base_size =</span> <span class="dv">12</span>, <span class="at">base_family =</span> <span class="st">&quot;Century Gothic&quot;</span>) {</span>
+<span id="cb5-36"><a href aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> base_size, <span class="at">base_family =</span> base_family) <span class="sc">+</span></span>
+<span id="cb5-37"><a href aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb5-38"><a href aria-hidden="true" tabindex="-1"></a>      <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> base_family, <span class="at">color =</span> fc_gray),</span>
+<span id="cb5-39"><a href aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(</span>
+<span id="cb5-40"><a href aria-hidden="true" tabindex="-1"></a>        <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>,</span>
+<span id="cb5-41"><a href aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> fc_colors[<span class="st">&quot;Blue&quot;</span>],</span>
+<span id="cb5-42"><a href aria-hidden="true" tabindex="-1"></a>        <span class="at">size =</span> <span class="fu">rel</span>(<span class="fl">1.2</span>),</span>
+<span id="cb5-43"><a href aria-hidden="true" tabindex="-1"></a>        <span class="at">hjust =</span> <span class="fl">0.5</span></span>
+<span id="cb5-44"><a href aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb5-45"><a href aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">color =</span> fc_gray, <span class="at">hjust =</span> <span class="fl">0.5</span>),</span>
+<span id="cb5-46"><a href aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">color =</span> fc_gray, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb5-47"><a href aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> fc_gray),</span>
+<span id="cb5-48"><a href aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">&quot;#DDDDDD&quot;</span>),</span>
+<span id="cb5-49"><a href aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb5-50"><a href aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">color =</span> fc_gray, <span class="at">size =</span> <span class="fu">rel</span>(<span class="fl">0.9</span>), <span class="at">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb5-51"><a href aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">color =</span> fc_gray, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb5-52"><a href aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">color =</span> fc_gray),</span>
+<span id="cb5-53"><a href aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>)</span>
+<span id="cb5-54"><a href aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb5-55"><a href aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-56"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-57"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-58"><a href aria-hidden="true" tabindex="-1"></a><span class="co"># Color and fill scales for ggplot2 using the FC color palette</span></span>
+<span id="cb5-59"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-60"><a href aria-hidden="true" tabindex="-1"></a>scale_fill_fc <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">discrete =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb5-61"><a href aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (discrete) {</span>
+<span id="cb5-62"><a href aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">rep</span>(<span class="fu">unname</span>(fc_colors), <span class="at">length.out =</span> <span class="dv">20</span>), ...)</span>
+<span id="cb5-63"><a href aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb5-64"><a href aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_gradientn</span>(<span class="at">colours =</span> <span class="fu">unname</span>(fc_colors), ...)</span>
+<span id="cb5-65"><a href aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-66"><a href aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-67"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-68"><a href aria-hidden="true" tabindex="-1"></a>scale_color_fc <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">discrete =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb5-69"><a href aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (discrete) {</span>
+<span id="cb5-70"><a href aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">rep</span>(<span class="fu">unname</span>(fc_colors), <span class="at">length.out =</span> <span class="dv">20</span>), ...)</span>
+<span id="cb5-71"><a href aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb5-72"><a href aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_gradientn</span>(<span class="at">colours =</span> <span class="fu">unname</span>(fc_colors), ...)</span>
+<span id="cb5-73"><a href aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-74"><a href aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-75"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-76"><a href aria-hidden="true" tabindex="-1"></a><span class="co"># Set as default ggplot theme, yay!</span></span>
+<span id="cb5-77"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_fc</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div class="toolkit-col fragment">
+<div class="card">
+<p><span class="card-title">Quarto</span></p>
 <ul>
 <li>Reports &amp; slides from one file</li>
 <li>HTML, PDF, Word</li>
 <li>Parameterized reports</li>
 </ul>
 </div>
-<div class="card fragment">
-<h3 id="templates">Templates</h3>
+<div class="code-scroll wrap">
+<div class="code-label">
+<p><strong>Report template (.qmd)</strong></p>
+</div>
+<!-- {{r}} displays as {r} without running the chunk inside this deck -->
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb6-2"><a href aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;Report Title&quot;</span></span>
+<span id="cb6-3"><a href aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> &quot;Subtitle or Term (e.g. Fall 2026)&quot;</span></span>
+<span id="cb6-4"><a href aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> &quot;Vinnie Wu&quot;</span></span>
+<span id="cb6-5"><a href aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> today</span></span>
+<span id="cb6-6"><a href aria-hidden="true" tabindex="-1"></a><span class="an">date-format:</span><span class="co"> &quot;MMMM D, YYYY&quot;</span></span>
+<span id="cb6-7"><a href aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb6-8"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-11"><a href aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
+<span id="cb6-12"><a href aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb6-13"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">FALSE</span>, <span class="at">message =</span> <span class="cn">FALSE</span>, <span class="at">warning =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb6-15"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;setup.R&quot;</span>)</span>
+<span id="cb6-17"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-19"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href aria-hidden="true" tabindex="-1"></a>::: {style=&quot;text-align:center;&quot;}</span>
+<span id="cb6-21"><a href aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">img</span><span class="ot"> src</span><span class="op">=</span><span class="st">&quot;../template/Library.jpg&quot;</span><span class="ot"> style</span><span class="op">=</span><span class="st">&quot;width:80%; height:auto;&quot;</span><span class="dt">/&gt;</span></span>
+<span id="cb6-22"><a href aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb6-23"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-24"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">## Overview {.section-slide}</span></span>
+<span id="cb6-25"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-26"><a href aria-hidden="true" tabindex="-1"></a>Blah blah blah</span>
+<span id="cb6-27"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-28"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">## Agenda</span></span>
+<span id="cb6-29"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-30"><a href aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>First topic</span>
+<span id="cb6-31"><a href aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Second topic</span>
+<span id="cb6-32"><a href aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Third topic</span>
+<span id="cb6-33"><a href aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Questions &amp; discussion</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div class="toolkit-col fragment">
+<div class="card">
+<p><span class="card-title">Templates</span></p>
 <ul>
 <li>CSS for branding &amp; layout</li>
 <li>ggplot2 themes</li>
 <li>Shared color palette</li>
 </ul>
+</div>
+<div class="code-scroll wrap">
+<div class="code-label">
+<p><strong>Branding CSS</strong></p>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb7-1"><a href aria-hidden="true" tabindex="-1"></a>h1<span class="op">,</span> h2<span class="op">,</span> h3<span class="op">,</span> h4 {</span>
+<span id="cb7-2"><a href aria-hidden="true" tabindex="-1"></a>  <span class="kw">font-family</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--font-body</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb7-3"><a href aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--fc-blue</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb7-4"><a href aria-hidden="true" tabindex="-1"></a>  <span class="kw">font-weight</span><span class="ch">:</span> <span class="dv">700</span><span class="op">;</span></span>
+<span id="cb7-5"><a href aria-hidden="true" tabindex="-1"></a>  <span class="kw">margin-top</span><span class="ch">:</span> <span class="dv">1</span><span class="dt">em</span><span class="op">;</span></span>
+<span id="cb7-6"><a href aria-hidden="true" tabindex="-1"></a>  <span class="kw">margin-bottom</span><span class="ch">:</span> <span class="dv">0.5</span><span class="dt">em</span><span class="op">;</span></span>
+<span id="cb7-7"><a href aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-8"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href aria-hidden="true" tabindex="-1"></a>h1 {</span>
+<span id="cb7-10"><a href aria-hidden="true" tabindex="-1"></a>  <span class="kw">border-bottom</span><span class="ch">:</span> <span class="dv">2</span><span class="dt">px</span> <span class="dv">solid</span> <span class="fu">var(</span><span class="va">--fc-blue</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb7-11"><a href aria-hidden="true" tabindex="-1"></a>  <span class="kw">padding-bottom</span><span class="ch">:</span> <span class="dv">4</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb7-12"><a href aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-13"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href aria-hidden="true" tabindex="-1"></a>h2<span class="op">,</span> h3 {</span>
+<span id="cb7-15"><a href aria-hidden="true" tabindex="-1"></a>  <span class="kw">border-inline-start</span><span class="ch">:</span> <span class="dv">5</span><span class="dt">px</span> <span class="dv">solid</span> <span class="fu">var(</span><span class="va">--fc-blue</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb7-16"><a href aria-hidden="true" tabindex="-1"></a>  <span class="kw">padding-inline-start</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--space-sm</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb7-17"><a href aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-18"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href aria-hidden="true" tabindex="-1"></a>h3 {</span>
+<span id="cb7-20"><a href aria-hidden="true" tabindex="-1"></a>  <span class="kw">font-style</span><span class="ch">:</span> <span class="dv">italic</span><span class="op">;</span></span>
+<span id="cb7-21"><a href aria-hidden="true" tabindex="-1"></a>  <span class="kw">font-weight</span><span class="ch">:</span> <span class="dv">600</span><span class="op">;</span></span>
+<span id="cb7-22"><a href aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-23"><a href aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href aria-hidden="true" tabindex="-1"></a><span class="co">/* Subtitle (below report title) */</span></span>
+<span id="cb7-25"><a href aria-hidden="true" tabindex="-1"></a><span class="pp">#subtitle</span> {</span>
+<span id="cb7-26"><a href aria-hidden="true" tabindex="-1"></a>  <span class="kw">font-family</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--font-body</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb7-27"><a href aria-hidden="true" tabindex="-1"></a>  <span class="kw">font-size</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--subtitle-size</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb7-28"><a href aria-hidden="true" tabindex="-1"></a>  <span class="kw">font-weight</span><span class="ch">:</span> <span class="dv">700</span><span class="op">;</span></span>
+<span id="cb7-29"><a href aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span><span class="ch">:</span> <span class="fu">var(</span><span class="va">--fc-gray</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb7-30"><a href aria-hidden="true" tabindex="-1"></a>  <span class="kw">letter-spacing</span><span class="ch">:</span> <span class="dv">0.5</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb7-31"><a href aria-hidden="true" tabindex="-1"></a>  <span class="kw">margin</span><span class="ch">:</span> <span class="dv">10</span><span class="dt">px</span> <span class="dv">0</span> <span class="dv">32</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb7-32"><a href aria-hidden="true" tabindex="-1"></a>  <span class="kw">border</span><span class="ch">:</span> <span class="dv">none</span> <span class="at">!important</span><span class="op">;</span></span>
+<span id="cb7-33"><a href aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </div>
 </div>
 <div class="takeaway fragment">

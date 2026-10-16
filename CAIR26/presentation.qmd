@@ -375,7 +375,7 @@ Board of Trustees
 **In your group**
 
 1. **Identify** the key message, context, and implied action.
-2. **Choose** a visualization/tool and framing for your audience.
+2. **Choose** a visualization/tool, report format, and framing for your audience.
 3. **Share** in one minute: how did your audience change your choices?
 :::
 :::
@@ -602,7 +602,7 @@ Paste it into each new report, then manually delete/add what's relevant.
 
 **Examples:** libraries, functions, themes
 :::
-::: {.step .fragment}
+::: {.step .fragment fragment-index=1}
 Where I am now: an R package
 
 Package calls report templates, functions, and themes.
@@ -630,30 +630,210 @@ Vinnie
 
 ## Example toolkit
 
-::::: {.card-grid}
-::: {.card .fragment}
-### R
+:::::: {.card-grid .compact .toolkit}
+::::: {.toolkit-col .fragment}
+::: {.card}
+[R]{.card-title}
 
 - Data prep: tidyverse
 - Charts: ggplot2, plotly
 - Reusable chart functions
 - Create a package or reusable file
 :::
-::: {.card .fragment}
-### Quarto
+
+::: {.code-scroll .wrap}
+::: {.code-label}
+**setup.R**
+:::
+
+```{.r code-line-numbers="false"}
+# ---- Libraries ----
+library(tidyverse) # data wrangling/viz
+library(plotly) # cool charts
+library(here) # file paths
+library(readxl) # Excel import
+library(writexl) # Excel export
+library(haven) # SPSS/SAS/Stata import
+library(glue) # Flexible text interpolation
+library(flextable) # pretty tables
+library(ggtext) # rich text in ggplot (HTML/Markdown)
+library(ragg) # raster rendering for plots
+library(extrafont) # font management
+library(htmltools) # html in reports
+library(quarto) #render quarto from R
+
+loadfonts(device = "win", quiet = TRUE)
+
+# ---- Fullerton College Color Palette ----
+fc_colors <- c(
+  "Blue" = "#0F406B",
+  "Yellow" = "#FFD600",
+  "Sky" = "#375E9E",
+  "Creek" = "#5DCCD4",
+  "Breeze" = "#BAEEED",
+  "LemonZest" = "#F5F3BF",
+  "Rustic" = "#E6605B",
+  "Elderberry" = "#1B0D42"
+)
+
+# Neutral tone for text, lines, etc.
+fc_blue <- "#0F406B"
+fc_gray <- "#333333"
+
+# ---- FC ggplot Theme ----
+theme_fc <- function(base_size = 12, base_family = "Century Gothic") {
+  theme_minimal(base_size = base_size, base_family = base_family) +
+    theme(
+      text = element_text(family = base_family, color = fc_gray),
+      plot.title = element_text(
+        face = "bold",
+        color = fc_colors["Blue"],
+        size = rel(1.2),
+        hjust = 0.5
+      ),
+      plot.subtitle = element_text(color = fc_gray, hjust = 0.5),
+      axis.title = element_text(color = fc_gray, face = "bold"),
+      axis.text = element_text(color = fc_gray),
+      panel.grid.major = element_line(color = "#DDDDDD"),
+      panel.grid.minor = element_blank(),
+      plot.caption = element_text(color = fc_gray, size = rel(0.9), hjust = 1),
+      legend.title = element_text(color = fc_gray, face = "bold"),
+      legend.text = element_text(color = fc_gray),
+      plot.margin = margin(10, 10, 10, 10)
+    )
+}
+
+
+# Color and fill scales for ggplot2 using the FC color palette
+
+scale_fill_fc <- function(..., discrete = TRUE) {
+  if (discrete) {
+    scale_fill_manual(values = rep(unname(fc_colors), length.out = 20), ...)
+  } else {
+    scale_fill_gradientn(colours = unname(fc_colors), ...)
+  }
+}
+
+scale_color_fc <- function(..., discrete = TRUE) {
+  if (discrete) {
+    scale_color_manual(values = rep(unname(fc_colors), length.out = 20), ...)
+  } else {
+    scale_color_gradientn(colours = unname(fc_colors), ...)
+  }
+}
+
+# Set as default ggplot theme, yay!
+theme_set(theme_fc())
+```
+:::
+:::::
+
+::::: {.toolkit-col .fragment}
+::: {.card}
+[Quarto]{.card-title}
 
 - Reports & slides from one file
 - HTML, PDF, Word
 - Parameterized reports
 :::
-::: {.card .fragment}
-### Templates
+
+::: {.code-scroll .wrap}
+::: {.code-label}
+**Report template (.qmd)**
+:::
+
+<!-- {{r}} displays as {r} without running the chunk inside this deck -->
+````{.markdown code-line-numbers="false"}
+---
+title: "Report Title"
+subtitle: "Subtitle or Term (e.g. Fall 2026)"
+author: "Vinnie Wu"
+date: today
+date-format: "MMMM D, YYYY"
+---
+
+
+```{{r}}
+#| label: setup
+#| include: false
+
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+
+source("setup.R")
+
+```
+
+::: {style="text-align:center;"}
+<img src="../template/Library.jpg" style="width:80%; height:auto;"/>
+:::
+
+## Overview {.section-slide}
+
+Blah blah blah
+
+## Agenda
+
+- First topic
+- Second topic
+- Third topic
+- Questions & discussion
+````
+:::
+:::::
+
+::::: {.toolkit-col .fragment}
+::: {.card}
+[Templates]{.card-title}
 
 - CSS for branding & layout
 - ggplot2 themes
 - Shared color palette
 :::
+
+::: {.code-scroll .wrap}
+::: {.code-label}
+**Branding CSS**
+:::
+
+```{.css code-line-numbers="false"}
+h1, h2, h3, h4 {
+  font-family: var(--font-body);
+  color: var(--fc-blue);
+  font-weight: 700;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+h1 {
+  border-bottom: 2px solid var(--fc-blue);
+  padding-bottom: 4px;
+}
+
+h2, h3 {
+  border-inline-start: 5px solid var(--fc-blue);
+  padding-inline-start: var(--space-sm);
+}
+
+h3 {
+  font-style: italic;
+  font-weight: 600;
+}
+
+/* Subtitle (below report title) */
+#subtitle {
+  font-family: var(--font-body);
+  font-size: var(--subtitle-size);
+  font-weight: 700;
+  color: var(--fc-gray);
+  letter-spacing: 0.5px;
+  margin: 10px 0 32px;
+  border: none !important;
+}
+```
+:::
 :::::
+
+::::::
 
 ::: {.takeaway .fragment}
 **Don't use R?** Start by templating one recurring report in Word, PowerPoint, Tableau/PowerBI, or your coding language.
