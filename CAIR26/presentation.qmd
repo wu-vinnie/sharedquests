@@ -385,7 +385,7 @@ Board of Trustees
 Reflection prompt to close the share-out: how do storytelling choices shape understanding, decisions, and action?
 :::
 
-# A reproducible workflow (within the report) {.section-slide}
+# A reproducible workflow<br><i>within the report</i> {.section-slide}
 
 #RealCollegeCA 2023 → 2025 → 2027: <br>
 build the report once, then drop in new data each cycle
@@ -574,7 +574,7 @@ New data in, same template, same functions, report out
 ::: {.step .manual .fragment}
 The time we get back
 
-Sense-making, and getting the data to people who act on it (like our student advocates)
+Sense-making: interpretation, context, and recommendations for action
 :::
 :::::
 
@@ -587,7 +587,8 @@ Bring it back to the case study: the 2027 report is a re-render, not a rebuild. 
 :::
 
 
-# A reproducible workflow (between reports) {.section-slide}
+
+# A reproducible workflow <br><i>between reports</i>  {.section-slide}
 
 build the template once, then use it for multiple reports
 
@@ -726,9 +727,6 @@ How it was automated, what it produced, how much manual labor it saved.
 ::: {.notes}
 Even if AI can help with repetitive tasks, 1) it isn't always correct and 2) it can't provide context or the framing you need for your specific audience.
 :::
-
-
-
 
 
 # Thank you! Questions? {.section-slide}
