@@ -561,7 +561,7 @@ Even if AI can help with repetitive tasks, 1) it isn't always correct and 2) it 
 :::
 ::::
 
-![](figures/raw_dataframe_crop.png){.wide-figure fig-alt="Screenshot of the cleaned survey data in wide format: one row per student, with College and year columns followed by 0/1 indicator columns for gender, sexual orientation, and race/ethnicity."}
+![](figures/insecurity_gender_summary.png){.wide-figure fig-alt="Screenshot of the summarized data: one row per source (IVC 2023, IVC 2025, State 2025) and gender (Female, Male), with total, n, and percent columns for food and housing insecurity. Statewide rows have percentages only, with NA for counts."}
 
 ::: {.notes}
 Joshie
