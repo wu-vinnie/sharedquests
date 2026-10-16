@@ -384,7 +384,7 @@ Board of Trustees
 Reflection prompt to close the share-out: how do storytelling choices shape understanding, decisions, and action?
 :::
 
-# Build It Once, Use It Everywhere {.section-slide}
+# A reproducible workflow (within the report) {.section-slide}
 
 #RealCollegeCA 2023 → 2025 → 2027: <br>
 build the report once, then drop in new data each cycle
@@ -426,125 +426,9 @@ Cleaning puts data in the right "format" so everything after it can be automated
 :::
 
 ::: {.notes}
-Output is automated with the template: .qmd + .css + .html.
+JOshie
 :::
 
-## A reproducible workflow (between reports)
-
-::::: {.flow .detail}
-::: {.step .manual}
-Where I started: copy `setup.R`
-
-Paste it into each new report, then manually delete/add what's relevant.
-
-**Examples:** libraries, functions, themes
-:::
-::: {.step .fragment}
-Where I am now: an R package
-
-Package calls report templates, functions, and themes.
-
-One version, loaded everywhere with `library()`.
-
-**Examples:** `use_report(format = "pdf")`, `use_presentation()`, `+ theme_fc()`
-:::
-:::::
-
-
-::: {.notes}
-Vinnie
-:::
-
-## A reproducible workflow (between reports)
-
-::: {.video-center}
-<video src="figures/r_report_template.mp4" controls preload="auto" height="560"></video>
-:::
-
-::: {.notes}
-Vinnie
-:::
-
-## Example toolkit
-
-::::: {.card-grid}
-::: {.card .fragment}
-### R
-
-- Data prep: tidyverse
-- Charts: ggplot2, plotly
-- Reusable chart functions
-- Create a package or reusable file
-:::
-::: {.card .fragment}
-### Quarto
-
-- Reports & slides from one file
-- HTML, PDF, Word
-- Parameterized reports
-:::
-::: {.card .fragment}
-### Templates
-
-- CSS for branding & layout
-- ggplot2 themes
-- Shared color palette
-:::
-:::::
-
-::: {.takeaway .fragment}
-**Don't use R?** Start by templating one recurring report in Word, PowerPoint, Tableau/PowerBI, or your coding language.
-:::
-
-::: {.notes}
-Vinnie
-:::
-
-## What to automate, and what not to
-
-:::: {.columns}
-::: {.column width="50%"}
-::: {.compare-card .after}
-**Automate**
-
-- Recurring cleaning steps
-- Charts for every group
-- Branding and formatting
-- One report per program
-
-::: {.ai-note .fragment fragment-index=1}
-**AI can help:** debugging code, alt text, contrast checks
-:::
-:::
-:::
-
-::: {.column width="50%"}
-::: {.compare-card .before}
-**Don't automate**
-
-- What the results mean
-- Campus context and history
-- Small-sample judgment calls
-- Recommendations and conclusions
-
-::: {.ai-note .fragment fragment-index=1}
-**AI isn't perfect:** verifying code, checking alt text
-:::
-:::
-:::
-::::
-
-
-::: {.notes}
-Even if AI can help with repetitive tasks, 1) it isn't always correct and 2) it can't provide context or the framing you need for your specific audience.
-:::
-
-
-# Behind the Scenes {.section-slide}
-
-::: {.notes}
-⏱ 30:00. Josh (~5 min): consistent visualizations. Vinnie (~5 min): parameterized reporting.
-:::
 
 ## Consistent visualizations: design the data first
 
@@ -673,29 +557,7 @@ Same function, now by race/ethnicity: only the grouping changed.
 Point out the red labels for n < 20: the warning is built into the function, so it's never forgotten.
 :::
 
-## Scaling reports: parameterized reporting
-
-<!-- EXAMPLE NEEDED:  Show (1) the render loop (a few lines of code), (2) one output report, and (3) numbers: N reports, hours by hand vs. minutes now. Also mention how small n / FERPA is handled per report. -->
-
-::: {.placeholder .tall}
-Faculty course success report: one template, a report per faculty member, IDK TBD
-:::
-
-::: {.notes}
-Vinnie: present the faculty course success data scenario.
-How it was automated, what it produced, how much manual labor it saved.
-:::
-
-
-# Wrap-up {.section-slide}
-
-::: {.notes}
-⏱ 40:00. Keep the conclusion to ~1 min to leave room for Q&A and the reflection.
-:::
-
 ## What changes in 2027
-
-<!-- EXAMPLE NEEDED: add real hours to the first two steps (e.g., "2025: ~X hours by hand", "2027: ~Y minutes"). One number makes this land. -->
 
 ::::: {.flow .detail}
 ::: {.step .manual .fragment}
@@ -722,6 +584,151 @@ Sense-making, and getting the data to people who act on it (like our student adv
 ::: {.notes}
 Bring it back to the case study: the 2027 report is a re-render, not a rebuild. The time saved goes to the parts that can't be automated: interpreting, and sharing the data so it turns into action, like the students who became advocates.
 :::
+
+
+# A reproducible workflow (between reports) {.section-slide}
+
+build the template once, then use it for multiple reports
+
+## A reproducible workflow (between reports)
+
+::::: {.flow .detail}
+::: {.step .manual}
+Where I started: copy `setup.R`
+
+Paste it into each new report, then manually delete/add what's relevant.
+
+**Examples:** libraries, functions, themes
+:::
+::: {.step .fragment}
+Where I am now: an R package
+
+Package calls report templates, functions, and themes.
+
+One version, loaded everywhere with `library()`.
+
+**Examples:** `use_report(format = "pdf")`, `use_presentation()`, `+ theme_fc()`
+:::
+:::::
+
+
+::: {.notes}
+Vinnie
+:::
+
+## A reproducible workflow (between reports)
+
+::: {.video-center}
+<video src="figures/r_report_template.mp4" controls preload="auto" height="560"></video>
+:::
+
+::: {.notes}
+Vinnie
+:::
+
+## Example toolkit
+
+::::: {.card-grid}
+::: {.card .fragment}
+### R
+
+- Data prep: tidyverse
+- Charts: ggplot2, plotly
+- Reusable chart functions
+- Create a package or reusable file
+:::
+::: {.card .fragment}
+### Quarto
+
+- Reports & slides from one file
+- HTML, PDF, Word
+- Parameterized reports
+:::
+::: {.card .fragment}
+### Templates
+
+- CSS for branding & layout
+- ggplot2 themes
+- Shared color palette
+:::
+:::::
+
+::: {.takeaway .fragment}
+**Don't use R?** Start by templating one recurring report in Word, PowerPoint, Tableau/PowerBI, or your coding language.
+:::
+
+::: {.notes}
+Vinnie
+:::
+
+
+
+## Scaling reports: parameterized reporting
+
+<!-- EXAMPLE NEEDED:  Show (1) the render loop (a few lines of code), (2) one output report, and (3) numbers: N reports, hours by hand vs. minutes now. Also mention how small n / FERPA is handled per report. -->
+
+::: {.placeholder .tall}
+Faculty course success report: one template, a report per faculty member, IDK TBD
+:::
+
+::: {.notes}
+Vinnie: present the faculty course success data scenario.
+How it was automated, what it produced, how much manual labor it saved.
+:::
+
+
+
+# Wrap-up {.section-slide}
+
+::: {.notes}
+⏱ 40:00. Keep the conclusion to ~1 min to leave room for Q&A and the reflection.
+:::
+
+
+
+
+## What to automate, and what not to
+
+:::: {.columns}
+::: {.column width="50%"}
+::: {.compare-card .after}
+**Automate**
+
+- Recurring cleaning steps
+- Charts for every group
+- Branding and formatting
+- One report to be customized as needed
+
+::: {.ai-note .fragment fragment-index=1}
+**AI can help:** debugging code, alt text, contrast checks
+:::
+:::
+:::
+
+::: {.column width="50%"}
+::: {.compare-card .before}
+**Don't automate**
+
+- What the results mean
+- Campus context and history
+- Small-sample judgment calls
+- Recommendations and conclusions
+
+::: {.ai-note .fragment fragment-index=1}
+**AI isn't perfect:** verifying code, checking alt text
+:::
+:::
+:::
+::::
+
+
+::: {.notes}
+Even if AI can help with repetitive tasks, 1) it isn't always correct and 2) it can't provide context or the framing you need for your specific audience.
+:::
+
+
+
+
 
 # Thank you! Questions? {.section-slide}
 
