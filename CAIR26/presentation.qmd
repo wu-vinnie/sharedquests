@@ -159,9 +159,7 @@ The **President's Office** needs main ideas, so this version is a **static page*
 :::
 
 ::: {.column width="62%"}
-::: {.placeholder}
-Screenshot: IVC food insecurity page, disaggregated by gender (bullets, key takeaway, IVC vs. statewide chart)
-:::
+![](figures/takeaway_graph.png){.report-page fig-alt="Page from IVC's #RealCollegeCA report on food insecurity, disaggregated by gender. Bullets give each group's 2023 and 2025 rates against the statewide rate, a key takeaway paragraph says IVC fares better than statewide except for transgender students (n < 20, interpret with caution), and a bar chart compares IVC 2023, IVC 2025, and State 2025 for female, male, non-binary/gender-fluid, and transgender students."}
 :::
 ::::
 
@@ -190,7 +188,7 @@ A **campuswide** audience explores on their own, so this version is **interactiv
 ::: {.column width="62%"}
 **Food Insecurity by Gender**
 
-Overall, food insecurity is most elevated among transgender and non-binary students
+Overall, food insecurity is most elevated among transgender and non-binary students.
 
 ```{r}
 #| label: food-insecurity-gender
@@ -229,13 +227,12 @@ Joshie
 
 ## Reducing cognitive load
 
-::::: {.card-grid}
+::::: {.card-grid .compact}
 ::: {.card .fragment}
 ### Consistency
 
 - Same branding and layout within and between reports
 - Same chart types for similar data
-- Same phrasing of interpretations
 :::
 ::: {.card .fragment}
 ### Inclusivity
@@ -243,13 +240,14 @@ Joshie
 - Easy to read
 - Alt text
 - Color contrast checking
-- Works at any data-literacy level
 :::
 ::: {.card .manual .fragment}
 ### Sense-Making
 
 - Interpret the data for the reader
-- Same message for everyone
+- Same phrasing, same message for everyone
+- Works at any data-literacy level
+- State recommendations and next steps
 :::
 :::::
 
@@ -261,6 +259,11 @@ Automated with templates
 Where our time goes
 :::
 :::::
+
+::: {.takeaway .tight .fragment}
+Automation should eliminate repetitive work, not analytical thinking,<br>
+which is why we're **research analysts**.
+:::
 
 ::: {.notes}
 Joshie
@@ -340,8 +343,6 @@ Sharing data with students turned them into advocates.
 Campus Climate Survey: one dataset, four audiences
 
 Assume you have the variables and/or results you need. How would you tell the story for each audience?
-
-<!-- EXAMPLE NEEDED: give groups a real artifact (a printed handout or QR code with 1–2 charts or a small table of results). Without one, discussion stays abstract. -->
 
 :::: {.columns}
 ::: {.column width="58%"}
