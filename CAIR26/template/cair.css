@@ -1108,24 +1108,36 @@
   margin-bottom: var(--space-xs);
 }
 
-/* Toolkit: cards in a row, each with a scrollable code example under
-   it. Each column (card + code) reveals together.
-     :::::: {.card-grid .compact .toolkit}
-     ::::: {.toolkit-col .fragment}  > ::: {.card} + ::: {.code-scroll .wrap}
-   Subgrid keeps the code boxes aligned even when cards differ in height. */
-.card-grid.toolkit {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-template-rows: auto auto;
-  column-gap: var(--space-lg);
-  row-gap: var(--space-sm);
+/* Toolkit split: description card on the left, scrollable code on
+   the right.  ::::: {.columns .toolkit-split} > 34% card + 66% code */
+.toolkit-split .column:first-child {
+  padding-right: var(--space-lg);
+  box-sizing: border-box;
 }
 
-.toolkit .toolkit-col {
-  display: grid;
-  grid-row: span 2;
-  grid-template-rows: subgrid;
-  min-width: 0;
+.toolkit-split .card {
+  background: var(--bg-light);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  font-size: 0.85em;
+}
+
+.reveal .toolkit-split .card ul {
+  margin: 0;
+  padding-inline-start: 1em;
+}
+
+.reveal .toolkit-split .card li {
+  margin-bottom: var(--space-sm);
+}
+
+.toolkit-split .takeaway {
+  margin-top: var(--space-lg);
+  font-size: 0.85em;
+}
+
+.reveal .toolkit-split .code-scroll {
+  max-height: 540px;
 }
 
 /* Card title as text, not a heading: a heading would turn the card
@@ -1136,22 +1148,6 @@
   font-size: 1.1em;
   font-weight: 700;
   color: var(--fc-blue);
-}
-
-.reveal .toolkit .code-scroll {
-  max-height: 210px;
-}
-
-.card-grid.toolkit .card {
-  font-size: 0.7em;
-}
-
-.reveal .toolkit pre {
-  font-size: 0.5em;   /* narrow columns: smaller code so fewer lines wrap */
-}
-
-.toolkit .code-scroll .code-label {
-  font-size: 0.55em;
 }
 
 /* Wrapping variant for pasted code with long lines: wrapped lines

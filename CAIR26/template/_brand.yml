@@ -1,0 +1,77 @@
+# ============================================================
+# _brand.yml: Fullerton College brand, defined once
+#
+# DRAFT. Not active yet: Quarto only picks up _brand.yml from the
+# project root. To try it, either move this file to the project
+# root, or add to _quarto.yml:
+#   brand: template/_brand.yml
+#
+# Quarto applies it to HTML reports, revealjs slides, dashboards,
+# and Typst PDFs. R can read the same file (brand.yml package), so
+# ggplot colors can come from here instead of fc_colors in setup.R.
+#
+# Layout CSS (flows, cards, brackets, code boxes) stays in cair.css;
+# this file only covers colors, fonts, and logos.
+#
+# Sources: palette from setup.R (fc_colors); color roles from cair.css.
+# ============================================================
+
+meta:
+  name:
+    full: Fullerton College
+    short: FC
+  link: https://www.fullcoll.edu
+
+logo:
+  images:
+    fc: fc.png              # Fullerton College wordmark
+    fc-oie: fc-oie.png      # Office of Institutional Effectiveness lockup
+  small: fc
+  medium: fc
+  large: fc-oie
+
+color:
+  palette:
+    stinger-blue: "#0F406B"   # primary: titles, headings, links
+    hornet-yellow: "#FFD600"  # accent fills only (1.4:1 on white: never text)
+    sky: "#375E9E"            # secondary: subtitles, meta (6.5:1 on white)
+    creek: "#5DCCD4"
+    breeze: "#BAEEED"
+    lemon-zest: "#F5F3BF"     # light tint: "human work" fills
+    rustic: "#E6605B"
+    elderberry: "#1B0D42"
+    near-black: "#222222"     # body text (setup.R's fc_gray is #333333: pick one)
+
+  foreground: near-black
+  background: "#FFFFFF"
+  primary: stinger-blue
+  secondary: sky
+  tertiary: creek
+  info: sky
+  success: creek
+  warning: hornet-yellow
+  danger: rustic
+  light: lemon-zest
+  dark: elderberry
+
+typography:
+  fonts:
+    - family: Arial
+      source: system
+    - family: Consolas
+      source: system
+
+  base:
+    family: Arial
+    line-height: 1.5
+
+  headings:
+    family: Arial
+    weight: 700
+    color: stinger-blue
+
+  link:
+    color: stinger-blue
+
+  monospace:
+    family: Consolas

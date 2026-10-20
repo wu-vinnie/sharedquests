@@ -628,10 +628,10 @@ Vinnie
 Vinnie
 :::
 
-## Example toolkit
+## Example toolkit: R
 
-:::::: {.card-grid .compact .toolkit}
-::::: {.toolkit-col .fragment}
+::::: {.columns .toolkit-split}
+:::: {.column width="34%"}
 ::: {.card}
 [R]{.card-title}
 
@@ -640,7 +640,9 @@ Vinnie
 - Reusable chart functions
 - Create a package or reusable file
 :::
+::::
 
+:::: {.column width="66%"}
 ::: {.code-scroll .wrap}
 ::: {.code-label}
 **setup.R**
@@ -724,19 +726,34 @@ scale_color_fc <- function(..., discrete = TRUE) {
 
 # Set as default ggplot theme, yay!
 theme_set(theme_fc())
+
 ```
 :::
+::::
 :::::
 
-::::: {.toolkit-col .fragment}
+::: {.notes}
+Vinnie
+:::
+
+## Example toolkit: Quarto
+
+::::: {.columns .toolkit-split}
+:::: {.column width="34%"}
 ::: {.card}
 [Quarto]{.card-title}
-
+*Includes the content of the report*
 - Reports & slides from one file
 - HTML, PDF, Word
 - Parameterized reports
 :::
 
+::: {.takeaway .fragment}
+**Why Quarto over R Markdown?** <br>Better multi-language support and standardized YAML implementation
+:::
+::::
+
+:::: {.column width="66%"}
 ::: {.code-scroll .wrap}
 ::: {.code-label}
 **Report template (.qmd)**
@@ -779,17 +796,27 @@ Blah blah blah
 - Questions & discussion
 ````
 :::
+::::
 :::::
 
-::::: {.toolkit-col .fragment}
+## Example toolkit: Templates
+
+::::: {.columns .toolkit-split}
+:::: {.column width="34%"}
 ::: {.card}
 [Templates]{.card-title}
 
-- CSS for branding & layout
-- ggplot2 themes
-- Shared color palette
+- One template per format: HTML, PDF, slides
+- HTML & slides: CSS for branding & layout
+- PDF: a print-ready template for the same look on paper
 :::
 
+::: {.takeaway .fragment}
+**Don't use R?** Templates can be created in Word, PowerPoint, Tableau/PowerBI, or your coding language.
+:::
+::::
+
+:::: {.column width="66%"}
 ::: {.code-scroll .wrap}
 ::: {.code-label}
 **Branding CSS**
@@ -831,23 +858,14 @@ h3 {
 }
 ```
 :::
+::::
 :::::
-
-::::::
-
-::: {.takeaway .fragment}
-**Don't use R?** Start by templating one recurring report in Word, PowerPoint, Tableau/PowerBI, or your coding language.
-:::
-
-::: {.notes}
-Vinnie
-:::
-
-
 
 ## Scaling reports: parameterized reporting
 
 <!-- EXAMPLE NEEDED:  Show (1) the render loop (a few lines of code), (2) one output report, and (3) numbers: N reports, hours by hand vs. minutes now. Also mention how small n / FERPA is handled per report. -->
+
+- Faculty Senate
 
 ::: {.placeholder .tall}
 Faculty course success report: one template, a report per faculty member, IDK TBD

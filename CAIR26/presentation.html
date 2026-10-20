@@ -1368,18 +1368,29 @@ padding: var(--space-md) var(--space-lg) var(--space-sm);
 margin-bottom: var(--space-xs);
 }
 
-.card-grid.toolkit {
-display: grid;
-grid-template-columns: repeat(3, minmax(0, 1fr));
-grid-template-rows: auto auto;
-column-gap: var(--space-lg);
-row-gap: var(--space-sm);
+.toolkit-split .column:first-child {
+padding-right: var(--space-lg);
+box-sizing: border-box;
 }
-.toolkit .toolkit-col {
-display: grid;
-grid-row: span 2;
-grid-template-rows: subgrid;
-min-width: 0;
+.toolkit-split .card {
+background: var(--bg-light);
+border-radius: var(--radius-md);
+padding: var(--space-lg);
+font-size: 0.85em;
+}
+.reveal .toolkit-split .card ul {
+margin: 0;
+padding-inline-start: 1em;
+}
+.reveal .toolkit-split .card li {
+margin-bottom: var(--space-sm);
+}
+.toolkit-split .takeaway {
+margin-top: var(--space-lg);
+font-size: 0.85em;
+}
+.reveal .toolkit-split .code-scroll {
+max-height: 540px;
 }
 
 .reveal .card .card-title {
@@ -1388,18 +1399,6 @@ margin: 0 0 var(--space-sm);
 font-size: 1.1em;
 font-weight: 700;
 color: var(--fc-blue);
-}
-.reveal .toolkit .code-scroll {
-max-height: 210px;
-}
-.card-grid.toolkit .card {
-font-size: 0.7em;
-}
-.reveal .toolkit pre {
-font-size: 0.5em; 
-}
-.toolkit .code-scroll .code-label {
-font-size: 0.55em;
 }
 
 .reveal .code-scroll.wrap pre.sourceCode code {
@@ -4016,8 +4015,8 @@ display:block!important;
 <p>Overall, food insecurity is most elevated among transgender and non-binary students.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div class="plotly html-widget html-fill-item" id="htmlwidget-c756d139a2a39456b164" style="width:960px;height:403.2px;"></div>
-<script type="application/json" data-for="htmlwidget-c756d139a2a39456b164">{"x":{"visdat":{"14e48c01bbf":["function () ","plotlyVisDat"]},"cur_data":"14e48c01bbf","attrs":{"14e48c01bbf":{"x":{},"y":{},"text":{},"textfont":{"color":"#333333"},"textposition":"outside","hovertext":{},"hoverinfo":"text","color":{},"colors":["#375E9E","#0F406B","#FFD600"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"width":680,"height":400,"margin":{"b":60,"l":90,"t":60,"r":40},"xaxis":{"domain":[0,1],"automargin":true,"title":"","tickangle":-45,"tickmode":"array","tickvals":["Transgender","Non-Binary","Female","Male"],"ticktext":["Transgender*","Non-Binary*","Female","Male"],"categoryorder":"array","categoryarray":["Transgender","Non-Binary","Female","Male"],"titlefont":{"family":"Century Gothic","size":14,"color":"#0F406B"},"tickfont":{"family":"Century Gothic","size":12,"color":"#333333"},"showgrid":false,"zeroline":false,"showline":false},"yaxis":{"domain":[0,1],"automargin":true,"title":"% of Students Experiencing Food Insecurity","range":[0,60.949999999999996],"titlefont":{"family":"Century Gothic","size":14,"color":"#0F406B"},"tickfont":{"family":"Century Gothic","size":12,"color":"#333333"},"showgrid":false,"zeroline":false,"showline":false},"barmode":"group","legend":{"orientation":"h","x":0.5,"y":1.1000000000000001,"xanchor":"center","yanchor":"bottom"},"annotations":[{"text":"* Fewer than 25 respondents","xref":"paper","yref":"paper","x":1,"y":1.03,"showarrow":false,"font":{"size":12,"color":"#555555"},"xanchor":"right","yanchor":"top"},{"text":"Tip: Click on the legend or demographic to filter. Click again to return.","xref":"paper","yref":"paper","x":1,"y":0.97999999999999998,"showarrow":false,"font":{"size":12,"color":"#555555"},"xanchor":"right","yanchor":"top"}],"font":{"family":"Century Gothic","color":"#333333"},"plot_bgcolor":"white","paper_bgcolor":"white","hoverlabel":{"font":{"family":"Century Gothic","size":12,"color":"white"},"bgcolor":"#0F406B","bordercolor":"#333333"},"autosize":false,"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"responsive":false},"data":[{"x":["Transgender","Non-Binary","Female","Male"],"y":[52,39,35,34],"text":["52%","39%","35%","34%"],"textfont":{"color":"#333333"},"textposition":["outside","outside","outside","outside"],"hovertext":["<b><span style='color:#FFD600;'>Transgender (FC 2023)<\/span><\/b><br>Food Insecurity: 52%<br>vs. FC 2025: -4 pts<br>vs. State 2025: -1 pts<br><b><span style='color:#E64B35;'>⚠️ Small sample size (&lt;25 respondents)<\/span><\/b>","<b><span style='color:#FFD600;'>Non-Binary (FC 2023)<\/span><\/b><br>Food Insecurity: 39%<br>vs. FC 2025: +3 pts<br>vs. State 2025: -13 pts<br><b><span style='color:#E64B35;'>⚠️ Small sample size (&lt;25 respondents)<\/span><\/b>","<b><span style='color:#FFD600;'>Female (FC 2023)<\/span><\/b><br>Food Insecurity: 35%<br>vs. FC 2025: +6 pts<br>vs. State 2025: -12 pts","<b><span style='color:#FFD600;'>Male (FC 2023)<\/span><\/b><br>Food Insecurity: 34%<br>vs. FC 2025: +5 pts<br>vs. State 2025: -11 pts"],"hoverinfo":["text","text","text","text"],"type":"bar","name":"FC 2023","marker":{"color":"rgba(55,94,158,1)","line":{"color":"rgba(55,94,158,1)"}},"error_y":{"color":"rgba(55,94,158,1)"},"error_x":{"color":"rgba(55,94,158,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Transgender","Non-Binary","Female","Male"],"y":[48,42,41,39],"text":["48%","42%","41%","39%"],"textfont":{"color":"#333333"},"textposition":["outside","outside","outside","outside"],"hovertext":["<b><span style='color:#FFD600;'>Transgender (FC 2025)<\/span><\/b><br>Food Insecurity: 48%<br>vs. FC 2023: +4 pts<br>vs. State 2025: -5 pts","<b><span style='color:#FFD600;'>Non-Binary (FC 2025)<\/span><\/b><br>Food Insecurity: 42%<br>vs. FC 2023: -3 pts<br>vs. State 2025: -10 pts","<b><span style='color:#FFD600;'>Female (FC 2025)<\/span><\/b><br>Food Insecurity: 41%<br>vs. FC 2023: -6 pts<br>vs. State 2025: -6 pts","<b><span style='color:#FFD600;'>Male (FC 2025)<\/span><\/b><br>Food Insecurity: 39%<br>vs. FC 2023: -5 pts<br>vs. State 2025: -6 pts"],"hoverinfo":["text","text","text","text"],"type":"bar","name":"FC 2025","marker":{"color":"rgba(15,64,107,1)","line":{"color":"rgba(15,64,107,1)"}},"error_y":{"color":"rgba(15,64,107,1)"},"error_x":{"color":"rgba(15,64,107,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Transgender","Non-Binary","Female","Male"],"y":[53,52,47,45],"text":["53%","52%","47%","45%"],"textfont":{"color":"#333333"},"textposition":["outside","outside","outside","outside"],"hovertext":["<b><span style='color:#FFD600;'>Transgender (State 2025)<\/span><\/b><br>Food Insecurity: 53%","<b><span style='color:#FFD600;'>Non-Binary (State 2025)<\/span><\/b><br>Food Insecurity: 52%","<b><span style='color:#FFD600;'>Female (State 2025)<\/span><\/b><br>Food Insecurity: 47%","<b><span style='color:#FFD600;'>Male (State 2025)<\/span><\/b><br>Food Insecurity: 45%"],"hoverinfo":["text","text","text","text"],"type":"bar","name":"State 2025","marker":{"color":"rgba(255,214,0,1)","line":{"color":"rgba(255,214,0,1)"}},"error_y":{"color":"rgba(255,214,0,1)"},"error_x":{"color":"rgba(255,214,0,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":{"render":[{"code":"\n      function(el, x) {\n        const gd = document.getElementById(el.id);\n        const allCats = [...new Set(x.data[0].x)];\n        let active = null;\n        gd.on('plotly_click', function(e) {\n          if (!e.points || e.points.length === 0) return;\n          const clickedCat = e.points[0].x;\n          const current = active;\n          if (current === clickedCat) {\n            Plotly.relayout(gd, {'xaxis.range': null, 'xaxis.autorange': true});\n            active = null;\n          } else {\n            const index = allCats.indexOf(clickedCat);\n            const pad = 0.5;\n            Plotly.relayout(gd, {'xaxis.range': [index - pad, index + pad]});\n            active = clickedCat;\n          }\n        });\n      }\n    ","data":null}]}}</script>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-dc00da711b5752f349f9" style="width:960px;height:403.2px;"></div>
+<script type="application/json" data-for="htmlwidget-dc00da711b5752f349f9">{"x":{"visdat":{"7e64762a6e33":["function () ","plotlyVisDat"]},"cur_data":"7e64762a6e33","attrs":{"7e64762a6e33":{"x":{},"y":{},"text":{},"textfont":{"color":"#333333"},"textposition":"outside","hovertext":{},"hoverinfo":"text","color":{},"colors":["#375E9E","#0F406B","#FFD600"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"width":680,"height":400,"margin":{"b":60,"l":90,"t":60,"r":40},"xaxis":{"domain":[0,1],"automargin":true,"title":"","tickangle":-45,"tickmode":"array","tickvals":["Transgender","Non-Binary","Female","Male"],"ticktext":["Transgender*","Non-Binary*","Female","Male"],"categoryorder":"array","categoryarray":["Transgender","Non-Binary","Female","Male"],"titlefont":{"family":"Century Gothic","size":14,"color":"#0F406B"},"tickfont":{"family":"Century Gothic","size":12,"color":"#333333"},"showgrid":false,"zeroline":false,"showline":false},"yaxis":{"domain":[0,1],"automargin":true,"title":"% of Students Experiencing Food Insecurity","range":[0,60.949999999999996],"titlefont":{"family":"Century Gothic","size":14,"color":"#0F406B"},"tickfont":{"family":"Century Gothic","size":12,"color":"#333333"},"showgrid":false,"zeroline":false,"showline":false},"barmode":"group","legend":{"orientation":"h","x":0.5,"y":1.1000000000000001,"xanchor":"center","yanchor":"bottom"},"annotations":[{"text":"* Fewer than 25 respondents","xref":"paper","yref":"paper","x":1,"y":1.03,"showarrow":false,"font":{"size":12,"color":"#555555"},"xanchor":"right","yanchor":"top"},{"text":"Tip: Click on the legend or demographic to filter. Click again to return.","xref":"paper","yref":"paper","x":1,"y":0.97999999999999998,"showarrow":false,"font":{"size":12,"color":"#555555"},"xanchor":"right","yanchor":"top"}],"font":{"family":"Century Gothic","color":"#333333"},"plot_bgcolor":"white","paper_bgcolor":"white","hoverlabel":{"font":{"family":"Century Gothic","size":12,"color":"white"},"bgcolor":"#0F406B","bordercolor":"#333333"},"autosize":false,"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"responsive":false},"data":[{"x":["Transgender","Non-Binary","Female","Male"],"y":[52,39,35,34],"text":["52%","39%","35%","34%"],"textfont":{"color":"#333333"},"textposition":["outside","outside","outside","outside"],"hovertext":["<b><span style='color:#FFD600;'>Transgender (FC 2023)<\/span><\/b><br>Food Insecurity: 52%<br>vs. FC 2025: -4 pts<br>vs. State 2025: -1 pts<br><b><span style='color:#E64B35;'>⚠️ Small sample size (&lt;25 respondents)<\/span><\/b>","<b><span style='color:#FFD600;'>Non-Binary (FC 2023)<\/span><\/b><br>Food Insecurity: 39%<br>vs. FC 2025: +3 pts<br>vs. State 2025: -13 pts<br><b><span style='color:#E64B35;'>⚠️ Small sample size (&lt;25 respondents)<\/span><\/b>","<b><span style='color:#FFD600;'>Female (FC 2023)<\/span><\/b><br>Food Insecurity: 35%<br>vs. FC 2025: +6 pts<br>vs. State 2025: -12 pts","<b><span style='color:#FFD600;'>Male (FC 2023)<\/span><\/b><br>Food Insecurity: 34%<br>vs. FC 2025: +5 pts<br>vs. State 2025: -11 pts"],"hoverinfo":["text","text","text","text"],"type":"bar","name":"FC 2023","marker":{"color":"rgba(55,94,158,1)","line":{"color":"rgba(55,94,158,1)"}},"error_y":{"color":"rgba(55,94,158,1)"},"error_x":{"color":"rgba(55,94,158,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Transgender","Non-Binary","Female","Male"],"y":[48,42,41,39],"text":["48%","42%","41%","39%"],"textfont":{"color":"#333333"},"textposition":["outside","outside","outside","outside"],"hovertext":["<b><span style='color:#FFD600;'>Transgender (FC 2025)<\/span><\/b><br>Food Insecurity: 48%<br>vs. FC 2023: +4 pts<br>vs. State 2025: -5 pts","<b><span style='color:#FFD600;'>Non-Binary (FC 2025)<\/span><\/b><br>Food Insecurity: 42%<br>vs. FC 2023: -3 pts<br>vs. State 2025: -10 pts","<b><span style='color:#FFD600;'>Female (FC 2025)<\/span><\/b><br>Food Insecurity: 41%<br>vs. FC 2023: -6 pts<br>vs. State 2025: -6 pts","<b><span style='color:#FFD600;'>Male (FC 2025)<\/span><\/b><br>Food Insecurity: 39%<br>vs. FC 2023: -5 pts<br>vs. State 2025: -6 pts"],"hoverinfo":["text","text","text","text"],"type":"bar","name":"FC 2025","marker":{"color":"rgba(15,64,107,1)","line":{"color":"rgba(15,64,107,1)"}},"error_y":{"color":"rgba(15,64,107,1)"},"error_x":{"color":"rgba(15,64,107,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Transgender","Non-Binary","Female","Male"],"y":[53,52,47,45],"text":["53%","52%","47%","45%"],"textfont":{"color":"#333333"},"textposition":["outside","outside","outside","outside"],"hovertext":["<b><span style='color:#FFD600;'>Transgender (State 2025)<\/span><\/b><br>Food Insecurity: 53%","<b><span style='color:#FFD600;'>Non-Binary (State 2025)<\/span><\/b><br>Food Insecurity: 52%","<b><span style='color:#FFD600;'>Female (State 2025)<\/span><\/b><br>Food Insecurity: 47%","<b><span style='color:#FFD600;'>Male (State 2025)<\/span><\/b><br>Food Insecurity: 45%"],"hoverinfo":["text","text","text","text"],"type":"bar","name":"State 2025","marker":{"color":"rgba(255,214,0,1)","line":{"color":"rgba(255,214,0,1)"}},"error_y":{"color":"rgba(255,214,0,1)"},"error_x":{"color":"rgba(255,214,0,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":{"render":[{"code":"\n      function(el, x) {\n        const gd = document.getElementById(el.id);\n        const allCats = [...new Set(x.data[0].x)];\n        let active = null;\n        gd.on('plotly_click', function(e) {\n          if (!e.points || e.points.length === 0) return;\n          const clickedCat = e.points[0].x;\n          const current = active;\n          if (current === clickedCat) {\n            Plotly.relayout(gd, {'xaxis.range': null, 'xaxis.autorange': true});\n            active = null;\n          } else {\n            const index = allCats.indexOf(clickedCat);\n            const pad = 0.5;\n            Plotly.relayout(gd, {'xaxis.range': [index - pad, index + pad]});\n            active = clickedCat;\n          }\n        });\n      }\n    ","data":null}]}}</script>
 </div>
 </div>
 </div></div>
@@ -4530,10 +4529,10 @@ overflow: hidden!important;
 display:block!important;
 }</style></aside>
 </section>
-<section id="example-toolkit" class="slide level2">
-<h2>Example toolkit</h2>
-<div class="card-grid compact toolkit">
-<div class="toolkit-col fragment">
+<section id="example-toolkit-r" class="slide level2">
+<h2>Example toolkit: R</h2>
+<div class="columns toolkit-split">
+<div class="column" style="width:34%;">
 <div class="card">
 <p><span class="card-title">R</span></p>
 <ul>
@@ -4543,6 +4542,7 @@ display:block!important;
 <li>Create a package or reusable file</li>
 </ul>
 </div>
+</div><div class="column" style="width:66%;">
 <div class="code-scroll wrap">
 <div class="code-label">
 <p><strong>setup.R</strong></p>
@@ -4625,8 +4625,25 @@ display:block!important;
 <span id="cb5-76"><a href aria-hidden="true" tabindex="-1"></a><span class="co"># Set as default ggplot theme, yay!</span></span>
 <span id="cb5-77"><a href aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_fc</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-<div class="toolkit-col fragment">
+</div></div>
+<aside class="notes">
+<p>Vinnie</p>
+<style type="text/css">
+span.MJX_Assistive_MathML {
+position:absolute!important;
+clip: rect(1px, 1px, 1px, 1px);
+padding: 1px 0 0 0!important;
+border: 0!important;
+height: 1px!important;
+width: 1px!important;
+overflow: hidden!important;
+display:block!important;
+}</style></aside>
+</section>
+<section id="example-toolkit-quarto" class="slide level2">
+<h2>Example toolkit: Quarto</h2>
+<div class="columns toolkit-split">
+<div class="column" style="width:34%;">
 <div class="card">
 <p><span class="card-title">Quarto</span></p>
 <ul>
@@ -4635,6 +4652,10 @@ display:block!important;
 <li>Parameterized reports</li>
 </ul>
 </div>
+<div class="takeaway fragment">
+<p><strong>Why Quarto over R Markdown?</strong> <br>Better multi-language support and standardized YAML implementation</p>
+</div>
+</div><div class="column" style="width:66%;">
 <div class="code-scroll wrap">
 <div class="code-label">
 <p><strong>Report template (.qmd)</strong></p>
@@ -4674,16 +4695,24 @@ display:block!important;
 <span id="cb6-32"><a href aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Third topic</span>
 <span id="cb6-33"><a href aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Questions &amp; discussion</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-<div class="toolkit-col fragment">
+</div></div>
+</section>
+<section id="example-toolkit-templates" class="slide level2">
+<h2>Example toolkit: Templates</h2>
+<div class="columns toolkit-split">
+<div class="column" style="width:34%;">
 <div class="card">
 <p><span class="card-title">Templates</span></p>
 <ul>
-<li>CSS for branding &amp; layout</li>
-<li>ggplot2 themes</li>
-<li>Shared color palette</li>
+<li>One template per format: HTML, PDF, slides</li>
+<li>HTML &amp; slides: CSS for branding &amp; layout</li>
+<li>PDF: a print-ready template for the same look on paper</li>
 </ul>
 </div>
+<div class="takeaway fragment">
+<p><strong>Don’t use R?</strong> Start by templating one recurring report in Word, PowerPoint, Tableau/PowerBI, or your coding language.</p>
+</div>
+</div><div class="column" style="width:66%;">
 <div class="code-scroll wrap">
 <div class="code-label">
 <p><strong>Branding CSS</strong></p>
@@ -4722,24 +4751,7 @@ display:block!important;
 <span id="cb7-32"><a href aria-hidden="true" tabindex="-1"></a>  <span class="kw">border</span><span class="ch">:</span> <span class="dv">none</span> <span class="at">!important</span><span class="op">;</span></span>
 <span id="cb7-33"><a href aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-</div>
-<div class="takeaway fragment">
-<p><strong>Don’t use R?</strong> Start by templating one recurring report in Word, PowerPoint, Tableau/PowerBI, or your coding language.</p>
-</div>
-<aside class="notes">
-<p>Vinnie</p>
-<style type="text/css">
-span.MJX_Assistive_MathML {
-position:absolute!important;
-clip: rect(1px, 1px, 1px, 1px);
-padding: 1px 0 0 0!important;
-border: 0!important;
-height: 1px!important;
-width: 1px!important;
-overflow: hidden!important;
-display:block!important;
-}</style></aside>
+</div></div>
 </section>
 <section id="scaling-reports-parameterized-reporting" class="slide level2">
 <h2>Scaling reports: parameterized reporting</h2>
