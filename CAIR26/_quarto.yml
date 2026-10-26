@@ -9,6 +9,7 @@ execute:
 format:
   revealjs:
     css: template/cair.css
+    include-in-header: template/analytics.html
     include-after-body: template/cair.html
     width: 1280    # 16:9, fills a projector
     height: 720

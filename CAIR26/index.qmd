@@ -634,9 +634,9 @@ Vinnie
 :::: {.column width="34%"}
 ::: {.card}
 [R]{.card-title}
+*the analyses of the report*
 
-- Data prep: tidyverse
-- Charts: ggplot2, plotly
+- Data cleaning and analyses
 - Reusable chart functions
 - Create a package or reusable file
 :::
@@ -742,7 +742,8 @@ Vinnie
 :::: {.column width="34%"}
 ::: {.card}
 [Quarto]{.card-title}
-*Includes the content of the report*
+*the document itself*
+
 - Reports & slides from one file
 - HTML, PDF, Word
 - Parameterized reports
@@ -805,6 +806,7 @@ Blah blah blah
 :::: {.column width="34%"}
 ::: {.card}
 [Templates]{.card-title}
+*the design of the report*
 
 - One template per format: HTML, PDF, slides
 - HTML & slides: CSS for branding & layout
@@ -865,7 +867,8 @@ h3 {
 
 <!-- EXAMPLE NEEDED:  Show (1) the render loop (a few lines of code), (2) one output report, and (3) numbers: N reports, hours by hand vs. minutes now. Also mention how small n / FERPA is handled per report. -->
 
-- Faculty Senate
+- Faculty Senate requested a report of disaggregated course success rates for every faculty member (~700+) to be sent annually.
+- Specific requirements: an emailed .pdf, guided questions for interpretation
 
 ::: {.placeholder .tall}
 Faculty course success report: one template, a report per faculty member, IDK TBD
@@ -873,7 +876,6 @@ Faculty course success report: one template, a report per faculty member, IDK TB
 
 ::: {.notes}
 Vinnie: present the faculty course success data scenario.
-How it was automated, what it produced, how much manual labor it saved.
 :::
 
 

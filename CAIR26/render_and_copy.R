@@ -31,7 +31,7 @@ local_output_dir <- "."
 #
 # Example — CAMP-style public docs repo:
 # publish_dir <- "C:/Users/vwu/OneDrive - Fullerton College/Documents/vwu-Code/fc-oie/docs/R-Tutorial/CAMP"
-publish_dir <- NULL
+publish_dir <- "C:\\Users\\vwu\\OneDrive - Fullerton College\\Documents\\vwu-Code\\fc-oie\\docs\\Presentations\\CAIR\\2026"
 
 # ---------------------------------------------------------------
 # Render
