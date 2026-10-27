@@ -835,7 +835,9 @@
      ::: {.card}
      ### Heading
      - point
-   Text stays near body size so it reads from the back of the room. */
+   Text stays near body size so it reads from the back of the room.
+   A bare ::: {.card} that starts with ### becomes its own slide in
+   reveal.js; add .fragment (or write the heading as raw <h3>). */
 .card-grid {
   display: flex;
   gap: var(--space-lg);

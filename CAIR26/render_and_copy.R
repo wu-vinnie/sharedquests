@@ -129,4 +129,16 @@ for (qmd in qmd_files) {
   }
 }
 
+# PDFs shown in the deck (iframe/link) are not embedded by
+# embed-resources, so they must sit next to the published file.
+if (!is.null(publish_dir)) {
+  pdf_files <- dir_ls("figures", glob = "*.pdf")
+
+  if (length(pdf_files) > 0) {
+    dir_create(path(publish_dir, "figures"))
+    file_copy(pdf_files, path(publish_dir, "figures", path_file(pdf_files)), overwrite = TRUE)
+    cat("✅ Published PDFs to:", path(publish_dir, "figures"), "\n")
+  }
+}
+
 cat("\n🏁 All .qmd and .Rmd files in the project root processed.\n")

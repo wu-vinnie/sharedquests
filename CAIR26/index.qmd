@@ -132,7 +132,7 @@ Demos use **R**, but the principles apply on any reporting platform (e.g., Pytho
 
 Case Study: The #RealCollegeCA Survey: Basic Needs in the CCCs
 
-Administered 2023 · 2025 · next in 2027 (?)
+Administered 2023 · 2025 · next in 2027
 
 ::: {.notes}
 State that the survey is recurring, and the 2025 report was rebuilt from scratch. The 2027 report will be built from the same template, with new data dropped in.
@@ -296,8 +296,7 @@ Every report should help answer:
 [Quotes from FC's 2025 #RealCollegeCA report]{.source}
 
 ::: {.notes}
-Vinnie: 
-"Be the catalyst." — Loris
+Vinnie
 :::
 
 ## Advocacy from sense-making
@@ -391,7 +390,7 @@ Reflection prompt to close the share-out: how do storytelling choices shape unde
 build the report once, then drop in new data each cycle
 
 ::: {.notes}
-⏱ ~23:00. ~7 min for this section. Target: start Behind the Scenes by 30:00.
+⏱ ~23:00. ~7 min for this section. Target: start the between-reports section by 30:00.
 :::
 
 ## A reproducible workflow (within the report)
@@ -592,6 +591,11 @@ Bring it back to the case study: the 2027 report is a re-render, not a rebuild. 
 
 build the template once, then use it for multiple reports
 
+::: {.notes}
+⏱ 30:00. ~10 min for this section (13 slides, ~45 sec each). Target: start Wrap-up by 40:00.
+If running long: let the video play without narrating, and click through the toolkit code without reading it.
+:::
+
 ## A reproducible workflow (between reports)
 
 ::::: {.flow .detail}
@@ -615,17 +619,22 @@ One version, loaded everywhere with `library()`.
 
 
 ::: {.notes}
-Vinnie
+Vinnie · ~45 sec · 30:15
+- I used to copy setup.R into every new report and delete what didn't apply. Every report drifted a little.
+- Now it's an R package: one version of the templates, functions, and themes, loaded with library().
+- New report? One line, and it's already branded.
 :::
 
 ## A reproducible workflow (between reports)
 
 ::: {.video-center}
 <video src="figures/r_report_template.mp4" controls preload="auto" height="560"></video>
-:::
+::: 
 
 ::: {.notes}
-Vinnie
+Vinnie · ~1:15 (video is 61 sec) · 31:00
+- Press play and narrate lightly: starting a new report from the package, already branded.
+- If short on time, skip ahead in the video.
 :::
 
 ## Example toolkit: R
@@ -733,7 +742,9 @@ theme_set(theme_fc())
 :::::
 
 ::: {.notes}
-Vinnie
+Vinnie · ~45 sec · 32:15
+- Three tools, three jobs. R does the analysis.
+- Scroll the setup file: libraries, the college palette, one ggplot theme. theme_set() at the end means every chart is on-brand by default.
 :::
 
 ## Example toolkit: Quarto
@@ -800,6 +811,13 @@ Blah blah blah
 ::::
 :::::
 
+::: {.notes}
+Vinnie · ~45 sec · 33:00
+- Quarto is the document: one file, rendered to HTML, PDF, Word, or slides. This deck is Quarto.
+- It's also what makes parameterized reports possible, which is coming up.
+- Click for the R Markdown question before someone asks it.
+:::
+
 ## Example toolkit: Templates
 
 ::::: {.columns .toolkit-split}
@@ -863,21 +881,254 @@ h3 {
 ::::
 :::::
 
+::: {.notes}
+Vinnie · ~45 sec · 33:45
+- Templates are the design: CSS for HTML and slides, a print template for PDF, so all formats look the same.
+- Click: this isn't R-only. A Word or Power BI template does the same job.
+:::
+
 ## Scaling reports: parameterized reporting
 
-<!-- EXAMPLE NEEDED:  Show (1) the render loop (a few lines of code), (2) one output report, and (3) numbers: N reports, hours by hand vs. minutes now. Also mention how small n / FERPA is handled per report. -->
+Project example: Individualized Faculty Course Success Reports
 
-- Faculty Senate requested a report of disaggregated course success rates for every faculty member (~700+) to be sent annually.
-- Specific requirements: an emailed .pdf, guided questions for interpretation
+- Professional Learning Committee recommended, Faculty Senate supported: an individualized course success report for **every faculty member**, every year
+  - Disaggregated course success rates and drop reasons
+  - Emailed as a PDF, with guiding questions for reflection
+  - A tool for professional learning, not evaluation
+  - Power BI dashboard later for further exploration
 
-::: {.placeholder .tall}
-Faculty course success report: one template, a report per faculty member, IDK TBD
+::::: {.tile-grid .cols-2 .fragment}
+::: {.tile}
+**860** reports in 2024–25
+:::
+::: {.tile}
+**971** reports in 2025–26
+:::
+:::::
+
+::: {.notes}
+Vinnie · ~45 sec · 34:30
+- Here's what all of that makes possible.
+- The request: every faculty member gets their own course success report, every year, by email, with guiding questions.
+- Stress that it's for professional learning, not evaluation. That framing is why faculty engage with it.
+- Click: 860 reports last year, 971 this year. Nobody builds that many by hand.
+:::
+
+## Why parameterized reports?
+
+::::: {.card-grid .compact}
+::: {.card .fragment}
+### Scalable
+
+- One template, one loop
+- A report for every person
+:::
+::: {.card .fragment}
+### Individualized
+
+- Sentences written from each person's data
+- E.g., "12.1 points **above** the ISS"
+:::
+::: {.card .fragment}
+### Better aesthetics
+
+- Page breaks, figure numbers, branding
+- Long tables flow onto the next page
+:::
+::: {.card .fragment}
+### Rule-based using code
+
+- Combine small groups
+- Skip empty sections
+:::
+:::::
+
+::: {.takeaway .fragment}
+Dashboards are still useful for **exploration**. 
+Parameterized reports are great for supplemental **individualized insights**.
 :::
 
 ::: {.notes}
-Vinnie: present the faculty course success data scenario.
+Vinnie · ~45 sec · 35:15
+- Takeaway: dashboards aren't going away. This complements them.
+
 :::
 
+## Parameterized reporting steps
+
+::::: {.flow .detail}
+::: {.step}
+**1. SQL pull**
+
+One query for the year: every course, student, and faculty member.
+
+Update the terms, save as CSV.
+:::
+::: {.step}
+**2. Shared functions**
+
+One R file that builds every stat, chart, and sentence.
+
+Written once, used by every report.
+:::
+::: {.step}
+**3. One template**
+
+A .qmd with a `faculty_id` parameter.
+
+Filters all content to one person.
+:::
+::: {.step}
+**4. Render loop**
+
+Runs the template once per faculty ID.
+
+~30 sec each; logs every render.
+:::
+::: {.step}
+**5. Automated email**
+
+Sends each PDF to its owner in batches.
+
+Logged, so no one gets it twice and to check bouncebacks.
+:::
+:::::
+
+::: {.notes}
+Vinnie · ~1:00 · 36:00
+- Left to right, about 10 seconds each.
+- The only yearly changes: the terms in the SQL and the academic year.
+- Steps 2 to 5 run unattended. Rendering is ~30 sec per report, so the full run is a few hours in the background.
+- The send log is what keeps anyone from getting two emails.
+:::
+
+## Parameterized reporting: the key idea
+
+:::: {.columns}
+::: {.column width="45%"}
+::: {.code-label}
+**1. Template** (faculty_template.qmd): declare a parameter
+:::
+
+```{.yaml code-line-numbers="false"}
+---
+title: "Course Success Report"
+format: pdf
+params:
+  faculty_id: null   # filled in by the loop
+---
+```
+
+::: {.code-label}
+**2. Template**: every stat, chart, and sentence uses it
+:::
+
+```{.r code-line-numbers="false"}
+summarize_overall_success(
+  df,
+  faculty_id_val = params$faculty_id
+)
+```
+:::
+
+::: {.column width="55%"}
+::: {.code-label}
+**3. Script** (render_all_faculty.R): render once per ID
+:::
+
+```{.r code-line-numbers="false"}
+for (fid in faculty_ids) {
+  quarto_render(
+    input = "faculty_template.qmd",
+    execute_params = list(faculty_id = fid),
+    output_file = paste0(
+      "Course_Success_2025-26_", fid, ".pdf"
+    )
+  )
+}
+```
+
+
+:::
+::::
+
+::: {.notes}
+Vinnie · ~1:00 · 37:00
+:::
+
+
+
+## Example report: Faculty course success
+
+
+:::: {.columns}
+::: {.column width="33%"}
+![](figures/course_success_p1.png){.report-page fig-alt="Page 1 of a sample Faculty Course Success Report, 2025–2026: an About section explaining the Institutional Set Standard (62.1%) and Stretch Goal (80.0%), guiding questions, and a bar chart comparing this faculty member's sections with all sections for five courses."}
+:::
+::: {.column width="33%"}
+![](figures/course_success_p2.png){.report-page fig-alt="Page 2 of the sample report: guiding questions and a bar chart of course success by race/ethnicity, ranging from 73.0% (White) to 100.0% (Middle Eastern/North African)."}
+:::
+::: {.column width="33%"}
+![](figures/course_success_p3.png){.report-page fig-alt="Page 3 of the sample report: bar charts of course success by college generational status (First-Gen 71.6%, Continuing-Gen 79.9%, Unknown 47.8%) and by gender (NB/trans/Unknown 46.2%, Male 70.7%, Female 78.6%)."}
+:::
+::::
+
+::: {.notes}
+Vinnie · ~30 sec · 38:00
+
+:::
+
+## Example report: Faculty course success (cont.)
+
+:::: {.columns}
+::: {.column width="33%"}
+![](figures/course_success_p4.png){.report-page fig-alt="Page 4 of the sample report: Drop Reasons. 106 students dropped and 21 answered the drop survey; guiding questions and a horizontal bar chart led by 'Coursework too difficult to manage' (14), then 'Low grade or fell behind' (6) and 'Work schedule conflict' (5)."}
+:::
+::: {.column width="33%"}
+![](figures/course_success_p5.png){.report-page fig-alt="Page 5 of the sample report: a table of six open-ended drop reasons and what could have helped, citing financial aid delays, workload, work hours, and family responsibilities; most 'what could have helped' answers are NA or unsure."}
+:::
+::::
+
+<!-- render_and_copy.R copies figures/*.pdf next to the published deck. -->
+[Open the full report (PDF)](figures/Course_Success_2025-26_99999999.pdf){target="_blank"}
+
+::: {.notes}
+Vinnie · ~30 sec · 38:30
+:::
+
+## Parameterized reporting: lessons learned
+
+::::: {.card-grid .compact}
+::: {.card .fragment}
+### By the numbers
+
+- ~30 seconds per report
+- Runs unattended
+- Each faculty member gets **only their own** report
+:::
+::: {.card .fragment}
+### Next year
+
+- Change the terms and academic year
+- Re-run
+- Same design, comparable year to year
+:::
+::: {.card .fragment}
+### What helped
+
+- Log every render and send
+- No double emails, easy restarts
+- Write directions for future you
+:::
+:::::
+
+::: {.takeaway .fragment}
+The dashboard is for **exploring**. The report is for **reflecting**.
+:::
+
+::: {.notes}
+Vinnie · ~45 sec · 39:00
+:::
 
 
 # Wrap-up {.section-slide}
@@ -935,15 +1186,15 @@ Even if AI can help with repetitive tasks, 1) it isn't always correct and 2) it 
 What's one improvement from today you could try on it?
 
 ::: {.thanks-panel}
-<!-- QR CODE: replace the placeholder div below with
-     ![](figures/qr.png){width="200" fig-alt="QR code linking to the GitHub repository"} -->
+
+
 ::: {.qr-placeholder}
-QR code
+![](figures/qrcode.png){width="200" fig-alt="QR code linking to the GitHub repository"}
 :::
 
 ::: {.thanks-info}
-**Sample code & slides**\
-[github.com/somethingsomething](https://github.com/wu-vinnie/sharedquests/tree/main/CAIR26)
+**Presentation Slides**\
+[bit.ly/cair2026](https://bit.ly/cair2026)
 
 Vinnie Wu · [vwu@fullcoll.edu](mailto:vwu@fullcoll.edu)\
 Joshua Rhee · [jrhee@ivc.edu](mailto:jrhee@ivc.edu)
