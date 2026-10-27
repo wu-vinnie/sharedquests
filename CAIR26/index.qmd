@@ -110,12 +110,12 @@ This is esp important in the age of AI, where numbers can be spat out quickly, b
 ## Today's session
 
 ::: {.agenda}
-- [0–5 min]{.time} Why it matters
+- [0–5 min]{.time} Why go beyond the dashboard
 - [5–13 min]{.time} Same data, different end product
 - [13–23 min]{.time} Your turn [Interactive]{.badge}
-- [23–30 min]{.time} Build it once: workflow & tools
-- [30–40 min]{.time} Behind the scenes
-- [40–45 min]{.time} Q&A & reflection [Interactive]{.badge}
+- [23–30 min]{.time} Reproducible workflow within a report: one function, every chart
+- [30–40 min]{.time} Reproducible workflow between reports: templates & parameterized reporting
+- [40–45 min]{.time} Wrap-up, Q&A & reflection [Interactive]{.badge}
 :::
 
 ::: {.takeaway}
