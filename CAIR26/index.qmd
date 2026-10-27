@@ -11,15 +11,20 @@ author:
       - name: "Research and Planning Analyst"
       - name: "Irvine Valley College"
 
+
 ---
+
 
 ```{r}
 #| label: setup
 #| include: false
 
+
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 
+
 source("setup.R")
+
 
 # Layout pieces used in this deck (styles in template/cair.css):
 #   {.section-slide}            full-screen blue divider slide
@@ -29,14 +34,19 @@ source("setup.R")
 #   {.placeholder}              stand-in for a screenshot or chart
 #   {.fragment}                 reveal one click at a time
 
+
 # Keep this note inside the chunk: an HTML comment before the first ##
 # heading renders as an empty slide.
 
+
 ```
+
 
 ## Sound familiar?
 
+
 Common challenges with data requests
+
 
 ::::: {.tile-grid}
 ::: {.tile}
@@ -56,32 +66,43 @@ Redundancy
 :::
 :::::
 
+
 ::: {.takeaway .fragment}
 Building and formatting eats **precious time**.\
 A reproducible, reusable template gives it back.
 :::
 
+
 ::: {.notes}
 Joshie
 
+
 Engagement opener:
+
 
 1. Raise your hand if you've rebuilt the same report more than once.
 2. Keep your hand up if you spent so much time creating the report that you lost time to work on other things.
 
+
 :::
+
+
 
 
 ## Why go beyond the dashboard?
 
+
 <!-- EXAMPLE NEEDED: one real request where a dashboard wasn't enough (e.g., someone looked at the dashboard and still asked "so what does this mean?"). Say it in the notes. -->
 
+
 Dashboards expanded access to data, but access isn't understanding.
+
 
 :::: {.columns}
 ::: {.column width="50%"}
 ::: {.compare-card .before .fragment}
 **Dashboards**
+
 
 - Show the numbers and filters
 - Built for open-ended exploration
@@ -89,9 +110,11 @@ Dashboards expanded access to data, but access isn't understanding.
 :::
 :::
 
+
 ::: {.column width="50%"}
 ::: {.compare-card .after .fragment}
 **Reports that tell the story**
+
 
 - Add context and meaning
 - Built for specific decisions/committees
@@ -100,14 +123,21 @@ Dashboards expanded access to data, but access isn't understanding.
 :::
 ::::
 
+
 ::: {.notes}
 Talk about how dashboards are great for exploration but don't tell the story. Reports are still needed to interpret the data and point to action.
+
 
 This is esp important in the age of AI, where numbers can be spat out quickly, but interpretation and context are still needed to make sense of them, and that's where we come in.
 :::
 
 
+
+
 ## Today's session
+
+
+
 
 ::: {.agenda}
 - [0–5 min]{.time} Why go beyond the dashboard
@@ -118,34 +148,49 @@ This is esp important in the age of AI, where numbers can be spat out quickly, b
 - [40–45 min]{.time} Wrap-up, Q&A & reflection [Interactive]{.badge}
 :::
 
+
+
+
 ::: {.takeaway}
 Demos use **R**, but the principles apply on any reporting platform (e.g., Python, Word/PowerPoint).
 :::
 
+
 ::: {.notes}
 
+
 :::
+
+
+
 
 
 
 # Same Data, Same Design,<br>Different End Product {.section-slide}
 
+
 Case Study: The #RealCollegeCA Survey: Basic Needs in the CCCs
 
+
 Administered 2023 · 2025 · next in 2027
+
 
 ::: {.notes}
 State that the survey is recurring, and the 2025 report was rebuilt from scratch. The 2027 report will be built from the same template, with new data dropped in.
 
+
 ⏱ ~5:00. Target: start Your Turn by 13:00.
 :::
 
+
 ## Same data, same design, different end product
+
 
 :::: {.columns}
 ::: {.column width="38%"}
 ::: {.version-card}
 **#RealCollegeCA · Version 1**
+
 
 **Audience:** President's Office\
 **Purpose:** Various uses (President's welcome talk, Board updates)\
@@ -153,26 +198,32 @@ State that the survey is recurring, and the 2025 report was rebuilt from scratch
 **Format:** PDF
 :::
 
+
 ::: {.takeaway}
 The **President's Office** needs main ideas, so this version is a **static page** with the takeaway written out (and printable).
 :::
 :::
+
 
 ::: {.column width="62%"}
 ![](figures/takeaway_graph.png){.report-page fig-alt="Page from IVC's #RealCollegeCA report on food insecurity, disaggregated by gender. Bullets give each group's 2023 and 2025 rates against the statewide rate, a key takeaway paragraph says IVC fares better than statewide except for transgender students (n < 20, interpret with caution), and a bar chart compares IVC 2023, IVC 2025, and State 2025 for female, male, non-binary/gender-fluid, and transgender students."}
 :::
 ::::
 
+
 ::: {.notes}
 Joshie -- say that the code and how this was done will be discussed later in the presentation.
 :::
 
+
 ## Same data, same design, different end product
+
 
 :::: {.columns}
 ::: {.column width="38%"}
 ::: {.version-card}
 **#RealCollegeCA · Version 2**
+
 
 **Audience:** Campuswide\
 **Purpose:** Overview + drilldown for specific programs\
@@ -180,15 +231,19 @@ Joshie -- say that the code and how this was done will be discussed later in the
 **Format:** HTML
 :::
 
+
 ::: {.takeaway}
 A **campuswide** audience explores on their own, so this version is **interactive**.
 :::
 :::
 
+
 ::: {.column width="62%"}
 **Food Insecurity by Gender**
 
+
 Overall, food insecurity is most elevated among transgender and non-binary students.
+
 
 ```{r}
 #| label: food-insecurity-gender
@@ -203,39 +258,51 @@ make_demographic_plot(summary_wide, outcome = "Food_Insecurity", predictor_prefi
 :::
 ::::
 
+
 ::: {.notes}
 Vinnie
 
+
 Demo: hover over a bar to show values, and toggle the 2023/2025 years. There are multiple versions of this, disaggregated by demographic so people can explore the groups they're interested in, while also seeing this takeaway.
+
 
 Finding (if asked): food insecurity is most elevated among transgender and non-binary students.
 :::
 
+
 ## Different end product, same rules
+
 
 Our two reports looked different, but underneath we followed the same rules and process.
 
+
 **What makes a data story work, regardless of its audience?**
+
 
 ::: {.big-idea .fragment}
 Reduce cognitive load
 :::
 
+
 ::: {.notes}
 Joshie
 :::
 
+
 ## Reducing cognitive load
+
 
 ::::: {.card-grid .compact}
 ::: {.card .fragment}
 ### Consistency
+
 
 - Same branding and layout within and between reports
 - Same chart types for similar data
 :::
 ::: {.card .fragment}
 ### Inclusivity
+
 
 - Easy to read
 - Alt text
@@ -244,12 +311,14 @@ Joshie
 ::: {.card .manual .fragment}
 ### Sense-Making
 
+
 - Interpret the data for the reader
 - Same phrasing, same message for everyone
 - Works at any data-literacy level
 - State recommendations and next steps
 :::
 :::::
+
 
 ::::: {.bracket-row}
 ::: {.bracket .span-2 .fragment}
@@ -260,65 +329,83 @@ Where our time goes
 :::
 :::::
 
+
 ::: {.takeaway .tight .fragment}
 Automation should eliminate repetitive work, not analytical thinking,<br>
 which is why we're **research analysts**.
 :::
 
+
 ::: {.notes}
 Joshie
 :::
 
+
 ## Sense-making: From data to decisions
 
+
 Every report should help answer:
+
 
 ::::: {.card-grid .quotes}
 ::: {.card .fragment}
 ### What's the key takeaway?
 
+
 "Basic needs insecurities affect the majority of Fullerton College students."
+
 
 "…the magnitude of inequities varies across groups."
 :::
 ::: {.card .fragment}
 ### Why does it matter?
 
+
 "Basic needs challenges may be linked to lower academic performance."
 :::
 ::: {.card .fragment}
 ### What could someone do next?
 
+
 "…opportunities to continue strengthening outreach and communication."
 :::
 :::::
 
+
 [Quotes from FC's 2025 #RealCollegeCA report]{.source}
+
 
 ::: {.notes}
 Vinnie
 :::
 
+
 ## Advocacy from sense-making
+
 
 :::: {.columns}
 ::: {.column width="58%"}
 **Campuswide**
 
+
 - Continued Healthy Hornet Meals for students
 - Convocation presentation on basic needs
+
 
 ::::: {.fragment fragment-index=1}
 **With students**
 
+
 - Ambassadors promoted basic needs resources
 - Journalism class wrote a student article
+
 
 ::: {.takeaway .tight}
 We shared the data with students, and they became **advocates**.
 :::
 :::::
 :::
+
 
 ::: {.column width="42%"}
 ::: {.fragment fragment-index=1}
@@ -327,21 +414,28 @@ We shared the data with students, and they became **advocates**.
 :::
 ::::
 
+
 ::: {.notes}
 Sharing data with students turned them into advocates.
 :::
 
+
 # Your Turn {.section-slide}
+
 
 ::: {.notes}
 ⏱ 13:00. 10 minutes total: ~1 min setup, ~6 min in groups, ~3 min share-out. Target: start Build It Once by 23:00.
 :::
 
+
 ## ACTIVITY: How would YOU tell the story?
+
 
 Campus Climate Survey: one dataset, four audiences
 
+
 Assume you have the variables and/or results you need. How would you tell the story for each audience?
+
 
 :::: {.columns}
 ::: {.column width="58%"}
@@ -349,29 +443,35 @@ Assume you have the variables and/or results you need. How would you tell the st
 ::: {.tile}
 President's Office
 
+
 "What do I need to know?"
 :::
 ::: {.tile}
 Faculty & staff
+
 
 Campuswide email report
 :::
 ::: {.tile}
 Student Equity Committee
 
+
 "I want to know about our X students."
 :::
 ::: {.tile}
 Board of Trustees
+
 
 "Tell me about the campus climate."
 :::
 :::::
 :::
 
+
 ::: {.column width="42%"}
 ::: {.steps-panel}
 **In your group**
+
 
 1. **Identify** the key message, context, and implied action.
 2. **Choose** a visualization/tool, report format, and framing for your audience.
@@ -380,20 +480,26 @@ Board of Trustees
 :::
 ::::
 
+
 ::: {.notes}
 Reflection prompt to close the share-out: how do storytelling choices shape understanding, decisions, and action?
 :::
 
+
 # A reproducible workflow<br><i>within the report</i> {.section-slide}
+
 
 #RealCollegeCA 2023 → 2025 → 2027: <br>
 build the report once, then drop in new data each cycle
+
 
 ::: {.notes}
 ⏱ ~23:00. ~7 min for this section. Target: start the between-reports section by 30:00.
 :::
 
+
 ## A reproducible workflow (within the report)
+
 
 ::::: {.flow}
 ::: {.step}
@@ -402,35 +508,44 @@ Raw data
 ::: {.step .manual}
 Cleaning
 
+
 Manual + automated
 :::
 ::: {.step}
 Visualization
+
 
 Automated
 :::
 ::: {.step .manual}
 Narrative & accessibility
 
+
 Manual
 :::
 ::: {.step}
 Output
 
+
 PDF · HTML · image
 :::
 :::::
 
+
 ::: {.takeaway}
 Cleaning puts data in the right "format" so everything after it can be automated.
 :::
+
 
 ::: {.notes}
 JOshie
 :::
 
 
+
+
 ## Consistent visualizations: design the data first
+
 
 :::: {.columns}
 ::: {.column width="50%"}
@@ -439,22 +554,29 @@ JOshie
 - Choose the data structure (wide vs. long)
 :::
 
+
 ::: {.column width="50%"}
 - Clean the data
 - Stack survey years (2023 + 2025), so 2027 just gets appended
 :::
 ::::
 
+
 ![](figures/insecurity_gender_summary.png){.wide-figure fig-alt="Screenshot of the summarized data: one row per source (IVC 2023, IVC 2025, State 2025) and gender (Female, Male), with total, n, and percent columns for food and housing insecurity. Statewide rows have percentages only, with NA for counts."}
+
 
 ::: {.notes}
 Joshie
 :::
 
 
+
+
 ## Consistent visualizations: one function, every chart
 
+
 Create a function to make the same style figures for all predictors to outcomes.
+
 
 :::: {.columns}
 ::: {.column width="30%"}
@@ -466,120 +588,152 @@ Create a function to make the same style figures for all predictors to outcomes.
 - Export sizes
 :::
 
+
 ::: {.column width="70%"}
 ::::: {.code-scroll}
 ::: {.code-label}
-**1. Wide → long → summarize:** works for any number of groups [(lines 132–150)]{.lines}
+**1. Style it once:** every formatting rule lives in one function [(make_comparison_plot)]{.lines}
 :::
 
+
 ```{.r code-line-numbers="false"}
-summarise_outcomes <- function(data, student_groups, outcomes,
-                               by = c("College", "year"),
-                               digits = 0) {
-  data %>%
-    pivot_longer(all_of(student_groups),
-                 names_to = "Student_Group",
-                 values_to = "in_group") %>%
-    filter(in_group == 1) %>%
-    pivot_longer(all_of(outcomes),
-                 names_to = "Outcome",
-                 values_to = "has_outcome") %>%
-    group_by(across(all_of(by)), Student_Group, Outcome) %>%
-    summarise(total = sum(!is.na(has_outcome)),
-              n = sum(has_outcome == 1, na.rm = TRUE),
-              pct = round(100 * n / total, digits),
-              .groups = "drop")
+make_comparison_plot <- function(
+    data, student_groups,
+    outcomes        = names(outcome_labels),
+    fill_colors     = source_colors,      # Branding & colors
+    group_label_map = label_map,          # Readable labels
+    outcome_names   = outcome_labels,
+    low_n_threshold = 20,                 # Warnings (n < 20)
+    low_n_color     = "#C00000",
+    title           = "IVC vs Statewide: Outcome Percentages",
+    font            = "sans",             # Fonts
+    wrap_width      = 16,
+    base_size       = 13,
+    strip_size      = base_size,
+    label_size      = 3) {
+
+
+  # ... pick the groups, add % labels and the low-n flag
+
+
+  ggplot(plot_data, aes(x = Group_Label, y = pct, fill = Source)) +
+    geom_col(position = position_dodge(width = 0.72), width = 0.64) +
+    geom_text(aes(label = bar_label, color = low_n, group = Source),
+              position = position_dodge(width = 0.72),
+              vjust = -0.25, size = label_size, family = font,
+              show.legend = FALSE) +
+    facet_wrap(~ Outcome, nrow = 1, scales = "free_y") +
+    scale_fill_manual(values = fill_colors) +
+    scale_color_manual(values = c(`FALSE` = "black",
+                                  `TRUE`  = low_n_color)) +
+    scale_y_continuous(expand = expansion(mult = c(0, 0.10))) +
+    coord_cartesian(clip = "off") +
+    labs(
+      title    = title,
+      subtitle = glue("<span style='color:{low_n_color}; font-weight:700;'>Red labels</span> ",
+                      "indicate very low sample size (n < {low_n_threshold})"),
+      x = NULL, y = NULL, fill = NULL
+    ) +
+    theme_minimal(base_size = base_size, base_family = font) +
+    theme(
+      legend.position  = "top",                # Legend
+      panel.spacing.x  = grid::unit(18, "pt"),
+      panel.grid.major = element_blank(),      # Clean layout: no gridlines
+      panel.grid.minor = element_blank(),
+      panel.border     = element_blank(),
+      axis.text.x      = element_text(hjust = 0.5, lineheight = 0.95),
+      axis.text.y      = element_blank(),      # Values on bars, not axis
+      axis.ticks.y     = element_blank(),
+      strip.text       = element_text(size = strip_size, face = "bold"),
+      plot.subtitle    = element_markdown(size = base_size * 0.8,
+                                          family = font),
+      plot.margin      = margin(10, 20, 20, 20)
+    )
 }
 ```
 
-::: {.code-label}
-**2. IVC + State in one table** [(lines 237–239)]{.lines}
-:::
-
-```{.r code-line-numbers="false"}
-summary_long <-
-  summarise_outcomes(ivc, student_groups, outcomes) %>%
-  bind_rows(statewide) %>%
-  mutate(Source = paste(College, year))
-```
 
 ::: {.code-label}
-**3. The plot core:** one bar per source, one panel per outcome [(inside make_comparison_plot)]{.lines}
+**2. Use it everywhere:** one chart, all outcomes, or every combination [(simplified; full code on GitHub)]{.lines}
 :::
 
-```{.r code-line-numbers="false"}
-ggplot(plot_data,
-       aes(x = Group_Label, y = pct, fill = Source)) +
-  geom_col(position = position_dodge(width = 0.72),
-           width = 0.64) +
-  geom_text(aes(label = bar_label, color = low_n,
-                group = Source),
-            position = position_dodge(width = 0.72),
-            vjust = -0.25) +
-  facet_wrap(~ Outcome, nrow = 1) +
-  scale_fill_manual(values = fill_colors)
-# ... theme settings
-```
-
-::: {.code-label}
-**4. Every group x outcome combination in one loop** instead of 12 copy-pasted calls [(lines 270–277)]{.lines}
-:::
 
 ```{.r code-line-numbers="false"}
-plot_grid <- expand_grid(group_set = names(group_sets),
-                         outcome = outcomes)
+# a) One call = one chart
+make_comparison_plot(summary_long, group_sets$gender, "FoodInsecure")
 
-group_plots <- pmap(plot_grid, function(group_set, outcome) {
-  build_plot(group_sets[[group_set]], outcome,
-             size = plot_sizes[[group_set]] %||%
-               plot_sizes$default)
-})
+
+# b) Same call, all three outcomes: one panel each
+make_comparison_plot(summary_long, "Overall", outcomes)
+
+
+# c) Every group x outcome (12 charts) in one loop,
+#    all exported at the same size
+plots <- pmap(plot_grid, \(group_set, outcome)
+  make_comparison_plot(summary_long, group_sets[[group_set]], outcome))
+save_plot_list(plots, fig_dir, width = 11, height = 4.2, dpi = 300)  # Export sizes
 ```
+
+
 :::::
 :::
 ::::
 
 
+
+
 ## The result: IVC vs. statewide
 
+
 ![](figures/overall_insecurity.png){width="100%" fig-alt="Grouped bar chart of IVC vs. statewide outcome percentages for three outcomes."}
+
 
 ::: {.notes}
 One function call per outcome: same colors, same layout, same labels.
 :::
 
+
 ## Same function, disaggregated
 
+
 ![](figures/food_ethnicity.png){width="100%" fig-alt="Grouped bar chart of food insecurity by race/ethnicity, IVC 2023 and 2025 vs. statewide 2025. Groups with fewer than 20 respondents are labeled in red."}
+
 
 ::: {.notes}
 Same function, now by race/ethnicity: only the grouping changed.
 Point out the red labels for n < 20: the warning is built into the function, so it's never forgotten.
 :::
 
+
 ## What changes in 2027
+
 
 ::::: {.flow .detail}
 ::: {.step .manual .fragment}
 2025: rebuild
+
 
 Cleaned, charted, and formatted the #RealCollegeCA report
 :::
 ::: {.step .fragment}
 2027: re-render
 
+
 New data in, same template, same functions, report out
 :::
 ::: {.step .manual .fragment}
 The time we get back
 
+
 Sense-making: interpretation, context, and recommendations for action
 :::
 :::::
 
+
 ::: {.takeaway .fragment}
 **Automate** the reporting, so we can **elevate** the storytelling.
 :::
+
 
 ::: {.notes}
 Bring it back to the case study: the 2027 report is a re-render, not a rebuild. The time saved goes to the parts that can't be automated: interpreting, and sharing the data so it turns into action, like the students who became advocates.
@@ -587,35 +741,49 @@ Bring it back to the case study: the 2027 report is a re-render, not a rebuild. 
 
 
 
+
+
+
 # A reproducible workflow <br><i>between reports</i>  {.section-slide}
 
+
 build the template once, then use it for multiple reports
+
 
 ::: {.notes}
 ⏱ 30:00. ~10 min for this section (13 slides, ~45 sec each). Target: start Wrap-up by 40:00.
 If running long: let the video play without narrating, and click through the toolkit code without reading it.
 :::
 
+
 ## A reproducible workflow (between reports)
+
 
 ::::: {.flow .detail}
 ::: {.step .manual}
 Where I started: copy `setup.R`
 
+
 Paste it into each new report, then manually delete/add what's relevant.
+
 
 **Examples:** libraries, functions, themes
 :::
 ::: {.step .fragment fragment-index=1}
 Where I am now: an R package
 
+
 Package calls report templates, functions, and themes.
 
+
 One version, loaded everywhere with `library()`.
+
 
 **Examples:** `use_report(format = "pdf")`, `use_presentation()`, `+ theme_fc()`
 :::
 :::::
+
+
 
 
 ::: {.notes}
@@ -625,11 +793,14 @@ Vinnie · ~45 sec · 30:15
 - New report? One line, and it's already branded.
 :::
 
+
 ## A reproducible workflow (between reports)
+
 
 ::: {.video-center}
 <video src="figures/r_report_template.mp4" controls preload="auto" height="560"></video>
-::: 
+:::
+
 
 ::: {.notes}
 Vinnie · ~1:15 (video is 61 sec) · 31:00
@@ -637,7 +808,9 @@ Vinnie · ~1:15 (video is 61 sec) · 31:00
 - If short on time, skip ahead in the video.
 :::
 
+
 ## Example toolkit: R
+
 
 ::::: {.columns .toolkit-split}
 :::: {.column width="34%"}
@@ -645,17 +818,20 @@ Vinnie · ~1:15 (video is 61 sec) · 31:00
 [R]{.card-title}
 *the analyses of the report*
 
+
 - Data cleaning and analyses
 - Reusable chart functions
 - Create a package or reusable file
 :::
 ::::
 
+
 :::: {.column width="66%"}
 ::: {.code-scroll .wrap}
 ::: {.code-label}
 **setup.R**
 :::
+
 
 ```{.r code-line-numbers="false"}
 # ---- Libraries ----
@@ -673,7 +849,9 @@ library(extrafont) # font management
 library(htmltools) # html in reports
 library(quarto) #render quarto from R
 
+
 loadfonts(device = "win", quiet = TRUE)
+
 
 # ---- Fullerton College Color Palette ----
 fc_colors <- c(
@@ -687,9 +865,11 @@ fc_colors <- c(
   "Elderberry" = "#1B0D42"
 )
 
+
 # Neutral tone for text, lines, etc.
 fc_blue <- "#0F406B"
 fc_gray <- "#333333"
+
 
 # ---- FC ggplot Theme ----
 theme_fc <- function(base_size = 12, base_family = "Century Gothic") {
@@ -715,7 +895,10 @@ theme_fc <- function(base_size = 12, base_family = "Century Gothic") {
 }
 
 
+
+
 # Color and fill scales for ggplot2 using the FC color palette
+
 
 scale_fill_fc <- function(..., discrete = TRUE) {
   if (discrete) {
@@ -725,6 +908,7 @@ scale_fill_fc <- function(..., discrete = TRUE) {
   }
 }
 
+
 scale_color_fc <- function(..., discrete = TRUE) {
   if (discrete) {
     scale_color_manual(values = rep(unname(fc_colors), length.out = 20), ...)
@@ -733,13 +917,16 @@ scale_color_fc <- function(..., discrete = TRUE) {
   }
 }
 
+
 # Set as default ggplot theme, yay!
 theme_set(theme_fc())
+
 
 ```
 :::
 ::::
 :::::
+
 
 ::: {.notes}
 Vinnie · ~45 sec · 32:15
@@ -747,7 +934,9 @@ Vinnie · ~45 sec · 32:15
 - Scroll the setup file: libraries, the college palette, one ggplot theme. theme_set() at the end means every chart is on-brand by default.
 :::
 
+
 ## Example toolkit: Quarto
+
 
 ::::: {.columns .toolkit-split}
 :::: {.column width="34%"}
@@ -755,21 +944,25 @@ Vinnie · ~45 sec · 32:15
 [Quarto]{.card-title}
 *the document itself*
 
+
 - Reports & slides from one file
 - HTML, PDF, Word
 - Parameterized reports
 :::
+
 
 ::: {.takeaway .fragment}
 **Why Quarto over R Markdown?** <br>Better multi-language support and standardized YAML implementation
 :::
 ::::
 
+
 :::: {.column width="66%"}
 ::: {.code-scroll .wrap}
 ::: {.code-label}
 **Report template (.qmd)**
 :::
+
 
 <!-- {{r}} displays as {r} without running the chunk inside this deck -->
 ````{.markdown code-line-numbers="false"}
@@ -782,25 +975,35 @@ date-format: "MMMM D, YYYY"
 ---
 
 
+
+
 ```{{r}}
 #| label: setup
 #| include: false
 
+
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+
 
 source("setup.R")
 
+
 ```
+
 
 ::: {style="text-align:center;"}
 <img src="../template/Library.jpg" style="width:80%; height:auto;"/>
 :::
 
+
 ## Overview {.section-slide}
+
 
 Blah blah blah
 
+
 ## Agenda
+
 
 - First topic
 - Second topic
@@ -811,6 +1014,7 @@ Blah blah blah
 ::::
 :::::
 
+
 ::: {.notes}
 Vinnie · ~45 sec · 33:00
 - Quarto is the document: one file, rendered to HTML, PDF, Word, or slides. This deck is Quarto.
@@ -818,7 +1022,9 @@ Vinnie · ~45 sec · 33:00
 - Click for the R Markdown question before someone asks it.
 :::
 
+
 ## Example toolkit: Templates
+
 
 ::::: {.columns .toolkit-split}
 :::: {.column width="34%"}
@@ -826,21 +1032,25 @@ Vinnie · ~45 sec · 33:00
 [Templates]{.card-title}
 *the design of the report*
 
+
 - One template per format: HTML, PDF, slides
 - HTML & slides: CSS for branding & layout
 - PDF: a print-ready template for the same look on paper
 :::
+
 
 ::: {.takeaway .fragment}
 **Don't use R?** Templates can be created in Word, PowerPoint, Tableau/PowerBI, or your coding language.
 :::
 ::::
 
+
 :::: {.column width="66%"}
 ::: {.code-scroll .wrap}
 ::: {.code-label}
 **Branding CSS**
 :::
+
 
 ```{.css code-line-numbers="false"}
 h1, h2, h3, h4 {
@@ -851,20 +1061,24 @@ h1, h2, h3, h4 {
   margin-bottom: 0.5em;
 }
 
+
 h1 {
   border-bottom: 2px solid var(--fc-blue);
   padding-bottom: 4px;
 }
+
 
 h2, h3 {
   border-inline-start: 5px solid var(--fc-blue);
   padding-inline-start: var(--space-sm);
 }
 
+
 h3 {
   font-style: italic;
   font-weight: 600;
 }
+
 
 /* Subtitle (below report title) */
 #subtitle {
@@ -881,21 +1095,26 @@ h3 {
 ::::
 :::::
 
+
 ::: {.notes}
 Vinnie · ~45 sec · 33:45
 - Templates are the design: CSS for HTML and slides, a print template for PDF, so all formats look the same.
 - Click: this isn't R-only. A Word or Power BI template does the same job.
 :::
 
+
 ## Scaling reports: parameterized reporting
 
+
 Project example: Individualized Faculty Course Success Reports
+
 
 - Professional Learning Committee recommended, Faculty Senate supported: an individualized course success report for **every faculty member**, every year
   - Disaggregated course success rates and drop reasons
   - Emailed as a PDF, with guiding questions for reflection
   - A tool for professional learning, not evaluation
   - Power BI dashboard later for further exploration
+
 
 ::::: {.tile-grid .cols-2 .fragment}
 ::: {.tile}
@@ -906,6 +1125,7 @@ Project example: Individualized Faculty Course Success Reports
 :::
 :::::
 
+
 ::: {.notes}
 Vinnie · ~45 sec · 34:30
 - Here's what all of that makes possible.
@@ -914,11 +1134,14 @@ Vinnie · ~45 sec · 34:30
 - Click: 860 reports last year, 971 this year. Nobody builds that many by hand.
 :::
 
+
 ## Why parameterized reports?
+
 
 ::::: {.card-grid .compact}
 ::: {.card .fragment}
 ### Scalable
+
 
 - One template, one loop
 - A report for every person
@@ -926,11 +1149,13 @@ Vinnie · ~45 sec · 34:30
 ::: {.card .fragment}
 ### Individualized
 
+
 - Sentences written from each person's data
 - E.g., "12.1 points **above** the ISS"
 :::
 ::: {.card .fragment}
 ### Better aesthetics
+
 
 - Page breaks, figure numbers, branding
 - Long tables flow onto the next page
@@ -938,61 +1163,78 @@ Vinnie · ~45 sec · 34:30
 ::: {.card .fragment}
 ### Rule-based using code
 
+
 - Combine small groups
 - Skip empty sections
 :::
 :::::
 
+
 ::: {.takeaway .fragment}
-Dashboards are still useful for **exploration**. 
+Dashboards are still useful for **exploration**.
 Parameterized reports are great for supplemental **individualized insights**.
 :::
+
 
 ::: {.notes}
 Vinnie · ~45 sec · 35:15
 - Takeaway: dashboards aren't going away. This complements them.
 
+
 :::
 
+
 ## Parameterized reporting steps
+
 
 ::::: {.flow .detail}
 ::: {.step}
 **1. SQL pull**
 
+
 One query for the year: every course, student, and faculty member.
+
 
 Update the terms, save as CSV.
 :::
 ::: {.step}
 **2. Shared functions**
 
+
 One R file that builds every stat, chart, and sentence.
+
 
 Written once, used by every report.
 :::
 ::: {.step}
 **3. One template**
 
+
 A .qmd with a `faculty_id` parameter.
+
 
 Filters all content to one person.
 :::
 ::: {.step}
 **4. Render loop**
 
+
 Runs the template once per faculty ID.
+
 
 ~30 sec each; logs every render.
 :::
 ::: {.step}
 **5. Automated email**
 
+
 Sends each PDF to its owner in batches.
+
 
 Logged, so no one gets it twice and to check bouncebacks.
 :::
 :::::
+
 
 ::: {.notes}
 Vinnie · ~1:00 · 36:00
@@ -1002,13 +1244,16 @@ Vinnie · ~1:00 · 36:00
 - The send log is what keeps anyone from getting two emails.
 :::
 
+
 ## Parameterized reporting: the key idea
+
 
 :::: {.columns}
 ::: {.column width="45%"}
 ::: {.code-label}
-**1. Template** (faculty_template.qmd): declare a parameter
+**1. Declare parameter** (faculty_template.qmd)
 :::
+
 
 ```{.yaml code-line-numbers="false"}
 ---
@@ -1019,11 +1264,15 @@ params:
 ---
 ```
 
+
 ::: {.code-label}
-**2. Template**: every stat, chart, and sentence uses it
+**2. Use parameter** (faculty_template.qmd): every stat, chart, and sentence filters on it
 :::
 
+
 ```{.r code-line-numbers="false"}
+source("faculty_functions.R") # loads df + functions
+
 summarize_overall_success(
   df,
   faculty_id_val = params$faculty_id
@@ -1031,12 +1280,18 @@ summarize_overall_success(
 ```
 :::
 
+
 ::: {.column width="55%"}
 ::: {.code-label}
-**3. Script** (render_all_faculty.R): render once per ID
+**3. Render** (render_all_faculty.R): once per ID
 :::
 
+
 ```{.r code-line-numbers="false"}
+faculty_ids <- read_csv("data/course_data.csv") |>
+  pull(FACULTY_ID) |>
+  unique()
+
 for (fid in faculty_ids) {
   quarto_render(
     input = "faculty_template.qmd",
@@ -1052,13 +1307,17 @@ for (fid in faculty_ids) {
 :::
 ::::
 
+
 ::: {.notes}
 Vinnie · ~1:00 · 37:00
+- The real script adds logging, so 
 :::
 
 
 
 ## Example report: Faculty course success
+
+
 
 
 :::: {.columns}
@@ -1073,12 +1332,16 @@ Vinnie · ~1:00 · 37:00
 :::
 ::::
 
+
 ::: {.notes}
 Vinnie · ~30 sec · 38:00
 
+
 :::
 
+
 ## Example report: Faculty course success (cont.)
+
 
 :::: {.columns}
 ::: {.column width="33%"}
@@ -1089,18 +1352,23 @@ Vinnie · ~30 sec · 38:00
 :::
 ::::
 
+
 <!-- render_and_copy.R copies figures/*.pdf next to the published deck. -->
 [Open the full report (PDF)](figures/Course_Success_2025-26_99999999.pdf){target="_blank"}
+
 
 ::: {.notes}
 Vinnie · ~30 sec · 38:30
 :::
 
+
 ## Parameterized reporting: lessons learned
+
 
 ::::: {.card-grid .compact}
 ::: {.card .fragment}
 ### By the numbers
+
 
 - ~30 seconds per report
 - Runs unattended
@@ -1109,6 +1377,7 @@ Vinnie · ~30 sec · 38:30
 ::: {.card .fragment}
 ### Next year
 
+
 - Change the terms and academic year
 - Re-run
 - Same design, comparable year to year
@@ -1116,22 +1385,28 @@ Vinnie · ~30 sec · 38:30
 ::: {.card .fragment}
 ### What helped
 
+
 - Log every render and send
 - No double emails, easy restarts
 - Write directions for future you
 :::
 :::::
 
+
 ::: {.takeaway .fragment}
 The dashboard is for **exploring**. The report is for **reflecting**.
 :::
+
 
 ::: {.notes}
 Vinnie · ~45 sec · 39:00
 :::
 
 
+
+
 # Wrap-up {.section-slide}
+
 
 ::: {.notes}
 ⏱ 40:00. Keep the conclusion to ~1 min to leave room for Q&A and the reflection.
@@ -1140,17 +1415,24 @@ Vinnie · ~45 sec · 39:00
 
 
 
+
+
+
+
 ## What to automate, and what not to
+
 
 :::: {.columns}
 ::: {.column width="50%"}
 ::: {.compare-card .after}
 **Automate**
 
+
 - Recurring cleaning steps
 - Charts for every group
 - Branding and formatting
 - One report to be customized as needed
+
 
 ::: {.ai-note .fragment fragment-index=1}
 **AI can help:** debugging code, alt text, contrast checks
@@ -1158,14 +1440,17 @@ Vinnie · ~45 sec · 39:00
 :::
 :::
 
+
 ::: {.column width="50%"}
 ::: {.compare-card .before}
 **Don't automate**
+
 
 - What the results mean
 - Campus context and history
 - Small-sample judgment calls
 - Recommendations and conclusions
+
 
 ::: {.ai-note .fragment fragment-index=1}
 **AI isn't perfect:** verifying code, checking alt text
@@ -1175,31 +1460,42 @@ Vinnie · ~45 sec · 39:00
 ::::
 
 
+
+
 ::: {.notes}
 Even if AI can help with repetitive tasks, 1) it isn't always correct and 2) it can't provide context or the framing you need for your specific audience.
 :::
 
 
+
+
 # Thank you! Questions? {.section-slide}
+
 
 **Before you go:** think of one recurring report you build.<br>
 What's one improvement from today you could try on it?
 
+
 ::: {.thanks-panel}
+
+
 
 
 ::: {.qr-placeholder}
 ![](figures/qrcode.png){width="200" fig-alt="QR code linking to the GitHub repository"}
 :::
 
+
 ::: {.thanks-info}
 **Presentation Slides**\
 [bit.ly/cair2026](https://bit.ly/cair2026)
+
 
 Vinnie Wu · [vwu@fullcoll.edu](mailto:vwu@fullcoll.edu)\
 Joshua Rhee · [jrhee@ivc.edu](mailto:jrhee@ivc.edu)
 :::
 :::
+
 
 ::: {.notes}
 Leave this slide up during Q&A so people can scan the QR code.
